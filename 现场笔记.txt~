@@ -225,8 +225,167 @@
 	    wq是保存+退出
 	    
 	    ~在window系统下
-	      在环境变量-> path变量里添加
+	      在环境变量-> path变量里添加.详情免
+	      
+	      
+	  *Android真机调试
+	  	~开启手机的调试模式
+	  	
+	  	~手机USB连接Mac机
+	    
+	    ~用adb devices查看设备,最好当前只有一台设备连到Mac机(模拟器也最好关掉)
+	    
+	    ~cd 到工程的根目录 ,react-native run-android
+	    
+	    ~开启目标机的悬浮窗设置 设置 -> 其他应用管理 -> 选中app -> app操作菜单之权限管理 -> "显示悬浮窗"设置为true
+	    
+	    ~摇晃手机,在浮现的菜单里选"Dev Settings" -> Debugging -> 在弹出的对话框里填上开发服务器的ip和端口.返回,重启app,即可正确显示js
 	    
 	    
+	    然后摇晃手机,在浮现的菜单里点选 "Debug in Chrome",在弹出的chrome里选择 列表 -> 其他工具 -> 开发者工具,即可在弹出窗体的debuggerWorker.js里,用断点调试.
 	    
-	    
+	 *第一个react-native程序的感想
+	 	1. 由数据,界面布局,样式表(还有没出场的JS)组成
+	 	2. 写在标签的<>里的都是属性设置,比如 <Text style = {style.font} />
+	 	3. js包含了执行体和数据 
+	 	
+	
+	 2016年04月11日09:43:18
+	 
+	 	*官方对react-native技术的解释
+	 		.js里必备的render()方法,用于展示样式
+	 		可接受参数,访问参数的方式是 this.prps.xxx
+	 		// 定义
+	 		var Hello = React.createClass({
+	 			render(){
+	 				return <div> Hello {this.props.name}</div>;
+	 			}
+	 		}
+	 		);	
+	 		
+	 		// 调用
+	 		ReactDOM.render(<Hello name="John" />, mountNode);
+	 		
+	 	  或者以组件的形式,调用内部变量
+	 	  var Timer = React.createClass(
+	 	    // 不定义就直接生成变量?
+	 	  	getInitialState(){
+	 	  		return {secondsElapsed:0};
+	 	  	},
+	 	  	// 
+	 	  	tick(){
+	 	  	  this.setSate({secondsElapsed:this.state.secondsElapsed + 1});
+	 	  	},
+	 	  	componentDidMount(){
+	 	  		this.interval = setInterval(this.tick, 1000);
+	 	  	},
+	 	  	componentWillUnmount(){
+	 	  		clearInterval(this.interval);
+	 	  	},
+	 	  	render(){
+	 	  		return(
+	 	  			<div> Seconds Elapsed: {this.state.secondsElapsed} </div>
+	 	  		);
+	 	  	}
+	 	  );
+	 	  
+	 	  ReactDOM.render( <Timer /> , mountNode);
+	 	  
+	 	2016年04月11日10:00:55
+	 	
+	 	2016年04月11日11:19:23
+	 	#react native 语法基础#
+	 		用内部变量实现一个列表.
+	 		事件句柄内嵌,用代理来实现
+	 		
+	 		js是弱类型的语言,无类型
+	 		
+	 		var TodoList = React.createClass(
+	 			render(){
+	 			    // 需要被嵌套的列表
+	 				var createItem = function(item){
+	 					return <li  key={item.id}>{item.text}</li>
+	 				};
+	 				return <ul> {this.props.items.map(createItem)} </ul>;
+	 			}	 		
+	 		);
+	 		
+	 	2016年04月11日12:41:46
+	 	
+	 	
+		#jedit使用技巧#
+			一般是中文解码失败,出现i/o load Error提示窗,解决办法是File-> Reload With Encoding -> 改用GBK编码
+			
+			常用的设置一般都可在Utilities -> Global Options里找到
+			
+		#c++知识#	
+			变量的特性:
+				链接性(能否用于其他编译单元.如能,称为外部变量)
+				作用域(在代码块,编译单元还是整个工程里可见)
+				持续性(存在于内存里的时间段 自动/静态)
+			
+				
+		2016年04月11日13:09:07
+			#react native 语法基础#
+				var TodoApp = React.createClass({
+				// 自定义的,在state集合里的变量
+  				getInitialState: function() {
+  				  return {items: [], text: ''};
+ 				 },
+ 				 // 响应事件,给属性赋值
+  				onChange: function(e) {
+    				this.setState({text: e.target.value});
+  				},
+  				// 响应事件,输入区的点击事件
+ 				handleSubmit: function(e) {
+ 				   e.preventDefault();
+ 				   // 新增
+  				  var nextItems = this.state.items.concat([{text: this.state.text, id: Date.now()}]);
+  				  var nextText = '';
+  				  // 刷新两个state的值
+  				  this.setState({items: nextItems, text: nextText});
+  				},
+  				// 还是样式,不过有点区别
+  				render: function() {
+  				  return (
+  				    <div>
+  				      <h3>TODO</h3>
+  				      // 列表项
+  				      <TodoList items={this.state.items} />
+  				      // 输入区,form直接绑定按钮的提交功能?
+   				      <form onSubmit={this.handleSubmit}>
+   				       // input直接关联属性,在onchange里设置setState,从而触发重新渲染
+   				       <input onChange={this.onChange} value={this.state.text} />
+   				       // 按钮不用添加事件?
+   				       <button>{'Add #' + (this.state.items.length + 1)}</button>
+    				  </form>
+    				</div>
+  				 );
+ 				 }
+				});
+
+				ReactDOM.render(<TodoApp />, mountNode);
+				
+		2016年04月11日13:48:00
+		
+		2016年04月11日13:56:28
+			#react native 语法基础#
+				调用this.setState()时,会再次触发render
+				2016年04月11日14:49:54
+				类调用的方法一般都是类方法,用this.function来调用
+				例如
+				class Hello extends component{
+				render(){
+					return this.renderLoadingView();
+				}
+				
+				renderLoadingView(){
+					return(
+					<View>
+						<Text>在加载~~~</Text>
+					</View>
+					);}	
+				}
+				
+				
+				

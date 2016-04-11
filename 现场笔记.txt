@@ -247,4 +247,185 @@
 	 *µÚÒ»¸öreact-native³ÌĞòµÄ¸ĞÏë
 	 	1. ÓÉÊı¾İ,½çÃæ²¼¾Ö,ÑùÊ½±í(»¹ÓĞÃ»³ö³¡µÄJS)×é³É
 	 	2. Ğ´ÔÚ±êÇ©µÄ<>ÀïµÄ¶¼ÊÇÊôĞÔÉèÖÃ,±ÈÈç <Text style = {style.font} />
-	 	3. 
+	 	3. js°üº¬ÁËÖ´ĞĞÌåºÍÊı¾İ 
+	 	
+	
+	 2016Äê04ÔÂ11ÈÕ09:43:18
+	 
+	 	*¹Ù·½¶Ôreact-native¼¼ÊõµÄ½âÊÍ
+	 		.jsÀï±Ø±¸µÄrender()·½·¨,ÓÃÓÚÕ¹Ê¾ÑùÊ½
+	 		¿É½ÓÊÜ²ÎÊı,·ÃÎÊ²ÎÊıµÄ·½Ê½ÊÇ this.prps.xxx
+	 		// ¶¨Òå
+	 		var Hello = React.createClass({
+	 			render(){
+	 				return <div> Hello {this.props.name}</div>;
+	 			}
+	 		}
+	 		);	
+	 		
+	 		// µ÷ÓÃ
+	 		ReactDOM.render(<Hello name="John" />, mountNode);
+	 		
+	 	  »òÕßÒÔ×é¼şµÄĞÎÊ½,µ÷ÓÃÄÚ²¿±äÁ¿
+	 	  var Timer = React.createClass(
+	 	    // ²»¶¨Òå¾ÍÖ±½ÓÉú³É±äÁ¿?
+	 	  	getInitialState(){
+	 	  		return {secondsElapsed:0};
+	 	  	},
+	 	  	// 
+	 	  	tick(){
+	 	  	  this.setSate({secondsElapsed:this.state.secondsElapsed + 1});
+	 	  	},
+	 	  	componentDidMount(){
+	 	  		this.interval = setInterval(this.tick, 1000);
+	 	  	},
+	 	  	componentWillUnmount(){
+	 	  		clearInterval(this.interval);
+	 	  	},
+	 	  	render(){
+	 	  		return(
+	 	  			<div> Seconds Elapsed: {this.state.secondsElapsed} </div>
+	 	  		);
+	 	  	}
+	 	  );
+	 	  
+	 	  ReactDOM.render( <Timer /> , mountNode);
+	 	  
+	 	2016Äê04ÔÂ11ÈÕ10:00:55
+	 	
+	 	2016Äê04ÔÂ11ÈÕ11:19:23
+	 	#react native Óï·¨»ù´¡#
+	 		ÓÃÄÚ²¿±äÁ¿ÊµÏÖÒ»¸öÁĞ±í.
+	 		ÊÂ¼ş¾ä±úÄÚÇ¶,ÓÃ´úÀíÀ´ÊµÏÖ
+	 		
+	 		jsÊÇÈõÀàĞÍµÄÓïÑÔ,ÎŞÀàĞÍ
+	 		
+	 		var TodoList = React.createClass(
+	 			render(){
+	 			    // ĞèÒª±»Ç¶Ì×µÄÁĞ±í
+	 				var createItem = function(item){
+	 					return <li  key={item.id}>{item.text}</li>
+	 				};
+	 				return <ul> {this.props.items.map(createItem)} </ul>;
+	 			}	 		
+	 		);
+	 		
+	 	2016Äê04ÔÂ11ÈÕ12:41:46
+	 	
+	 	
+		#jeditÊ¹ÓÃ¼¼ÇÉ#
+			Ò»°ãÊÇÖĞÎÄ½âÂëÊ§°Ü,³öÏÖi/o load ErrorÌáÊ¾´°,½â¾ö°ì·¨ÊÇFile-> Reload With Encoding -> ¸ÄÓÃGBK±àÂë
+			
+			³£ÓÃµÄÉèÖÃÒ»°ã¶¼¿ÉÔÚUtilities -> Global OptionsÀïÕÒµ½
+			
+		#c++ÖªÊ¶#	
+			±äÁ¿µÄÌØĞÔ:
+				Á´½ÓĞÔ(ÄÜ·ñÓÃÓÚÆäËû±àÒëµ¥Ôª.ÈçÄÜ,³ÆÎªÍâ²¿±äÁ¿)
+				×÷ÓÃÓò(ÔÚ´úÂë¿é,±àÒëµ¥Ôª»¹ÊÇÕû¸ö¹¤³ÌÀï¿É¼û)
+				³ÖĞøĞÔ(´æÔÚÓÚÄÚ´æÀïµÄÊ±¼ä¶Î ×Ô¶¯/¾²Ì¬)
+			
+				
+		2016Äê04ÔÂ11ÈÕ13:09:07
+			#react native Óï·¨»ù´¡#
+				var TodoApp = React.createClass({
+				// ×Ô¶¨ÒåµÄ,ÔÚstate¼¯ºÏÀïµÄ±äÁ¿
+  				getInitialState: function() {
+  				  return {items: [], text: ''};
+ 				 },
+ 				 // ÏìÓ¦ÊÂ¼ş,¸øÊôĞÔ¸³Öµ
+  				onChange: function(e) {
+    				this.setState({text: e.target.value});
+  				},
+  				// ÏìÓ¦ÊÂ¼ş,ÊäÈëÇøµÄµã»÷ÊÂ¼ş
+ 				handleSubmit: function(e) {
+ 				   e.preventDefault();
+ 				   // ĞÂÔö
+  				  var nextItems = this.state.items.concat([{text: this.state.text, id: Date.now()}]);
+  				  var nextText = '';
+  				  // Ë¢ĞÂÁ½¸östateµÄÖµ
+  				  this.setState({items: nextItems, text: nextText});
+  				},
+  				// »¹ÊÇÑùÊ½,²»¹ıÓĞµãÇø±ğ
+  				render: function() {
+  				  return (
+  				    <div>
+  				      <h3>TODO</h3>
+  				      // ÁĞ±íÏî
+  				      <TodoList items={this.state.items} />
+  				      // ÊäÈëÇø,formÖ±½Ó°ó¶¨°´Å¥µÄÌá½»¹¦ÄÜ?
+   				      <form onSubmit={this.handleSubmit}>
+   				       // inputÖ±½Ó¹ØÁªÊôĞÔ,ÔÚonchangeÀïÉèÖÃsetState,´Ó¶ø´¥·¢ÖØĞÂäÖÈ¾
+   				       <input onChange={this.onChange} value={this.state.text} />
+   				       // °´Å¥²»ÓÃÌí¼ÓÊÂ¼ş?
+   				       <button>{'Add #' + (this.state.items.length + 1)}</button>
+    				  </form>
+    				</div>
+  				 );
+ 				 }
+				});
+
+				ReactDOM.render(<TodoApp />, mountNode);
+				
+		2016Äê04ÔÂ11ÈÕ13:48:00
+		
+		2016Äê04ÔÂ11ÈÕ13:56:28
+			#react native Óï·¨»ù´¡#
+				µ÷ÓÃthis.setState()Ê±,»áÔÙ´Î´¥·¢render
+				2016Äê04ÔÂ11ÈÕ14:49:54
+				Ààµ÷ÓÃµÄ·½·¨Ò»°ã¶¼ÊÇÀà·½·¨,ÓÃthis.functionÀ´µ÷ÓÃ
+				ÀıÈç
+				class Hello extends component{
+				render(){
+					return this.renderLoadingView();
+				}
+				
+				renderLoadingView(){
+					return(
+					<View>
+						<Text>ÔÚ¼ÓÔØ~~~</Text>
+					</View>
+					);}	
+				}
+				
+			ÑùÊ½ÓÃ
+				var style = StyleSheet.create(
+					{
+						container:{
+							flex:1,
+							
+						},	
+					
+					
+					});
+				·ÅÔÚjsÎÄ¼şµÄ×îºó,ÓĞÈı¸öºÃ´¦
+				1.²»¿É¸ü¸Ä
+				2.²»¿É¼û
+				3.Ö»Òª¼ÓÔØÒ»´Î,²»ÓÃÃ¿´Îrender¶¼¼ÓÔØ
+				
+				Êı¾İµÄ±íÊ¾·½Ê½ÊÇ:{ Êı¾İÄÚÈİ }
+				
+				2016Äê04ÔÂ11ÈÕ15:35:26
+					#react native Óï·¨»ù´¡#
+						¼ÓÔØÍ¼Æ¬Ê±µÄ×¢Òâµã
+						1. ¼ÓÔØ±¾µØÍ¼Æ¬Ê±,ĞèÒª²»Í¬³ß´ç,ÏàÍ¬ÄÚÈİµÄÍ¼Æ¬,ÒÔÊÊÓ¦²»Í¬µÄÆÁÄ»
+						2. ¼ÓÔØÍøÂçÍ¼Æ¬,ĞèÒªÊÖ¶¯Ö¸¶¨Í¼Æ¬³ß´ç
+							<Image source ={{uri: 'https://facebook.github.io/react/img/logo_og.png'}}
+							style = {{width: 400, height: 400}}/>
+							ÁíÍâÒª×¢Òâ,ÕâÀïµÄuri:xxxÖ¸¶¨ÁËÒ»¸öuriÊôĞÔÎªxxxµÄ¶ÔÏó
+						
+						3. Í¼Æ¬ĞÔÄÜ					
+							Ãû´Ê½âÊÍ:µôÖ¡
+								UI¶ªÊ§Ó¦¸Ã¼ÓÔØµÄÍ¼Æ¬
+								
+							FPS:Ö¡ÂÊ
+								Ã¿ÃëÓ¦¸ÃÕ¹ÏÖµÄÍ¼Æ¬Êı,±ê×¼Îª60,Ò²¾ÍÊÇÃ¿16msĞèÒªÉú³ÉÒ»ÕÅÍ¼Æ¬,ÌÈÈô¿ª·¢ÕßºÍUIÏµÍ³ÎŞ·¨ÔÚ´ËÊ±¼äÄÚÉú³ÉÒ»ÕÅÍ¼Æ¬,Ôò½çÃæ»á¿¨¶Ù.
+							reactµÄÔËĞĞ»úÖÆÊÇ:ÓÉJSÔËĞĞÒµÎñÂß¼­,È»ºó½«Êı¾İ¸üĞÂµ½Ô­Éú½çÃæ.
+							ÔÚpushĞÂÒ³Ê±,jsĞèÒª»æÖÆËùÓĞ×é¼ş,ËùÒÔ±ØÈ»»áÕ¼ÓÃÊ±¼ä,ÒıÆğÒ³Ãæ¿¨¶Ù
+
+							
+					2016Äê04ÔÂ11ÈÕ16:34:51					
+						#react native Óï·¨»ù´¡#
+							DOM:¿ÉÓÃÓÚ¹ÜÀíhtmlºÍXMLÎÄ¼şÀïµÄÔªËØ,°üÀ¨ÔöÉ¾¸Ä²é
+							
+						ÖØÒª:this.propÓÃÓÚ´«µİÊı¾İ(°üÀ¨ÎÄ¼şÄÚºÍÎÄ¼şÖ®¼ä)
+						   this.stateÓÃÓÚË¢ĞÂÊÓÍ¼
