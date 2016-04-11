@@ -225,26 +225,8 @@
 	    wq是保存+退出
 	    
 	    ~在window系统下
-	      在环境变量-> path变量里添加.详情免
-	      
-	      
-	  *Android真机调试
-	  	~开启手机的调试模式
-	  	
-	  	~手机USB连接Mac机
-	    
-	    ~用adb devices查看设备,最好当前只有一台设备连到Mac机(模拟器也最好关掉)
-	    
-	    ~cd 到工程的根目录 ,react-native run-android
-	    
-	    ~开启目标机的悬浮窗设置 设置 -> 其他应用管理 -> 选中app -> app操作菜单之权限管理 -> "显示悬浮窗"设置为true
-	    
-	    ~摇晃手机,在浮现的菜单里选"Dev Settings" -> Debugging -> 在弹出的对话框里填上开发服务器的ip和端口.返回,重启app,即可正确显示js
+	      在环境变量-> path变量里添加
 	    
 	    
-	    然后摇晃手机,在浮现的菜单里点选 "Debug in Chrome",在弹出的chrome里选择 列表 -> 其他工具 -> 开发者工具,即可在弹出窗体的debuggerWorker.js里,用断点调试.
 	    
-	 *第一个react-native程序的感想
-	 	1. 由数据,界面布局,样式表(还有没出场的JS)组成
-	 	2. 写在标签的<>里的都是属性设置,比如 <Text style = {style.font} />
-	 	3. 
+	    
