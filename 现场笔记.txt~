@@ -387,5 +387,71 @@
 					);}	
 				}
 				
+			ÑùÊ½ÓÃ
+				var style = StyleSheet.create(
+					{
+						container:{
+							flex:1,
+							
+						},	
+					
+					
+					});
+				·ÅÔÚjsÎÄ¼þµÄ×îºó,ÓÐÈý¸öºÃ´¦
+				1.²»¿É¸ü¸Ä
+				2.²»¿É¼û
+				3.Ö»Òª¼ÓÔØÒ»´Î,²»ÓÃÃ¿´Îrender¶¼¼ÓÔØ
 				
+				Êý¾ÝµÄ±íÊ¾·½Ê½ÊÇ:{ Êý¾ÝÄÚÈÝ }
 				
+				2016Äê04ÔÂ11ÈÕ15:35:26
+					#react native Óï·¨»ù´¡#
+						¼ÓÔØÍ¼Æ¬Ê±µÄ×¢Òâµã
+						1. ¼ÓÔØ±¾µØÍ¼Æ¬Ê±,ÐèÒª²»Í¬³ß´ç,ÏàÍ¬ÄÚÈÝµÄÍ¼Æ¬,ÒÔÊÊÓ¦²»Í¬µÄÆÁÄ»
+						2. ¼ÓÔØÍøÂçÍ¼Æ¬,ÐèÒªÊÖ¶¯Ö¸¶¨Í¼Æ¬³ß´ç
+							<Image source ={{uri: 'https://facebook.github.io/react/img/logo_og.png'}}
+							style = {{width: 400, height: 400}}/>
+							ÁíÍâÒª×¢Òâ,ÕâÀïµÄuri:xxxÖ¸¶¨ÁËÒ»¸öuriÊôÐÔÎªxxxµÄ¶ÔÏó
+						
+						3. Í¼Æ¬ÐÔÄÜ					
+							Ãû´Ê½âÊÍ:µôÖ¡
+								UI¶ªÊ§Ó¦¸Ã¼ÓÔØµÄÍ¼Æ¬
+								
+							FPS:Ö¡ÂÊ
+								Ã¿ÃëÓ¦¸ÃÕ¹ÏÖµÄÍ¼Æ¬Êý,±ê×¼Îª60,Ò²¾ÍÊÇÃ¿16msÐèÒªÉú³ÉÒ»ÕÅÍ¼Æ¬,ÌÈÈô¿ª·¢ÕßºÍUIÏµÍ³ÎÞ·¨ÔÚ´ËÊ±¼äÄÚÉú³ÉÒ»ÕÅÍ¼Æ¬,Ôò½çÃæ»á¿¨¶Ù.
+							reactµÄÔËÐÐ»úÖÆÊÇ:ÓÉJSÔËÐÐÒµÎñÂß¼­,È»ºó½«Êý¾Ý¸üÐÂµ½Ô­Éú½çÃæ.
+							ÔÚpushÐÂÒ³Ê±,jsÐèÒª»æÖÆËùÓÐ×é¼þ,ËùÒÔ±ØÈ»»áÕ¼ÓÃÊ±¼ä,ÒýÆðÒ³Ãæ¿¨¶Ù
+
+							
+					2016Äê04ÔÂ11ÈÕ16:34:51					
+						#react native Óï·¨»ù´¡#
+							DOM:¿ÉÓÃÓÚ¹ÜÀíhtmlºÍXMLÎÄ¼þÀïµÄÔªËØ,°üÀ¨ÔöÉ¾¸Ä²é
+							
+						ÖØÒª:this.propÓÃÓÚ´«µÝÊý¾Ý(°üÀ¨ÎÄ¼þÄÚºÍÎÄ¼þÖ®¼ä)
+						   this.stateÓÃÓÚË¢ÐÂÊÓÍ¼
+
+						   
+					2016Äê04ÔÂ12ÈÕ10:50:46
+						#web²¼¾Ö»ù´¡#
+							cssÎÄ±¾äÖÈ¾ÑùÊ½Ê±Õë¶ÔµÄÊÇclass
+							.flex-container{
+								¡­¡­¡­¡­¡­¡­
+								¡­¡­¡­¡­¡­¡­
+							}							
+							<Span class="flex-container" ></Span>
+							
+							
+							styleäÖÈ¾ÑùÊ½Ê±Õë¶ÔµÄÊÇ±êÇ©
+							<head>
+								<style type="text/css">
+										body {background-color: red}
+										p {margin-left: 20px}
+								</style>
+							</head>							
+							<span class="flex-container"> 
+								<span class="flex-item">1</span>
+								<span class="flex-item">5</span>
+							</span>
+							
+							
+							

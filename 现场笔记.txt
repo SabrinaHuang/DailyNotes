@@ -429,3 +429,63 @@
 							
 						ÖØÒª:this.propÓÃÓÚ´«µİÊı¾İ(°üÀ¨ÎÄ¼şÄÚºÍÎÄ¼şÖ®¼ä)
 						   this.stateÓÃÓÚË¢ĞÂÊÓÍ¼
+
+						   
+					2016Äê04ÔÂ12ÈÕ10:50:46
+						#web²¼¾Ö»ù´¡#
+							cssÎÄ±¾äÖÈ¾ÑùÊ½Ê±Õë¶ÔµÄÊÇclass
+							.flex-container{
+								¡­¡­¡­¡­¡­¡­
+								¡­¡­¡­¡­¡­¡­
+							}							
+							<Span class="flex-container" ></Span>
+							
+							
+							styleäÖÈ¾ÑùÊ½Ê±Õë¶ÔµÄÊÇ±êÇ©
+							<head>
+								<style type="text/css">
+										body {background-color: red}
+										p {margin-left: 20px}
+								</style>
+							</head>							
+							<span class="flex-container"> 
+								<span class="flex-item">1</span>
+								<span class="flex-item">5</span>
+							</span>
+							
+							
+						#react¼¼Êõ#
+							Ô­ÉúÌØĞÔ
+								js¿ÉÒÔĞ´Ô­Éú´úÂë,Ò²¿ÉÒÔ·ÃÎÊÆ½Ì¨.ÎÒÃÇµÄµÚÒ»²½ÊÇ·â×°Ô­ÉúÄ£¿é¹©reactÊ¹ÓÃ
+								
+								·â×°µÄµÚÒ»²½:
+									ÈÃÔ­Éú´úÂë³ÉÎªRCTBridgeModuleµÄĞ­Òé,±ÈÈçÕâÑù
+									@interface CalendarManager : NSObject <RCTBridgeModule>
+									@end	
+								
+								µÚ¶ş²½,ÔÚ@implement @endÀï,Ìí¼ÓĞ­ÒéµÄÊµÏÖ
+								
+									RCT_EXPORT_MODULE();
+								
+								µÚÈı²½,¸øÒªµ¼³öµÄ·½·¨Ìí¼ÓRCT_EXPORT_METHOD()ºê
+									RCT_EXPORT_METHOD(addEvent:(NSString *)name location:(NSString *)location)
+									±»µ¼³öµÄ·½·¨µÄ·µ»ØÖµ±ØĞëÊÇvoid
+									
+								µÚËÄ²½ ÔÚjsÀïµ÷ÓÃ
+									var CalendarManager = require('react-native').NativeModules.CalendarManager;
+									CalendarManager.addEvent('name', 'Shanghai');
+								
+								µÚÎå²½  ÓĞ»Øµ÷Ê±
+									RCT_EXPORT_METHOD(findEvents:(RCTResponseSenderBlock)callback)
+									{
+									    // »ñÈ¡Öµ,ÊÇÒ»¸öÊı×é
+										NSArray *events = 
+										// ´«Öµ
+										callback( events);
+									}
+									
+									ÔÚjsÀï
+									var CalendarManager = require('react-native').NativeModules.CalendarManager;
+									CalendarManager.findEvent((Events)=> {
+										
+									})
