@@ -1,0 +1,34 @@
+	#java基础#
+		#配置开发环境#
+		   概念：
+			jre(Java SE Runtime Environment):作用类似虚拟机，可以在任意操作系统上为Java程序提供统一的编程接口
+			jdk(Java Develop Kit).是一组API，专为java提供开发环境，所有的java程序都要基于它来构建
+			Java SDK：辅助开发Java的相关文档、范例和工具的集合
+			开发服务器：用于开发和编译程序的机器。
+
+		  步骤：
+		    0、下载并安装jre
+		  	1、下载jdk http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+		  	2、下载SDK,在android SDK Manager里，设置代理 镜像:mirrors.neusoft.edu.cn  端口:80
+		  	3、配置路径，（只讲述Mac机），在/Users/当前用户名/ 路径下，建.bash_profile文件,在文件内添加
+		  		ANDROID_HOME = jdk路径
+		  	4、	
+
+	#通用知识#
+			平台：一般是一套工具包。可在任意操作系统上为特定语言编写的程序提供统一的接口
+			例如
+				Java平台（Java platform）。是一套工具，包括Java虚拟机和Java Core，在任意操作系统上为Java程序提供统一接口
+				.NET平台，（.NET platform）。是一套工具，包括了CLR和framework类库，在任意操作系统上为.NET程序提供统一接口
+
+
+			runtime:是程序运行时，除了bare-metal之外的调用
+				特点：
+					1、在程序运行时，介入的频率不是太高
+					2、由此语言独享					
+
+
+#react-native开发基础#
+			概念：
+				NodeJS：是基于JS runtime的javascript开发平台
+				npm（node package manager）：管理代码的工具，用于分发和管理NodeJS包
+

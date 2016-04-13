@@ -1,89 +1,4 @@
-2016Äê4ÔÂ7ÈÕ 11:23:29
-		react NativeµÄÓÃ·¨
-		
-		*µ÷ÓÃÔ­ÉúiOS¿Ø¼şµÄ·¨×Ó		
-		// Ã²ËÆÊÇÒıÓÃreact,²¢ÇÒÒıÓÃtabºÍNav
-		var React = require("")
-		var {TabBarIOS, NavigatorIOS } = React;
-		
-		var App = React.createClass({
-			// äÖÈ¾º¯Êı
-			render: function(){
-				return(
-				// Ò²ÊÇÓÃjsÀï¶ÔÔªËØµÄĞŞÊÎÀ´ÊµÏÖµÄ
-				<TabBarIOS>
-					<TabBarIOS.Item title = "React Native" selected={true} >
-							<NavIOS initialRoute ={{title: 'React Native'}} />
-					</TabBarIOS.Item>
-				</TabBarIOS>
-				);			
-			},		
-		}	
-		);
-       
 
-	
-		react Ä£ÄâiOSÖĞµÄ´¥Ãş	
-		var React = require("")
-		var {ScrollView, TouchableHighlight, Text} = React;
-		var TouchDemo = React.createClass({
-			// äÖÈ¾¿Ø¼şµÄÑùÊ½
-			render:function(){
-				<ScrollView>
-				  //  ¿ÉÒÔäÖÈ¾ÊÂ¼ş
-				  <TouchableHighlight onPress={()=>console.log('pressed')} >
-					<Text>Proper Touch Handling</Text>
-				  </TouchableHighlight>
-				</scrollView>
-			},
-		});
-	
-	
-		*ÔÚJSÀï£¬render±íÊ¾äÖÈ¾¡£¸øÔªËØÌí¼ÓÑùÊ½£¬²¼¾Ö£¬ÊÂ¼ş
-		
-		react ÊµÏÖiOSÀïµÄÑùÊ½ÉèÖÃ
-		var React = require('react-native');
-		// Ïàµ±ÓÚimport¸÷×é¼ş
-		var { Image, StyleSheet, Text, View } = React;
-		var ReactNative = React.createClass({
-			render: function() {
-				return (
-					<View style={styles.row}>
-						<Image	source={{uri: 'http://facebook.github.io/react/img/logo_og.png'}} style={styles.image}/>
-						<View style={styles.text}>
-						<Text style={styles.title}>
-							React Native
-						</Text>
-						
-						<Text style={styles.subtitle}>
-							Build high quality mobile apps using React
-						</Text>					
-						</View>
-					</View>
-		);
-	},
-	});
-	
-	// react NativeÌá¹©¸÷¿Ø¼şäÖÈ¾ÑùÊ½µÄstylesheet
-	var styles = StyleSheet.create({
-		row: { flexDirection: 'row', margin: 40 },
-		image: { width: 40, height: 40, marginRight: 10 },
-		text: { flex: 1, justifyContent: 'center'},
-		title: { fontSize: 11, fontWeight: 'bold' },
-		subtitle: { fontSize: 10 },
-	});
-		
-	
-	*npm£¨node package manager£© ¹¦ÄÜÍ¬cocoPods,ÓÃÓÚ·Ö·¢ºÍ¹ÜÀíNodeJS°ü
-	
-	
-	*NodeJS  ÊÇ»ùÓÚJS runtimeµÄÆ½Ì¨¡£
-	
-	*runtime 
-		ÊÇÒ»¶Î³ÌĞòÔËĞĞÊ±£¬³ıÁË bare-metalÖ®ÍâµÄµ÷ÓÃ
-		ÌØµãÊÇ£º
-			1¡¢ÔÚ³ÌĞòÔËĞĞÊ±£¬½éÈëµÄÆµÂÊ²»ÊÇÌ«¸ß
-			2¡¢ÓÉ´ËÓïÑÔ¶ÀÏí
 			
 			
 	// 	react ±¾ÉíÈÚÈë JSµÄAPI£¬±ÈÈçXMLHttpRequest,navigator.geolocationµÈ
@@ -172,12 +87,7 @@
 		validAttributes: { myCustomProperty: true },
 		uiViewClassName: 'MyCustomView',
 	});
-	
-	
-	*JavaÆ½Ì¨£¨Java platform£©¡£ÊÇÒ»Ì×¹¤¾ß£¬°üÀ¨JavaĞéÄâ»úºÍJava Core¡£¿ÉÒÔÔÚÈÎÒâ²Ù×÷ÏµÍ³ÉÏÎªJava³ÌĞòÌá¹©Í³Ò»µÄ±à³Ì½Ó¿Ú
-	
-	*.NETÆ½Ì¨£¬£¨.NET platform£©¡£ÊÇÒ»Ì×¹¤¾ß£¬°üÀ¨ÁËCLRºÍframeworkÀà¿â¡£
-	¿ÉÒÔÎªÈÎÒâ²Ù×÷ÏµÍ³ÉÏµÄ´¿.NET³ÌĞòÌá¹©Í³Ò»µÄ±à³Ì½Ó¿Ú¡£
+
 	
 	*ÉúÌ¬»·¾³	Ó°ÏìÉúÎïÉú»îºÍÉú²ú»î¶¯µÄ¸÷ÖÖÁ¦Á¿£¨ÎïÖÊ£¬ÄÜÁ¿£¬×÷ÓÃ£©µÄ×ÜºÍ
 	
@@ -186,46 +96,7 @@
 	
 	// ÈçºÎäÖÈ¾Í¼Æ¬
 	1¡¢ÔÚindex.XXX.jsÀï
-		
-	¡¾JAVA¿ª·¢»·¾³ÉèÖÃ¡¿
-	 *jdk(Java Develop Kit)
-	 ÊÇ×¨¹©JavaÓÃµÄ¿ª·¢»·¾³£¬ËùÓĞµÄjava³ÌĞò¶¼ÒªÔÚËüÉÏÃæ¹¹½¨¡£°üÀ¨ÁËÒ»×éAPI		
-		
-	 *Java SDK 
-	  Ïà¶Ô¿í·ºµÄ¸ÅÄî¡£ÊÇ¸¨Öú¿ª·¢JavaµÄÏà¹ØÎÄµµ¡¢·¶ÀıºÍ¹¤¾ßµÄ¼¯ºÏ
-	 
-	 *¿ª·¢·şÎñÆ÷
-	 	"·şÎñÆ÷"ÊÇ¸ù¾İÉè±¸¹¦ÄÜÀ´»®·ÖÊ±¶ÔÉè±¸µÄ³Æºô.ÄÜ¸øÆäËûÉè±¸Ìá¹©·şÎñµÄ,¾ÍÊÇ·şÎñÆ÷.¿ª·¢·şÎñÆ÷¾ÍÊÇÌá¹©¿ª·¢³ÌĞò,±àÒë³ÌĞò·şÎñµÄ»úÆ÷.¶øÄ¿±ê»úÔòÊÇ²¿Êğ,ÔËĞĞ³ÌĞòµÄ»úÆ÷.
-	 	
-	 *ÅäÖÃjava¿ª·¢»·¾³
-	    Õâ¸öÕæĞÄºÜÂé·³
-	    ~Ê×ÏÈÒªÏÂÔØjdk
-	    µØÖ·:http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
-	    oracleÌá¹©µÄjava¿ª·¢×¨ÓÃ¿â
-	    
-	    ~È»ºóÒªÏÂÔØSDK
-	    ÓÃandroid SDK Manager
-	    ÒòÎªÎÒ¹úµÄÌØÊâ¹úÇé,ĞèÒªÊ¹ÓÃ´úÀí
-	    ¾µÏñ:mirrors.neusoft.edu.cn  
-	    ¶Ë¿Ú:80
-	    
-	    °´ÕÕ»·¾³ÅäÖÃµÄÒªÇóÏÂÔØ¸÷ÖÖSDK
-	    
-	    ~È»ºóÒªÅäÖÃÂ·¾¶,¹©java³ÌĞòÕÒµ½¶ÔÓ¦µÄsdk
-	    MacÏµÍ³ÖĞ:
-	    cd ~  (~±íÊ¾ÓÃ»§Ä¿Â¼  /Users/ÓÃ»§Ãû )
-	    È»ºóÔÚ .bash_profileÎÄ¼şÀïÅäÖÃ ANDROID_HOME»·¾³±äÁ¿(.±íÊ¾ÎÄ¼şÒş²Ø)
-	    
-	    Ë³±ã½éÉÜÅäÖÃµÄ·½·¨
-	    sudo vi .bash_profile
-	    È»ºóÕ³Ìù
-	    
-	    vi ÔÚ´ò¿ªÊ±Ä¬ÈÏÎªÃüÁîĞĞÄ£Ê½,°´i½øÈë±à¼­Ä£Ê½
-	    ·µ»ØÃüÁîĞĞÄ£Ê½Ê±,°´  shift + :
-	    wqÊÇ±£´æ+ÍË³ö
-	    
-	    ~ÔÚwindowÏµÍ³ÏÂ
-	      ÔÚ»·¾³±äÁ¿-> path±äÁ¿ÀïÌí¼Ó.ÏêÇéÃâ
+
 	      
 	      
 	  *AndroidÕæ»úµ÷ÊÔ
@@ -489,3 +360,59 @@
 									CalendarManager.findEvent((Events)=> {
 										
 									})
+									
+						#react¼¼Êõ#
+								#Óï·¨#
+								alertÊ±¿ÉÖ±½Óµ÷¿çÆ½Ì¨½Ó¿Ú,alert,ÔÚIOSÖĞ¿ÉÓÃalertIOS
+									alertIOS.alert(title,content,[{btn1:'text' onPress: ÄäÃû·½·¨ }])
+									
+								#»Øµ÷#
+									Ô­ÉúÕâ±ß,
+									ĞèÒª 
+										1 Àà×ñÊØĞ­Òé <RCTBridgeModule>
+										2 ĞèÒª±»µ÷ÓÃµÄ·½·¨ÒÔºê	RCT_EXPORT_METHOD()°üº¬
+											·½·¨µÄ·µ»ØÖµ±ØĞëÎªvoid
+										
+									JSÕâ±ß
+									ĞèÒª
+										1 import NativeModules
+										2 var Manager = require('react-native').NativeModules.AlertManager
+										3 ÔÚ´úÂëÀïµ÷ÓÃ
+											<Text onPress = Manager.alertWithTags( {title:'?',message:'!!!'} ), (e)=>{} > 
+											</Text>
+											
+								#ES5,ES6µÄÓï·¨Çø±ğ#
+										ÒıÓÃreactÄ£¿é£º
+												es5ÏÂ
+												var React = require('react-native')
+												var {
+										
+
+												} = React;
+
+
+												es6ÏÂ
+												import React,{
+
+
+												} from 'react-native';
+
+											µ¼³öÄ£¿é£¨¶àÓÃÓÚ×Ô¶¨ÒåÄ£¿é£©	
+												es5ÏÂ£¬·ÖÁ½²½
+												var MyComponent = React.Create({
+										
+												});
+
+												module.exports = MyComponent;
+										
+												es6ÏÂ(ÔÚ¶¨ÒåÖ®Ç°Ìí¼Óexport default classÒÔËµÃ÷¿ÉÍâµ÷ )
+												export default class MyComponent extends Component{
+													¡­¡­¡­¡­
+												}
+
+											ÒıÓÃÄ£¿é
+												ES5
+													var MyComponent = require('./MyComponent.js');	
+
+												ES6
+													import MyComponent from './MyComponent.js';
