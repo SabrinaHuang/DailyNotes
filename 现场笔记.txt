@@ -416,3 +416,218 @@
 
 												ES6
 													import MyComponent from './MyComponent.js';
+												
+								#reactÓï·¨#
+									flex-boxµÄ³£ÓÃÊôĞÔ
+											¶Ôcontainer
+												¿ÉÒÔÖ¸¶¨ÄÚ²¿itemÔÚÊúÖáÉÏµÄ¶ÔÆë·½Ê½, ÓÃÊôĞÔalign-content
+												flex-end¿¿µ½ÊúÖáµÄ×îÏÂ¶Ë ,center¾ÛÔÚÊúÖáµÄÖĞĞÄµÈ
+												
+											Ò²¿ÉÒÔÖ¸¶¨itemµÄ¼ä¾à
+												space-around:Ã¿¸öitemÖÜÎ§¶¼»·ÈÆÒ»È¦¿Õ°×
+												
+											¶¨ÒåÊôĞÔÊ±,Ò»°ã»á¶¨ÒåÕë¶ÔÌØ¶¨×é¼şµÄÊôĞÔ.Ò»Ğ©¹²ÓÃµÄÊôĞÔ»áµ¥¶ÀÁĞ³ö,±ÈÈç
+												height400:{
+													height:400,
+												},
+												
+											view¿ÉÒÔÊÇÈİÆ÷,Ò²¿ÉÒÔÊÇÈİÆ÷ÀïµÄitem
+													ÓÃflexDirection¿ÉÒÔÖ¸¶¨ÄÚ²¿itemµÄÅÅÁĞ·½Ê½(column »ò row)
+										
+													
+										ÔÚÑùÊ½ÉèÖÃÀï,ÊôĞÔÏî³ıÁË±íÊ¾ÎªÊ®½øÖÆµÄÊı×ÖÖ®Íâ,¶¼ÒªÒÔ''À´°üÀ¨
+										Ã¿¸ö×é¼ş×î»ù±¾µÄÊôĞÔ
+											Ò»²ãÌ×Ò»²ã,´ÓÄÚµ½ÍâÒÀ´ÎÊÇ
+												content, padding, border, margin
+												Ä£ĞÍ½Ğ×öºĞ×ÓÄ£ĞÍ,Ò»¸öºĞ×ÓÌ×Ò»¸ö
+												
+												
+								#Ç°¶ËÖªÊ¶#
+										²Ëµ¥ÓĞ·á¸»¶à²ÊµÄÑùÊ½
+											±ÈÈçÁĞ±íÊ½
+											±ÈÈçtab²ãµşÊ½
+											±ÈÈçÕÛµşÊ½
+											±ÈÈçÉìËõÊ½
+											
+													
+										*¸ÅÄî
+											DOCTYPE: ÓÃÓÚ¸æËßä¯ÀÀÆ÷,ÒÔµÚ¼¸´úHTML¹æÔò½âÎöÎÄ±¾,½¨ÒéÊ¹ÓÃ¹ı¶ÉĞÍ,±ÈÈçXHTML 1.0
+											
+											HTML: ÓÃÓÚ±àĞ´ÍøÒ³µÄÓïÑÔ.¸üÑÏ½÷¸ü¸ß¼¶µÄ½ĞXHTML
+											
+											CSS:  ¾ö¶¨ÁËÒ³ÃæµÄ±íÏÖĞÎÊ½
+											
+											Ñ¡ÔñÆ÷:
+											
+											[±êÇ©Ñ¡ÔñÆ÷]
+											<head>
+											    <style type="text/css">
+        											    h1{
+            											    color: white;
+            											    background-color: blue
+          											    }
+    											    </style>
+											</head>
+												ÕâÀïµÄh1½Ğ×ö±êÖ¾Ñ¡ÔñÆ÷,¿ÉÓÃÓÚÑ¡ÖĞbodyÀïµÄÍ¬Ãû±êÇ©
+											
+											[»¹ÓĞÀàÑ¡ÔñÆ÷,ÑùÊ½ÊÇ]
+											<head>
+											    <style type="text/css">
+        											    .red{
+            											    color: red;
+            											    background-color: blue
+          											    }
+    											    </style>
+											</head>												
+											<body>
+												<!-- Ê¹ÓÃÀàÑ¡ÔñÆ÷ -->
+												<h1 class="red">
+													classÑ¡ÔñÆ÷
+												</h1>
+											<body>	
+											¿ÉÒÔ»ìÓÃ,ÀàËÆ¶à¼Ì³Ğ
+											
+											
+											[»¹ÓĞidÑ¡ÔñÆ÷]
+											<head>
+											<meta charset="utf-8" ;http-equiv="content-type" ; content="text/html" >
+    											<style type="text/css" >
+    											    .one{
+       											     color: blueviolet;
+    											    }
+      											  #one{
+      											      font-weight: bold;
+     											   }
+     											   #two{
+     											       font-size: 30px;
+     											       color: #009900;
+     											   }
+   											 </style>
+											</head>
+											<body>
+											idÑ¡ÔñÆ÷²»ÄÜ»ìºÏÊ¹ÓÃ
+											
+											[Ñ¡ÔñÆ÷µÄ×éºÏ]
+												±êÖ¾Àà,±íÊ¾½»¼¯   p.special  ±êÖ¾ÎªpÇÒclassÎªspecialµÄÔªËØ
+												±êÖ¾1,±êÖ¾2  ±íÊ¾ºÏ¼¯    p,.special ËüÃÇ¶¼ÓÃ´ËÑùÊ½
+												±êÖ¾1/ÀàÒ»/id1 ±êÖ¾2/Àà¶ş/id2 ±íÊ¾ÔªËØÀïÇ¶Ì×ÔªËØµÄÑùÊ½  p span  
+												²¢ÇÒ»¹¿ÉÒÔ´«µ½¸üÉî²ãµÄÇ¶Ì×
+												
+												±êÖ¾1/ÀàÒ»/id1>±êÖ¾2/Àà¶ş/id2 ±íÊ¾ÔªËØÀïÇ¶Ì×ÔªËØµÄÑùÊ½  p>span
+												²»¿ÉÓÃ´«µ½¸üÉîµÄ²ã
+												
+												
+											[ºó´úÑ¡ÔñÆ÷]	
+												p span{
+													color:red;
+												}												
+												±êÇ©Ç¶Ì×±êÇ©Ê±,¿ÉÓÃ´ËÓï·¨¶¨Òå±»Ç¶Ì×±êÇ©µÄÑùÊ½
+											
+											W3C:±ê×¼»¯Ãñ¼ä×éÖ¯,Ö÷Òª¹¤×÷ÊÇÖÆ¶¨web¹æ·¶µÄ½¨Òé
+											
+											[È«¾ÖÑ¡ÔñÆ÷ÊÇ*,´«È¾ËùÓĞµÄ±êÖ¾]
+												±íÊ¾ËùÓĞ±êÖ¾¶¼ÓÃ´ËÑùÊ½
+											
+											*¿éÔªËØ
+												»á×Ô´øĞÂµÄ¿ªÊ¼ĞĞ,ÀıÈç<p>(¶ÎÂ¥),<table>(±í¸ñ)
+												
+											*ÄÚÁª
+												²»ÓÃĞÂµÄ¿ªÊ¼ĞĞ,ÀıÈç<span>(¶àÓÃ×÷¶ÎÂäÀï²¿·ÖÎÄ±¾µÄÈİÆ÷), <img>(Í¼Ïñ)
+											
+											DOM
+												½«ÎÄµµ¿´³ÉÒ»¸ö¶ÔÏó,ÎÄµµÒ»°ã¾ÍÊÇhtml,ÎÄµµÀïµÄ×é¼ş(component)¿ÉÒÔÓÃobject.attributeµÄ·½Ê½À´·ÃÎÊ
+											
+											ÈİÆ÷
+												ÔÚDOMÀï,Ã¿Ò»¸ö±êÖ¾¾ÍÊÇÒ»¸öÈİÆ÷,ÈİÆ÷Àï¿ÉÒÔ°üº¬×ÓÈİÆ÷,×ÓÈİÆ÷´«È¾ÁË¸¸ÈİÆ÷µÄÌØĞÔ
+											
+											²ãµşÑùÊ½µÄºËĞÄº¬Òå
+												µ±Ò»¸öÔªËØÀïÓĞ¶à¸öÑùÊ½¹ØÁªµ½Í¬Ò»¸öÊôĞÔÊ±,ÏÔÊ¾°´ÕÕÓÅÏÈ¼¶À´
+													ĞĞÄÚÑùÊ½> idÑùÊ½> ÀàÑùÊ½> ±êÖ¾ÑùÊ½
+											
+											ºĞ×ÓÄ£ĞÍ(ÖØµã)		
+												Ò³ÃæÉÏµÄÈÎÒ»ÔªËØ¾ù¿ÉÊÓÎªºĞ×Ó
+												ĞèÒª¹Ø×¢:
+													ºĞ×ÓµÄÄÚ²¿½á¹¹
+													ºĞ×ÓÖ®¼äµÄ¹ØÏµ
+												ÖØÒªÊôĞÔ:padding-border-margin ÃèÊöÁË¾ØĞÎµÄ²¼¾ÖĞÎÊ½
+											
+											Div±êÇ©,ÓÃÓÚ°ü¹üÄÚÈİ,ÊµÏÖÑùÊ½²»Í¬µÄÅÅ°æ,¾ÍÊÇÖ¸¶¨ÄÚÈİÍâ°ü¹üµÄpadding,border,marginµÄÑùÊ½.±ÈÈç
+											<!doctype html>
+											<!--cssµÄ¸÷ÖÖµ÷ÓÃ·½·¨-->
+											<html lang="en">
+											<head>
+  											  <meta charset="utf-8" ;http-equiv="content-type" ; content="text/html" >
+   											 <style>
+     											  div{
+     											      border-width: 6px;
+     											      border-color: #000000;
+     											      margin: 20px;
+       											    padding: 5px;
+     											      background-color: #FFFFCC;
+    											   }
+  											  </style>
+  											  <title>¼Ì³Ğ¹ØÏµ</title>
+											</head>
+ 											   <body>
+  											  <div style="border-style: dashed" >  The  border-style of dashed </div>
+ 											   <div style="border-style: dotted" >  The  border-style of dotted </div>
+ 											   <div style="border-style: double" >  The  border-style of double </div>
+  											  <div style="border-style: groove" >  The  border-style of groove </div>
+  											  <div style="border-style: inset" >  The  border-style of inset </div>
+  											  <div style="border-style: outset" >  The  border-style of outset </div>
+ 											   </body>
+											</html>
+											
+											¿ÉÔÚ°ü¹üµÄÄÚÈİÍâ³öÏÖÍ¼°¸²»Í¬µÄ±ß¿ò
+											
+											²ãµşÑùÊ½,¸²¸ÇÑùÊ½µÄ²î±ğ
+												²ãµşÊÇµ±¶à¸ö[ÑùÊ½]´øÀ´Í¬Ò»ÊôĞÔÊ±,ÓÅÏÈ¼¶¸ßµÄ¸²¸ÇÓÅÏÈ¼¶µÍµÄ
+												¸²¸ÇÑùÊ½ÊÇÖ¸ÔÚ±ß¿òÑùÊ½( div )´øÀ´µÄÊôĞÔºÍÄÚÇ¶ÊôĞÔÖØ¸´Ê±,È¡ºó³öÏÖµÄÊôĞÔ
+											
+												
+											ËõĞ´ÊôĞÔ
+												¶à¸öÊôĞÔ¿ÉÔÚÍ¬Ò»¸ö±êÖ¾Àï¸³Öµ
+												ÀıÈç
+													border: 2px black groove¾Í¶¨ÒåÁË±ß¿ò¿í¶È,ÑÕÉ«ºÍÑùÊ½ÈıÖÖÊôĞÔ
+												
+											¿òµÄ¸÷±ß·Ö±ğ¸³ÊôĞÔ
+												ÀıÈç
+													border-color:red gray orange blue  Ë³Ê±ÖÓ¸³Öµ  ÉÏ ÓÒ ÏÂ ×ó 
+												
+										*¼¼ÇÉ
+											½á¹¹±êÖ¾:²»ÏÔÊ¾ÄÚÈİ,ÊÇ¿ò¼Ü.±ÈÈç <ul> <table>µÈ
+											ÄÚÈİ±êÇ©:ÓÃÓÚÏÔÊ¾ÄÚÈİ
+											
+											html¼ÓÔØCSSÊ±,
+												Èç¹ûÖ»ÓĞÒ»¸öCSSÒªµ¼Èë,×îºÃÓÃÁ´½ÓÊ½,ÕâÑùÒ»³öÀ´¾ÍÊÇÓĞÑùÊ½µÄ½çÃæ. ÓÃlink±êÇ©À´ <link href=""; content="" />
+												
+												»¹ÓĞÖ±°×µÄµ¼ÈëÊ½:
+												<style type="text/css">
+													.red{
+														color:red;
+													}
+													.green{
+														color:green;
+													}													
+												</style>
+												
+												Èç¹ûÓĞ¶à¸ö,ÓÃÁ´½ÓÒıÈëcssÄ¿Â¼,ÔÙÔÚÄ¿Â¼ÀïÓÃµ¼Èë·¨ÒıÓÃÆäËû
+												Èç¹ûÓÃJSÀ´µ¼ÈëCSS,ÒªÓÃÁ´½ÓÊ½
+												
+											
+												²ã¼¶Ê½
+													       <ul>
+            													  <li>second link
+                													   <ul>
+                    												       <li>third link</li>
+                													   </ul>
+            													       </li>
+            													  <li>second link2</li>
+        											       </ul>
+        											       
+        											   <ul> ´Î¼¶µÄ<li>ÔªËØ¾ÍÊÇÄÚÈİ
+        											   ÔÚ<li>ÀïÃæ,¿ÉÒÔÇ¶Ì×
+        											   		<ul>
+        											   			<li></li>
+        											   		</ul>
+											

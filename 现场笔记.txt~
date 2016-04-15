@@ -381,3 +381,73 @@
 											<Text onPress = Manager.alertWithTags( {title:'?',message:'!!!'} ), (e)=>{} > 
 											</Text>
 											
+								#ES5,ES6的语法区别#
+										引用react模块：
+												es5下
+												var React = require('react-native')
+												var {
+										
+
+												} = React;
+
+
+												es6下
+												import React,{
+
+
+												} from 'react-native';
+
+											导出模块（多用于自定义模块）	
+												es5下，分两步
+												var MyComponent = React.Create({
+										
+												});
+
+												module.exports = MyComponent;
+										
+												es6下(在定义之前添加export default class以说明可外调 )
+												export default class MyComponent extends Component{
+													…………
+												}
+
+											引用模块
+												ES5
+													var MyComponent = require('./MyComponent.js');	
+
+												ES6
+													import MyComponent from './MyComponent.js';
+												
+								#react语法#
+									flex-box的常用属性
+											对container
+												可以指定内部item在竖轴上的对齐方式, 用属性align-content
+												flex-end靠到竖轴的最下端 ,center聚在竖轴的中心等
+												
+											也可以指定item的间距
+												space-around:每个item周围都环绕一圈空白
+												
+											定义属性时,一般会定义针对特定组件的属性.一些共用的属性会单独列出,比如
+												height400:{
+													height:400,
+												},
+												
+											view可以是容器,也可以是容器里的item
+													用flexDirection可以指定内部item的排列方式(column 或 row)
+										
+													
+										在样式设置里,属性项除了表示为十进制的数字之外,都要以''来包括
+										每个组件最基本的属性
+											一层套一层,从内到外依次是
+												content, padding, border, margin
+												模型叫做盒子模型,一个盒子套一个
+												
+												
+								#前端知识#
+										菜单有丰富多彩的样式
+											比如列表式
+											比如tab层叠式
+											比如折叠式
+											比如伸缩式
+											
+													
+									
