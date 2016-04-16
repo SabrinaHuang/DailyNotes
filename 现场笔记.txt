@@ -451,61 +451,7 @@
 											
 													
 										*概念
-											DOCTYPE: 用于告诉浏览器,以第几代HTML规则解析文本,建议使用过渡型,比如XHTML 1.0
-											
-											HTML: 用于编写网页的语言.更严谨更高级的叫XHTML
-											
-											CSS:  决定了页面的表现形式
-											
-											选择器:
-											
-											[标签选择器]
-											<head>
-											    <style type="text/css">
-        											    h1{
-            											    color: white;
-            											    background-color: blue
-          											    }
-    											    </style>
-											</head>
-												这里的h1叫做标志选择器,可用于选中body里的同名标签
-											
-											[还有类选择器,样式是]
-											<head>
-											    <style type="text/css">
-        											    .red{
-            											    color: red;
-            											    background-color: blue
-          											    }
-    											    </style>
-											</head>												
-											<body>
-												<!-- 使用类选择器 -->
-												<h1 class="red">
-													class选择器
-												</h1>
-											<body>	
-											可以混用,类似多继承
-											
-											
-											[还有id选择器]
-											<head>
-											<meta charset="utf-8" ;http-equiv="content-type" ; content="text/html" >
-    											<style type="text/css" >
-    											    .one{
-       											     color: blueviolet;
-    											    }
-      											  #one{
-      											      font-weight: bold;
-     											   }
-     											   #two{
-     											       font-size: 30px;
-     											       color: #009900;
-     											   }
-   											 </style>
-											</head>
-											<body>
-											id选择器不能混合使用
+										
 											
 											[选择器的组合]
 												标志类,表示交集   p.special  标志为p且class为special的元素
@@ -523,7 +469,7 @@
 												}												
 												标签嵌套标签时,可用此语法定义被嵌套标签的样式
 											
-											W3C:标准化民间组织,主要工作是制定web规范的建议
+											W3C:网页方面的标准化民间组织,主要工作是制定web规范的建议
 											
 											[全局选择器是*,传染所有的标志]
 												表示所有标志都用此样式
@@ -631,3 +577,6 @@
         											   			<li></li>
         											   		</ul>
 											
+
+
+			

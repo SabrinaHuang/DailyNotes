@@ -32,3 +32,69 @@
 				NodeJS：是基于JS runtime的javascript开发平台
 				npm（node package manager）：管理代码的工具，用于分发和管理NodeJS包
 
+				
+#css布局基本知识#				
+			概念：
+				DOCTYPE关键字: 在浏览器解析时告诉它,应以第几代HTML规则解析文本
+				
+				HTML: 用于编写网页的语言.更严谨更高级的叫XHTML
+				
+				CSS:  实现页面表现形式的语言
+				
+				选择器:用于检索标签的关键字，一般出现在<head><style></style></head> 里
+					分为
+						标识选择器  为元素的标签名，如 p,span,body,h1,ul等
+						
+						类选择器  为类名，作用在指定了相应class的标签上，如
+							.marginBox{
+								padding:40px;
+							}
+							
+							<span class="marginBox"></span>
+							则此标签拥有padding:40px的属性
+							
+						id选择器  作用在指定了相应id的标签上，如
+							#one{
+								margin:20px;
+							}
+							
+							<p id="one">the pad using style one</p>
+							
+						*全局选择器
+							文档里的所有元素都染上此标签的属性
+							
+							
+				可以组合这些选择器
+					合集,样式为
+						h1,h2,h3,h4,h5{
+								color:red;
+						}
+					所有名为h1,h2,h3,h4,h5的都是这个属性
+					
+					交集
+						h1.special{
+							color:red;
+						}
+						<h1 class="special"><h1>的有这个属性
+						
+					子集
+						h1 ul li ul li{
+							color:red;
+						}
+						嵌在h1里的ul里的li里的ul里的li元素为此属性
+						并且li里的元素也是这个属性
+						
+						
+					W3C:网页方面的标准化民间组织,主要工作是制订web规范的建议
+					
+					块元素：
+						在开头处自带新开始行的元素，如<p>(段落),<table>(表格)
+					
+					内联元素：
+						开头处无折行的元素，如<span>(多用作段落里部分文本的容器), <img>(图像)
+						
+					DOM:
+						一种编程思维，将文档看成一个对象,文档一般就是html,文档里的组件(component)可以用object.attribute的方式来访问
+						
+				
+				
