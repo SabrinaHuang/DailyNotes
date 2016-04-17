@@ -64,8 +64,139 @@
 		¶¨Î»:ÊôÐÔ,ÓÃÓÚÒ³Ãæ²¼¾ÖµÄÖØÒªÊÖ¶Î
 		
 		
-		
-		
+		DOCTYPE:Ö¸¶¨htmlÎÄ±¾µÄ½âÎö·½Ê½	
 
+		
+		meta: Ìá¹©¹ØÓÚÒ³ÃæµÄ"ÔªÐÅÏ¢"µÄ±êÇ© Î»ÓÚheadÄÚ,Ö÷ÒªÊôÐÔÓÐ
+		
+				content ¶¨ÒåÓëhttp-equivÏà¹ØµÄÔªÐÅÏ¢,ºÍhttp-equivÅä¶ÔÊ¹ÓÃ,±íÊ¾Öµ.¾ßÌå½âÊÍ¼ûhttp-equiv´ÊÌõ
+				
+				http-equiv ±íÊ¾¼üÖµ¶ÔÀïµÄ¼ü  ·¢ÎÄµµ¸øä¯ÀÀÆ÷Ê±,ÔÚÄÚÈÝµÄÍ·²¿Ò»¶¨Òª¼ÓÉÏ,´Ó¶ø¸æËßä¯ÀÀÆ÷ÎÄµµµÄÀàÐÍ
+						<meta http-equiv="charset" content="iso-8859-1">
+						<meta http-equiv="expires" content="31 Dec 2008">
+						ÔòÔÚ·¢¸øä¯ÀÀÆ÷µÄÎÄµµµÄÍ·²¿,»á°üº¬
+						charset:iso-8859-1
+						expires:31 Dec 2008
 
-			
+						
+						
+				name 	ÊÇ¼üÖµ¶ÔÀïµÄ¼üÃû³Æ,×÷ÓÃÍ¬http-equiv ÀýÈç <meta name="keywords"  content="HTML,ASP,PHP,SQL" > 
+						·þÎñÆ÷´«ÎÄµµ¸øä¯ÀÀÆ÷Ê±,Í·²¿¾Í»á°üº¬
+						keywords:HTML,ASP,PHP,SQL µÄÐÅÏ¢
+						
+				scheme  ¶¨ÒåÓÃÓÚ·­ÒëcontentÊôÐÔµÄ¸ñÊ½
+		
+				
+		ÌÈÈô³öÏÖÖÐÎÄÂÒÂë,½«<meta>±êÇ©ÀïµÄcharsetÊôÐÔÉèÎª utf-8Ò»°ãÄÜ½â¾ö		
+		
+				body:
+					ÊÇÒ³ÃæÉÏ³ÊÏÖµÄÔªËØµÄ¸¸½Úµã
+				
+					
+			±ê×¼ÎÄ¼þÁ÷
+					ÔÚ²»ÓÃCSSÊ±,¸÷ÔªËØµÄÅÅÁÐÑùÊ½.¾ÍÊÇÄ¬ÈÏÑùÊ½
+					ÔªËØ·ÖÎª
+						¿éÔªËØ
+							Í¬¼¶µÄÔªËØ¶¼ÊÇÊúÖ±·½Ïò×ó¶ÔÆëµÄ.µäÐÍÑùÀý:<ul><li></li></ul>
+						
+						ÄÚÁªÔªËØ
+							ÀàËÆÆÕÍ¨ÎÄ±¾ÑùÊ½,ÔªËØºáÏòÅÅÁÐ,µ½×îÓÒÊ±ÕÛÐÐ
+						
+							
+			ÔÚÓÃDOMË¼ÏëÔÄ¶ÁÊ±,Ó¦µ±ÓÉÍâ¶øÄÚµØ·ÖÎö
+					ÒÔ±í½á¹¹ÎªÀý
+					    <ul>
+       					     <li>1st list 1st item</li>
+        					 <li class="withborder">
+            					    1st list 2st item,wrap required so content is longer
+        					 </li>
+    					 </ul>
+    					 <ul>
+       					     <li>2st list 1st item</li>
+      					      <li class="withborder">
+       					         2st list 2st item,wrap required so content is longer
+      					      </li>
+  					      </ul>	
+  					      
+					µÚÒ»²½
+						bodyÊÇ×î´óµÄ¿éÔªËØ,ÓÐÒ»¸ö
+						bodyÏÂÒ»¼¶ÓÐÁ½¸öul,ÊÇ¿éÔªËØ,ËùÒÔ´¹Ö±·½Ïò×ó¶ÔÆëµØÅÅÁÐ
+					
+  					µÚ¶þ²½
+  					 	ulÒ²ÊÇ¸öÈÝÆ÷,ÔÚÈÝÆ÷ÀïÓÐÁ½¸ö<li>,ÊÇ¿éÔªËØ,ËùÒÔÊúÖ±·½Ïò×ó¶ÔÆëµØÅÅÁÐ
+  					 	
+  					 µÚÈý²½
+  					 	Èç¹ûÓÐÑùÊ½,ÄÇ¾ÍÄÃÑùÊ½È¥ÐÞÊÎ¶ÔÓ¦µÄÔªËØ
+  					 	
+  			
+  			ÖØÒªµÄ¿éÔªËØ div
+  					ÊÇÒ»ÖÖ¿éÈÝÆ÷±êÊ¶,ÀïÃæ¿ÉÒÔÈÝÄÉ¸÷ÖÖ¸÷ÑùµÄÔªËØ.³£¼ûÓÃ·¨ÊÇ½«divÀïµÄÄÚÈÝÊÓÎª¶ÀÁ¢¶ÔÏó,ÓÃÓÚcssµÄ¿ØÖÆ.
+  					
+  			ÖØÒªµÄÄÚÁªÔªËØ  span
+  					¿ÉÒÔÏñdivÒ»ÑùÓÃ,ÓÃÓÚ¿ØÖÆspanÎ§×¡µÄ±êÊ¶µÄÑùÊ½.µ«spanÎÞ·¨Ö¸¶¨¸ß¶È¿í¶È,Ö»ÄÜÖ¸¶¨ÑùÊ½ÊôÐÔ
+  					
+  			heightÊôÐÔ:
+  					¾¡Á¿±ÜÃâÊ¹ÓÃ,ÒòÎªÔÚIEºÍfirefoxÖÐ»á³öÏÖ±íÏÖ²»Í¬µÄÎÊÌâ,Ò»°ãÓÃmin-height, min-width, max-widthµÈÀ´ÏÞ¶¨³ß´ç
+  					
+  			
+  			marginÊôÐÔ:
+  					ÓÃÓÚÖ¸¶¨ºÐ×ÓµÄ¼ä¾à.²¢ÇÒ¿ÉÒÔÎª¸ºÊý,Îª¸ºÊýÊ±,ÔªËØ»á³öÏÖ²¿·Ö½»µþ
+
+  					
+  			floatÊôÐÔ:
+  					ÓÃÓÚ¸ü¸Ä±ê×¼Á÷ÀïÖ¸¶¨µÄ³ß´ç,Ïà¶ÔÎ»ÖÃµÈÒªËØ.
+  					ÈçÉèÆäÎªleft,Ôò¿é»á×ó¶ÔÆë,²¢ÇÒ²»Éèright-margin,¶øÊÇ¸ù¾Ýcontent´óÐ¡À´¾ö¶¨´óÐ¡
+  					
+  					ÀýÈç,ÔÚheadµÄstyleÀï
+  					    .son1{
+          					    /* Ð´¸¡¶¯ÑùÊ½ */
+          					    float:left;
+      					}
+      					.son2{
+      					  	±ê×¼Á÷ÑùÊ½
+     					}
+     					
+     					ÔÚbodyÀï
+  					       <div class="son1">Box-1</div>
+  					       <div class="son2">Box-2</div>
+  					 	
+  					     Ôò´ËÊ±ÀàÎªson1µÄ±êÇ©ÒÑÍÑÀë±ê×¼Á÷,±»±ê×¼Á÷ÎÞÊÓ
+  					     son2±êÇ©»á¶¥µ½ÈÝÆ÷µÄ×îÉÏÃæ
+  					     ¶øson1Ôò¸ù¾Ý¸¡¶¯µÄ¹æÔò,¶¥µ½ÁË×îÉÏÃæ,ÕâÊ±box2
+  					     ²¢ÇÒson1ÓÉÓÚÊÇ¸¡¶¯,border²»ÔÙ³Å¿ª,¶øÊÇÎ§ÈÆÔÚÄÚÈÝËÄÖÜ
+  					     
+  					     floatËÄ´óÊôÐÔ
+  					     	1 °ü¹üÐÔ Èç¹ûÃ»ÉèÖÃ¸ß¶ÈºÍ¿í¶È,»á¾¡Á¿ËõÐ¡
+  					     	2 ¸¡¶¯ÆÆ»µÐÔ ËüµÄÏÂÒ»¸ö±ê×¼Á÷ÔªËØÀïµÄ·ÇblockÔªËØ»á»·ÈÆ
+  					     	3 ¸úËæÐÔ  ¸¡¶¯ÔªËØµÄÏÂÒ»¸öÔªËØÒ²¸¡¶¯ ÔòÏÂÒ»¸öÔªËØ»á¸úËæÇ°Ò»¸öÏÔÊ¾³ÉÒ»ÐÐ
+  					     	
+  					     	
+  					     
+  					 	float¿É¸Ä±ä±ê×¼Á÷ÖÐÓÉ³öÏÖË³ÐòÊµÏÖµÄÅÅÐò
+  					 	ÀýÈç
+  					 		.son1{
+  					 			float : right;
+  					 		}
+  					 	
+  					 		.son2{
+  					 			float : left;
+  					 		}
+
+  					 		<div class="son1">A</div>
+  					 		<div class="son2">B</div>
+  					     	
+  					 		Ôòson2 ½ôÌùÈÝÆ÷×ó²à
+  					 		Ôòson1 ½ôÌùÈÝÆ÷ÓÒ²à
+  					 		
+  					 		ÔÚUIÉè¼ÆÖÐ,¿ÉÀûÓÃ´ËÌØÐÔÖØ²¼Ò³Ãæ,½«ÖØÒªµÄÄÚÈÝfloat:left ÒÔÓÅ»¯ÓÃ»§ÌåÑé
+  					 		
+  					 		²»¹ýÔÚÒ³Ãæ±äÕ­,ÐèÒª¸¡¶¯ÔªËØÕÛÐÐÊ±,È´ÊÇ°´ÅÅÁÐË³ÐòÀ´ÕÛÐÐµÄ.ÅÅÔÚÇ°ÃæµÄÔªËØÏÈÕÛÐÐ
+  					 		
+  					 		
+  					 	positionÊôÐÔÎªrelativeÊ±:
+  					 		¶Ô±ê×¼Á÷ÀïµÄÔªËØ,»áÊ¹ÆäÏà¶ÔÄ¬ÈÏÎ»ÖÃÎ»ÒÆ.¶ø²»Ó°ÏìÆäËûÔªËØ.ËüÈÔÊÇ±ê×¼Á÷ÔªËØ.ÕâµãºÍfloat´óÓÐÇø±ð,ÇÐ¼ÇÇÐ¼Ç.
+  					 		
+  					 	
+    					positionÊôÐÔÎªabsoluteÊ±:
+    						»áÕÒµ½ÔÚ²ã¼¶ÉÏÀëËü×î½üµÄÎªabsolute/relative/ÔªËØ²¢¶¨Î»,
+  					     
