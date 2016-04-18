@@ -53,10 +53,8 @@
 	
 										
 													
-	#Mac基本用法#
-			路径表示为~ 是Macintosh HD/用户/sabrina
-			
-			路径不带~,直接 /usr/local表示 Macintosh HD/usr/local  在Macintosh HD/usr/local/bin里,有各种程序对应的脚本
+	
+
 			
 	#CSS语法#
 		标准流:一种标准的网页布局样式,是一种模板

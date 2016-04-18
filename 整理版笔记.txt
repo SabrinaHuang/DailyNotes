@@ -302,3 +302,11 @@
 						问题:打开中文文档时出现乱码  解决方案:File-> Reload With Encoding -> 改用GBK编码
 			
 						常用的设置一般都可在Utilities -> Global Options里找到
+						
+					#Mac基本用法#	
+						路径表示为~ 是Macintosh HD/用户/sabrina
+			
+						路径不带~,直接 /usr/local表示 Macintosh HD/usr/local  在Macintosh HD/usr/local/bin里,有各种程序对应的脚本
+						
+			#CSS最常用技巧
+					
