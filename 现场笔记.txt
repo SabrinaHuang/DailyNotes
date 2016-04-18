@@ -198,5 +198,121 @@
   					 		
   					 	
     					position属性为absolute时:
-    						会找到在层级上离它最近的为absolute/relative/元素并定位,
+    						会找到在层级上离它最近的为absolute/relative/fixed/inherited 元素并定位,    					
+    						
+    					<br />表示文本换行
+    					
+  					     clear属性:
+  					     		当标准流元素跟在float后面时,会环绕.为了消除环绕,可以用clear:both来摆脱float元素的影响.就像那float元素重新变成了标准流元素
+  					     		
+  					     		倘若浮动元素没有后续元素,那可能会导致先前的块元素与浮动元素分离.解决方法是给浮动元素加一个同级的标准流块元素
   					     
+  					     黑科技之absolute:
+  					     		一个absolute属性的对象,在父容器都是static时,倘若不设置偏移量,会保持原先的偏移量
+  					     		
+        #outerBox{
+            width: 200px;
+            height: 100px;
+            margin: 10px auto;
+            background: silver;
+        }
+        #innerbox{
+            width: 100px;
+            height: 50px;
+            background: orange;
+            position: absolute;
+        }
+  					    
+ 		<div id="outerBox">
+            <div id="innerbox"></div>
+        </div>
+        
+        此时innerbox的位置同statice时
+        
+        				
+        				重要属性display:
+        						display可用于强制指定元素的块类型(block/inline/none)分别表示块,内联和隐藏
+        							
+        				全角&半角属性:
+        						那些一个字符占两个标准字符位置的的码表,如汉字,国标GB2312-80里的图形
+        						英文字符一般为半角
+        						
+        				
+        				font-size属性:
+        						值一般用px为单位,表示相对屏幕上一个像素的大小
+        						
+        						
+        				在div里,倘若有多个样式,则在父级别指定尺寸属性时,最好用比例
+        				如
+        					        p{
+            font-family: Arial, "Times New Roman";
+            font-size: 12px;
+            line-height: 18px;
+        }
+        .firstLetter{
+            font-size: 200%;
+            float: left;
+        }
+        	
+        				
+        					        <p class="p2">
+                  					          <span class="firstLetter">T</span>eacher<br />eacher<br />eacher<br />eacher<br />eacher<br />eacher<br />eacher<br />
+              					    </p>
+              					   
+              					   倘若p的line-height指定为18px,则应当首字下沉的span里的T的容器高度也是18,环绕时沿着高18px的盒子达不到下沉效果
+              					   
+              					   倘若属性写在一起,当子元素层叠时,只要有一个属性冲突,就会覆盖全部属性
+              					   例如
+              					   <div>
+              					   	<span></span>
+              					   </div>
+              					   
+              					   div
+              					   {
+              					   	font:18px/3 Arial;
+              					   }
+              					   span 
+              					   {
+              					   	font-size:3em;
+              					   }
+              					   
+              					   会抹掉三个属性
+              					   
+              					   
+              		关于网页的文字样式,例如环绕式
+              		正文文字因为要贴边,所以一般不弄margin和padding,要弄都是float来弄margin和padding
+              		
+              		引用背景图时,用url("03.jpg")
+              		
+              		将body的背景色设为背景图片的边缘色,可以让背景图片和谐地融入背景中
+              		
+              		标题常需要较特殊的字体,用图片 替代文字
+              		<h1><span>The title</span></h1>
+              		
+              		h1{
+              			background-image:url("img/")
+              		}
+              		h1 span{
+              			display:none;
+              		}
+              		
+              		这样即可显示图片而隐藏文字
+              		
+              		九宫格制法
+              			stpe1:
+              				为body设置属性 textAlign:center
+              				
+              			step2:
+              				为包含格子的容器设置属性margin:0 auto;
+              				
+              			step3:
+              				设置格子属性
+              				width:calc((100% - 6px) / 3)  
+              				float: left;
+              				height:120  
+              				减去边框和margin的宽度,然后需要排几个格子,就除以几
+              				
+              				
+              				
+              			
+              				
