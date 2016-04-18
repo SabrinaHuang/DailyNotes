@@ -309,4 +309,124 @@
 						路径不带~,直接 /usr/local表示 Macintosh HD/usr/local  在Macintosh HD/usr/local/bin里,有各种程序对应的脚本
 						
 			#CSS最常用技巧
+				概念
+					标准流:默认的布局模板,设置了每个元素的各种属性的默认值
 					
+					DOCTYPE:关键字,用于指定浏览器解析html文本时遵循的协议
+						<!DOCTYPE "-//W3C//DTD XHTML 1.0 Transitional//EN">
+					
+					meta: 嵌套在head里的元素,用于指定全局信息和发协议时报文头部的信息,包括
+					
+					meta里的属性http-equiv,content 分别对应头信息里的key和value
+						例如
+						<meta http-equiv="charset" content="iso-8859-1">
+						<meta http-equiv="expires" content="31 Dec 2008">
+						则在发给浏览器的文档的头部,会包含
+						charset:iso-8859-1
+						expires:31 Dec 2008
+						
+					meta里的scheme
+						定义翻译content的格式
+						
+					body:
+						页面上的根节点
+						
+					块元素:
+						html里单独占行,形状为块状的元素,比如段落<p>,比如表格<ul>
+						
+					内联元素:
+						html里不单独占行的元素,比如样式<span>
+						
+					div
+						是一种块容器标识,里面可以容纳各种各样的元素.常见用法是将div里的内容视为独立对象,用于css的控制.
+						
+					span
+						多用于修饰部分文本的样式
+						
+					
+					height
+						应尽量少用的属性,因为在不同浏览器里的表现不一样,一般用min-height, min-width, max-width等来表示尺寸
+					
+					margin,padding,border
+						指定块状元素尺寸的重要属性
+						
+					float,让元素摆脱标准流设定下的位置:
+						有三个重要属性
+  					     	1 包裹性 如果没设置高度和宽度,会尽量缩小
+  					     	2 浮动破坏性 它的下一个标准流元素里的非block元素会环绕
+  					     	3 跟随性  浮动元素的下一个元素也浮动 则下一个元素会跟随前一个显示成一行					
+						
+  					     此外,float:left的元素,即使排在后面,显示时还是靠左.
+  					     
+  					     
+					position的值
+						relative:
+								相对于标准流时的位置漂移
+								
+						absolute:
+								以最近的非标准流父元素为原点坐标
+								倘若没有非标准流元素,则保持做标准流时的位置
+						
+								例如
+								        #outerBox{
+            width: 200px;
+            height: 100px;
+            margin: 10px auto;
+            background: silver;
+        }
+        #innerbox{
+            width: 100px;
+            height: 50px;
+            background: orange;
+            position: absolute;
+        }
+  					    
+ 		<div id="outerBox">
+            <div id="innerbox"></div>
+        </div>
+        						此时innerbox位置就是static时的位置
+        						
+
+        						
+        			倘若属性用简写法,当子元素发生层叠时,只要有一个属性冲突,就会覆盖全部属性
+              					   例如
+              					   <div>
+              					   	<span></span>
+              					   </div>
+              					   
+              					   div
+              					   {
+              					   	font:18px/3 Arial;
+              					   }
+              					   span 
+              					   {
+              					   	font-size:3em;
+              					   }
+              					   
+              					   会抹掉三个属性.			
+					
+              					
+              		url
+              			用于定位资源,比如
+              				background-image:url("head.jpg")
+              		
+              				
+              		九宫格制法
+              			body{ 
+              				textAlign:center
+              			}
+              			
+              			#grid{
+              				margin:0 auto;
+              			}
+              			
+              			.box{
+              				width:calc((100% - 6px) / 3)  
+              				float: left;
+              				height:120;  
+              				border:1px;
+              			}
+              			宽度的算法是:减去边框和margin的宽度,然后需要排几个格子,就除以几
+              			
+              			
+              				
