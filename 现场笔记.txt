@@ -50,4 +50,71 @@
 		validAttributes: { myCustomProperty: true },
 		uiViewClassName: 'MyCustomView',
 	});
-              					   
+
+              				
+              				
+              		#react nativeÓï·¨#
+              			×é¼ş  extends Component{} ÓÃ´óÀ¨ºÅ
+              			
+              			StyleSheet.create() ÓÃĞ¡À¨ºÅ
+              			ËùÓĞµÄÖµ¶¼ÒÔ{}°ü¹ü
+              			
+              			view
+              				¶ÔÇ¶Ì×µÄÈİÆ÷À´Ëµ,Íâ²ãÈİÆ÷¿É¾ö¶¨ÄÚ²ãÈİÆ÷µÄÅÅ²¼·½Ê½,µ«ÎŞ·¨¾ö¶¨ËüÃÇµÄ´óĞ¡
+              				Èç
+				<View style={[styles.item,styles.lineLeftRight]}>
+						<View style={[styles.flex,styles.center,styles.lineCenter]} >
+							<Text>¶î2</Text>
+						</View>
+						<View style={[styles.flex,styles.center,styles.lineCenter]}>
+							<Text>¸ò2</Text>		
+						</View>				
+				</View>  
+						Íâ²ãÈİÆ÷¾ö¶¨ÁË×Ô¼ºÊÇÆ½ÆÌµÄ,¾ö¶¨ÁË×Ô¼ºµÄ×óÓÒÏß¿í
+						ÄÚ²ãÈİÆ÷¾ö¶¨ÁË×Ô¼ºÊÇÆ½ÆÌµÄ,×Ô¼ºµÄÄÚÈİÊÇ¾ÓÖĞµÄ,×Ô¼ºµÄµ×²¿ÏßµÄ¿í¶È
+              				
+              	
+				Èç¹ûÊÇ·â×°µÄ×é¼ş,×îÍâ²ãµÄÈİÆ÷µÄÊôĞÔÒ»°ã½Ğflex,ĞèÒªÉèÖÃµ½¸÷±ßÔµµÄmargin,ÒÔ¼°ÄÚ²¿µÄ¶ÔÆë·½Ê½
+				ÀıÈç alignItems:'center' ÈÃitemË®Æ½·½Ïò¶ÔÆë
+				
+				ÁĞ±í×é¼şµÄÓ¦ÓÃ
+					1 ½«Êı¾İÒÀ´Î·â×°µ½½çÃæÀï
+						// ¶¨Òå
+						var newsArr = [];
+						// Éú³É×é¼ş²¢·ÅÈëÊı×é
+						for( var i in this.props.news){
+							var text = (
+								<Text>
+									{this.props.news[i]}
+								</Text>
+							);
+							newsArr.push(text);
+						}
+						
+					2 ½«Êı¾İÕ¹Ê¾µ½×é¼şÀï
+						return(
+							<View>
+								<Text>µÚÒ»ĞĞÊÇ±êÌâ</Text>
+								{newsArr}
+							</View>
+						)
+						
+					2  µ÷ÓÃÊ±
+						import Array from './Component';
+						
+						<View>
+							<Array news={['a','b','c','d','e','f','g',]} />
+						</View>
+
+
+					tabBarIOSµÄÓÃ·¨
+						ÒªÉèÖÃÖîÈçtitle, item, ÓÃ property = {valueXX}¼´¿É.Òª×¢ÒâÓï·¨½Ï·±Ëö
+						ÌØ±ğÊÇÄÚÁªº¯Êı
+							
+					ÒıÓÃÍ¼Æ¬	
+						<Image source={require('./image.png')} />
+						Í¼Æ¬Õ¹Ê¾Ê±,°´Ô­Ê¼³ß´ç´óĞ¡Õ¹Ê¾,²»ÊÜÈİÆ÷µÄheightÔ¼Êø
+						ÒıÓÃÊ±ĞèÒª²ÃÇĞ³öºÏÊÊµÄÍ¼Æ¬.
+						
+						
+						
