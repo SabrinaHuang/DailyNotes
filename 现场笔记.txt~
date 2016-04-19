@@ -1,0 +1,316 @@
+
+			
+		/*  待验证 */	
+	// 	react 本身融入 JS的API，比如XMLHttpRequest,navigator.geolocation等
+	var React = require('react-native');
+	var { Text } = React;
+		*指定了三个对象
+	var GeoInfo = React.createClass({
+		getInitialState: function() {
+		return { position: 'unknown' };
+	},	
+	
+	componentDidMount: function() {
+		navigator.geolocation.getCurrentPosition(
+			(position) => this.setState({position}),
+			(error) => console.error(error)
+		);
+	},
+	
+	render: function() {
+	   return (
+		  <Text>
+			Position: {JSON.stringify(this.state.position)}
+		  </Text>
+		);
+	   },
+	});
+	
+	
+	
+	// react可以重用原生UI，方法是在RCTViewManager的子类里实现-(UIView *)view。需要调用时用RCT_EXPORT_VIEW_PROPERTY暴露。
+	/* 研究重点 */
+	//  OC代码
+	#import "RCTViewManager.h"
+	@interface MyCustomViewManager : RCTViewManager
+	@end
+	// 调用此view
+	@implementation MyCustomViewManager
+		- (UIView *)view
+		{
+			return [[MyCustomView alloc] init];
+		}
+		// 向JS暴露属性
+		RCT_EXPORT_VIEW_PROPERTY(myCustomProperty);
+	@end	
+	
+	// JS代码
+	// 生成一个模型
+	module.exports = createReactIOSNativeComponentClass({
+		validAttributes: { myCustomProperty: true },
+		uiViewClassName: 'MyCustomView',
+	});
+	
+										
+													
+	
+
+			
+	#CSS语法#
+		标准流:一种标准的网页布局样式,是一种模板
+		浮动:属性,用于页面布局的重要手段
+		定位:属性,用于页面布局的重要手段
+		
+		
+		DOCTYPE:指定html文本的解析方式	
+
+		
+		meta: 提供关于页面的"元信息"的标签 位于head内,主要属性有
+		
+				content 定义与http-equiv相关的元信息,和http-equiv配对使用,表示值.具体解释见http-equiv词条
+				
+				http-equiv 表示键值对里的键  发文档给浏览器时,在内容的头部一定要加上,从而告诉浏览器文档的类型
+						<meta http-equiv="charset" content="iso-8859-1">
+						<meta http-equiv="expires" content="31 Dec 2008">
+						则在发给浏览器的文档的头部,会包含
+						charset:iso-8859-1
+						expires:31 Dec 2008
+
+						
+						
+				name 	是键值对里的键名称,作用同http-equiv 例如 <meta name="keywords"  content="HTML,ASP,PHP,SQL" > 
+						服务器传文档给浏览器时,头部就会包含
+						keywords:HTML,ASP,PHP,SQL 的信息
+						
+				scheme  定义用于翻译content属性的格式
+		
+				
+		倘若出现中文乱码,将<meta>标签里的charset属性设为 utf-8一般能解决		
+		
+				body:
+					是页面上呈现的元素的父节点
+				
+					
+			标准文件流
+					在不用CSS时,各元素的排列样式.就是默认样式
+					元素分为
+						块元素
+							同级的元素都是竖直方向左对齐的.典型样例:<ul><li></li></ul>
+						
+						内联元素
+							类似普通文本样式,元素横向排列,到最右时折行
+						
+							
+			在用DOM思想阅读时,应当由外而内地分析
+					以表结构为例
+					    <ul>
+       					     <li>1st list 1st item</li>
+        					 <li class="withborder">
+            					    1st list 2st item,wrap required so content is longer
+        					 </li>
+    					 </ul>
+    					 <ul>
+       					     <li>2st list 1st item</li>
+      					      <li class="withborder">
+       					         2st list 2st item,wrap required so content is longer
+      					      </li>
+  					      </ul>	
+  					      
+					第一步
+						body是最大的块元素,有一个
+						body下一级有两个ul,是块元素,所以垂直方向左对齐地排列
+					
+  					第二步
+  					 	ul也是个容器,在容器里有两个<li>,是块元素,所以竖直方向左对齐地排列
+  					 	
+  					 第三步
+  					 	如果有样式,那就拿样式去修饰对应的元素
+  					 	
+  			
+  			重要的块元素 div
+  					是一种块容器标识,里面可以容纳各种各样的元素.常见用法是将div里的内容视为独立对象,用于css的控制.
+  					
+  			重要的内联元素  span
+  					可以像div一样用,用于控制span围住的标识的样式.但span无法指定高度宽度,只能指定样式属性
+  					
+  			height属性:
+  					尽量避免使用,因为在IE和firefox中会出现表现不同的问题,一般用min-height, min-width, max-width等来限定尺寸
+  					
+  			
+  			margin属性:
+  					用于指定盒子的间距.并且可以为负数,为负数时,元素会出现部分交叠
+
+  					
+  			float属性:
+  					用于更改标准流里指定的尺寸,相对位置等要素.
+  					如设其为left,则块会左对齐,并且不设right-margin,而是根据content大小来决定大小
+  					
+  					例如,在head的style里
+  					    .son1{
+          					    /* 写浮动样式 */
+          					    float:left;
+      					}
+      					.son2{
+      					  	标准流样式
+     					}
+     					
+     					在body里
+  					       <div class="son1">Box-1</div>
+  					       <div class="son2">Box-2</div>
+  					 	
+  					     则此时类为son1的标签已脱离标准流,被标准流无视
+  					     son2标签会顶到容器的最上面
+  					     而son1则根据浮动的规则,顶到了最上面,这时box2
+  					     并且son1由于是浮动,border不再撑开,而是围绕在内容四周
+  					     
+  					     float四大属性
+  					     	1 包裹性 如果没设置高度和宽度,会尽量缩小
+  					     	2 浮动破坏性 它的下一个标准流元素里的非block元素会环绕
+  					     	3 跟随性  浮动元素的下一个元素也浮动 则下一个元素会跟随前一个显示成一行
+  					     	
+  					     	
+  					     
+  					 	float可改变标准流中由出现顺序实现的排序
+  					 	例如
+  					 		.son1{
+  					 			float : right;
+  					 		}
+  					 	
+  					 		.son2{
+  					 			float : left;
+  					 		}
+
+  					 		<div class="son1">A</div>
+  					 		<div class="son2">B</div>
+  					     	
+  					 		则son2 紧贴容器左侧
+  					 		则son1 紧贴容器右侧
+  					 		
+  					 		在UI设计中,可利用此特性重布页面,将重要的内容float:left 以优化用户体验
+  					 		
+  					 		不过在页面变窄,需要浮动元素折行时,却是按排列顺序来折行的.排在前面的元素先折行
+  					 		
+  					 		
+  					 	position属性为relative时:
+  					 		对标准流里的元素,会使其相对默认位置位移.而不影响其他元素.它仍是标准流元素.这点和float大有区别,切记切记.
+  					 		
+  					 	
+    					position属性为absolute时:
+    						会找到在层级上离它最近的为absolute/relative/fixed/inherited 元素并定位,    					
+    						
+    					<br />表示文本换行
+    					
+  					     clear属性:
+  					     		当标准流元素跟在float后面时,会环绕.为了消除环绕,可以用clear:both来摆脱float元素的影响.就像那float元素重新变成了标准流元素
+  					     		
+  					     		倘若浮动元素没有后续元素,那可能会导致先前的块元素与浮动元素分离.解决方法是给浮动元素加一个同级的标准流块元素
+  					     
+  					     黑科技之absolute:
+  					     		一个absolute属性的对象,在父容器都是static时,倘若不设置偏移量,会保持原先的偏移量
+  					     		
+        #outerBox{
+            width: 200px;
+            height: 100px;
+            margin: 10px auto;
+            background: silver;
+        }
+        #innerbox{
+            width: 100px;
+            height: 50px;
+            background: orange;
+            position: absolute;
+        }
+  					    
+ 		<div id="outerBox">
+            <div id="innerbox"></div>
+        </div>
+        
+        此时innerbox的位置同statice时
+        
+        				
+        				重要属性display:
+        						display可用于强制指定元素的块类型(block/inline/none)分别表示块,内联和隐藏
+        							
+        				全角&半角属性:
+        						那些一个字符占两个标准字符位置的的码表,如汉字,国标GB2312-80里的图形
+        						英文字符一般为半角
+        						
+        				
+        				font-size属性:
+        						值一般用px为单位,表示相对屏幕上一个像素的大小
+        						
+        						
+        				在div里,倘若有多个样式,则在父级别指定尺寸属性时,最好用比例
+        				如
+        					        p{
+            font-family: Arial, "Times New Roman";
+            font-size: 12px;
+            line-height: 18px;
+        }
+        .firstLetter{
+            font-size: 200%;
+            float: left;
+        }
+        	
+        				
+        					        <p class="p2">
+                  					          <span class="firstLetter">T</span>eacher<br />eacher<br />eacher<br />eacher<br />eacher<br />eacher<br />eacher<br />
+              					    </p>
+              					   
+              					   倘若p的line-height指定为18px,则应当首字下沉的span里的T的容器高度也是18,环绕时沿着高18px的盒子达不到下沉效果
+              					   
+              					   倘若属性写在一起,当子元素层叠时,只要有一个属性冲突,就会覆盖全部属性
+              					   例如
+              					   <div>
+              					   	<span></span>
+              					   </div>
+              					   
+              					   div
+              					   {
+              					   	font:18px/3 Arial;
+              					   }
+              					   span 
+              					   {
+              					   	font-size:3em;
+              					   }
+              					   
+              					   会抹掉三个属性
+              					   
+              					   
+              		关于网页的文字样式,例如环绕式
+              		正文文字因为要贴边,所以一般不弄margin和padding,要弄都是float来弄margin和padding
+              		
+              		引用背景图时,用url("03.jpg")
+              		
+              		将body的背景色设为背景图片的边缘色,可以让背景图片和谐地融入背景中
+              		
+              		标题常需要较特殊的字体,用图片 替代文字
+              		<h1><span>The title</span></h1>
+              		
+              		h1{
+              			background-image:url("img/")
+              		}
+              		h1 span{
+              			display:none;
+              		}
+              		
+              		这样即可显示图片而隐藏文字
+              		
+              		九宫格制法
+              			stpe1:
+              				为body设置属性 textAlign:center
+              				
+              			step2:
+              				为包含格子的容器设置属性margin:0 auto;
+              				
+              			step3:
+              				设置格子属性
+              				width:calc((100% - 6px) / 3)  
+              				float: left;
+              				height:120  
+              				减去边框和margin的宽度,然后需要排几个格子,就除以几
+              				
+              				
+              				
+              			
+              				

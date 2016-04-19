@@ -1,0 +1,312 @@
+	#java基础#
+		#配置开发环境#
+		   概念：
+			jre(Java SE Runtime Environment):作用类似虚拟机，可以在任意操作系统上为Java程序提供统一的编程接口
+			jdk(Java Develop Kit).是一组API，专为java提供开发环境，所有的java程序都要基于它来构建
+			Java SDK：辅助开发Java的相关文档、范例和工具的集合
+			开发服务器：用于开发和编译程序的机器。
+
+		  步骤：
+		    0、下载并安装jre
+		  	1、下载jdk http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+		  	2、下载SDK,在android SDK Manager里，设置代理 镜像:mirrors.neusoft.edu.cn  端口:80
+		  	3、配置路径，（只讲述Mac机），在/Users/当前用户名/ 路径下，建.bash_profile文件,在文件内添加
+		  		ANDROID_HOME = jdk路径
+		  	4、	
+
+	#通用知识#
+			平台：一般是一套工具包。可在任意操作系统上为特定语言编写的程序提供统一的接口
+			例如
+				Java平台（Java platform）。是一套工具，包括Java虚拟机和Java Core，在任意操作系统上为Java程序提供统一接口
+				.NET平台，（.NET platform）。是一套工具，包括了CLR和framework类库，在任意操作系统上为.NET程序提供统一接口
+
+
+			runtime:是程序运行时，除了bare-metal之外的调用
+				特点：
+					1、在程序运行时，介入的频率不是太高
+					2、由此语言独享					
+
+
+#react-native开发基础#
+			概念：
+				NodeJS：是基于JS runtime的javascript开发平台
+				npm（node package manager）：管理代码的工具，用于分发和管理NodeJS包
+
+			语法
+				this.setState 改变属性后,会触发
+			
+			技巧
+				JS调原生
+					封装原生模块供react使用								
+								第一步:
+									让原生代码成为RCTBridgeModule的协议,在.h文件里
+									@interface CalendarManager : NSObject <RCTBridgeModule>
+									@end	
+								
+								第二步,在.m文件的@implement @end里,添加协议的实现								
+									RCT_EXPORT_MODULE();
+								
+								第三步,给要导出的方法添加RCT_EXPORT_METHOD()宏
+									RCT_EXPORT_METHOD(addEvent:(NSString *)name location:(NSString *)location)
+									被导出的方法的返回值必须是void
+									
+								第四步 在js里调用
+									var CalendarManager = require('react-native').NativeModules.CalendarManager;
+									CalendarManager.addEvent('name', 'Shanghai');
+								
+								第五步  倘若方法有回调,回调对象只能是RCTResponseSenderBlock
+									   并且在调用块时,第一个参数是NULL,第二个参数才是真正传给JS的参数
+									RCT_EXPORT_METHOD(findEvents:(RCTResponseSenderBlock)callback)
+									{
+									    // 获取值,是一个数组
+										NSArray *events = 
+										// 传值
+										callback(@NSNull[null], events);
+									}
+									
+									在js里
+									var CalendarManager = require('react-native').NativeModules.CalendarManager;
+									CalendarManager.findEvent((Events)=> {										
+									})
+				
+						prop和state
+								prop是传给对象的参数,例如
+								 var Hello = React.createClass({
+								                 render(){
+								 	 				return <div> Hello {this.props.name}</div>;
+	 									 		}
+	 									 	});	
+								
+	 							 < Hello name = "sabrina" />
+	 							 
+	 							 则html页面上显示为
+	 							 Hello  sabrina
+	 							 
+	 							 state是组件本身的属性,当state改变时,会reload界面.
+	 							 比如从网络上下载数据并填充到表格里时,会有个state叫dataSource,网络请求改变了state.页面会刷新显示,将数据展现出来.
+	 							 具体可见http://sentsin.com/web/1120.html里关于展示25部电影的段楼
+					
+				技术
+					Android真机调试的步骤
+						1 开启手机的调试模式
+						2 手机USB连接Mac机,最好当前只有一台设备连到Mac机,模拟器等也不要打开
+						3 用adb devices查看设备,如只有一个dev,说明连接正确
+						4 终端的路径为工程的根目录, 命令行是react-native run-android
+						5 开启目标机的悬浮窗设置 设置 -> 其他应用管理 -> 选中app -> app操作菜单之权限管理 -> "显示悬浮窗"设置为true
+						6 摇晃手机,在浮现的菜单里选"Dev Settings" -> Debugging -> 在弹出的对话框里填上开发服务器的ip和端口.返回,重启app,即可正确显示js
+						7 需要调试时,摇晃手机,在浮现的菜单里点选 "Debug in Chrome",在弹出的chrome里选择 列表 -> 其他工具 -> 开发者工具,即可在弹出窗体的debuggerWorker.js里,用断点调试.
+					
+						
+					RCT语法
+						常用函数
+							render:实现样式,渲染样式,用JS调用样式
+							
+							const styles = StyleSheet.create(
+							{
+								container:{
+								flex:1,
+								},	
+							});用于实现样式,好处是不可更改,不可见,而且只在mount时加载,不用每次render去刷新时都加载
+							
+							所有的数据,都要用{}括起来,如{this.prop.name},如{this.state.container}
+							
+					
+					
+					图像显示技巧
+						   FPS:帧率								
+						   	每秒应该展现的图片数,标准为60,也就是每16ms需要生成一张图片,倘若开发者和UI系统无法在此时间内生成一张图片,则界面会卡顿.
+							
+						   	掉帧
+						   		每秒展示的图片数小于FPS所对应的,应有的帧数
+						   	
+						   	push新页时可能卡顿的原因
+						   		js需要绘制所有组件,所以必然会占用时间,图片生成所需时间大于FPS对应的最大时间.页面就会出现卡顿
+						   		
+						   		
+								
+							
+#css布局基本知识#				
+			概念：
+				DOCTYPE关键字: 在浏览器解析时告诉它,应以第几代HTML规则解析文本
+				
+				HTML: 用于编写网页的语言.更严谨更高级的叫XHTML
+				
+				CSS:  实现页面表现形式的语言
+				
+				选择器:用于检索标签的关键字，一般出现在<head><style></style></head> 里
+					分为
+						标识选择器  为元素的标签名，如 p,span,body,h1,ul等
+						
+						类选择器  为类名，作用在指定了相应class的标签上，如
+							.marginBox{
+								padding:40px;
+							}
+							
+							<span class="marginBox"></span>
+							则此标签拥有padding:40px的属性
+							
+						id选择器  作用在指定了相应id的标签上，如
+							#one{
+								margin:20px;
+							}
+							
+							<p id="one">the pad using style one</p>
+							
+						*全局选择器
+							文档里的所有元素都染上此标签的属性
+						
+						如果一个标签的某属性有多个选择器来关联,则决定属性值的优先级为
+							行内样式> id样式> 类样式> 标志样式
+							CSS里的层叠,说的就是这回事
+							
+							另外一种情况下,如果div的样式和内嵌的样式重复,取后出现的,这叫覆盖,以出现的先后来决定,而不以选择器类型决定
+				
+				样式赋值的技巧
+						在div标签中,多个属性可以在同一个标志上指定,如border
+							border: 2px black groove定义了边框宽度,颜色和样式三种属性
+						
+						或者在div中,对边框的上,右,下,左依次赋值
+							border-color:red gray orange blue 
+							上红色,右灰色,下橘色,左蓝色
+				
+				CSS关联到HTML的适合方法
+						如果只有一个CSS要关联到HTML,则可用链接标签
+						<head>
+							<link href="XX.css"; content="text/style" />
+						</head>
+						
+						如果有多个css要链接,则可以link css的目录,然后在目录里导入引用其他
+						
+						如果用JS导入CSS,用链接法(目前未接触)
+						
+				可以组合这些选择器
+					合集,样式为
+						h1,h2,h3,h4,h5{
+								color:red;
+						}
+					所有名为h1,h2,h3,h4,h5的都是这个属性
+					
+					交集
+						h1.special{
+							color:red;
+						}
+						<h1 class="special"><h1>的有这个属性
+						
+					子集
+						h1 ul li ul li{
+							color:red;
+						}
+						嵌在h1里的ul里的li里的ul里的li元素为此属性
+						并且li里的元素也是这个属性
+						
+						
+						
+					W3C:网页方面的标准化民间组织,主要工作是制订web规范的建议
+					
+					块元素：
+						在开头处自带新开始行的元素，如<p>(段落),<table>(表格)
+					
+					内联元素：
+						开头处无折行的元素，如<span>(多用作段落里部分文本的容器), <img>(图像)
+						
+					DOM:
+						一种编程思维，将文档看成一个对象,文档一般就是html,文档里的组件(component)可以用object.attribute的方式来访问
+						
+					容器:
+						HTML里的每一个标签被称为一个容器,容器里可以套容器,被嵌套的容器传染外层容器的属性
+						
+						容器的有些属性很重要,主要是设定容器自身大小和容器与外部环境关系的量						
+							padding-border-margin,由内而外地设定了一些距离参数
+					
+					flex-box:
+						一种重要的标签,指定了容器的样式,有很多重要属性
+							align-content: 指定内部item在竖轴上的对齐方式  flex-end 靠底部对齐 center 居中对齐
+							space-around: 指定item周围环绕的空白
+							flexDirection:  指定内部item是横着排列还是竖着排列
+							
+							
+					Div:
+						一种重要的标签,用于设定被包裹的content的padding, border, margin属性.还能指定样式
+						如
+						<head>
+						 <style>
+						 		div{
+     								border-width: 6px;
+     								border-color: #000000;
+     								margin: 20px;
+       								padding: 5px;
+     								background-color: #FFFFCC;
+    								}
+  						 </style>						
+  						 </head>
+  						 <body>
+  						 	<div style="border-style: dashed" >  The  border-style of dashed </div>
+						 </body>
+						 出来的就是一个粗黑点点框,黄背景的The  border-style of dashed文字段落
+					
+					<ul><li></li></ul>:
+							层级样式,类似word里的一级目录/二级目录/三级目录
+							
+							<ul>
+								<li>第一层</li>	
+								<li>
+									<ul><li>第二层</li></ul>									
+								</li>
+							</ul>
+						 
+							在<li>里嵌套<ul><li></li></ul>样式
+					
+					ES5 VS ES6语法
+								对某些旧版的资料,需要转换为ES6语法,因为现有的RCT已全面采用ES6替代ES5
+								
+								引用react模块:
+									ES5
+									var  React = require('react-native')
+												var {
+													view,
+													Tab,
+												} = React;
+					
+									ES6
+									import React,{
+									
+									}from 'react-native';
+									
+									
+								导出模块
+									ES5
+									var MyComponent = React.Create({
+													………………
+												});
+									
+									module.exports = MyComponent;			
+									
+									ES6
+									export default class MyComponent extends Component{
+													…………
+												}
+									就像extern和定义放在了一起
+									
+									
+								导入
+									ES5
+										var MyComponent = require('./MyComponent.js');	
+
+									ES6
+										import MyComponent from './MyComponent.js';
+								
+										
+										
+			#办公工具使用技巧#
+					#jedit使用技巧#
+						问题:打开中文文档时出现乱码  解决方案:File-> Reload With Encoding -> 改用GBK编码
+			
+						常用的设置一般都可在Utilities -> Global Options里找到
+						
+					#Mac基本用法#	
+						路径表示为~ 是Macintosh HD/用户/sabrina
+			
+						路径不带~,直接 /usr/local表示 Macintosh HD/usr/local  在Macintosh HD/usr/local/bin里,有各种程序对应的脚本
+						
+			#CSS最常用技巧
+					
