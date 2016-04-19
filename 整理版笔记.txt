@@ -121,8 +121,56 @@
 						   	
 						   	push新页时可能卡顿的原因
 						   		js需要绘制所有组件,所以必然会占用时间,图片生成所需时间大于FPS对应的最大时间.页面就会出现卡顿
+					
 						   		
-						   		
+				   list的实现
+							1 将数据封装到界面中
+							  Arr.js
+							
+								render(){
+									var newsArr = [];
+									for( var i in this.props.news ){
+										var text = (
+											<Text>
+												{ this.props.news[i] }
+											</Text>
+										);
+										newsArr.push(text);
+									}
+								
+									return(
+										<View>
+											<Text>第一行是标题</Text>
+											{newsArr}
+										</View>
+									);									
+								}
+								
+							2 调用
+								main.js
+								import Array from './Arr';
+								
+								<View>
+									<Array news={['a','b','c','d','e','f','g',]} />
+								</View>
+								
+						
+						tabBarIOS和tabBarIOS.item
+								<tabBarIOS>
+								    <tabBarIOS.item>
+								    	<View />
+								    </tabBarIOS.item>
+								    <tabBarIOS.item>
+								    	<View />
+								    </tabBarIOS.item>								    
+								    <tabBarIOS.item>
+								    	<View />
+								    </tabBarIOS.item>
+							    </tabBarIOS>
+						
+						引用图片
+							<Image source={require('./image.png')} />
+						
 					组件的封装
 							1 写js,在js里创建组件
 								scroll.js
@@ -143,7 +191,18 @@
 					
 					容器嵌套时的的属性影响
 							最外层的container,设置自身的flex(延展,充满界面)
-							还要设置
+							还要设置内部容器们的排列次序和flex顺序
+							
+							内层容器则相对简单,主要是字体,背景色,行距等
+							<View style={[styles.item,styles.lineLeftRight]}>
+								<View style={[styles.flex,styles.center,styles.lineCenter]} >
+									<Text>额2</Text>
+								</View>
+								
+								<View style={[styles.flex,styles.center,styles.lineCenter]}>
+									<Text>蛤2</Text>		
+								</View>				
+							</View>  							
 								
 								
 							
@@ -469,5 +528,6 @@
               		
               		这样即可显示图片而隐藏文字
               		
+
               		
               			
