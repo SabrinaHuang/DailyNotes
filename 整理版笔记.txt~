@@ -123,28 +123,6 @@
 						   		js需要绘制所有组件,所以必然会占用时间,图片生成所需时间大于FPS对应的最大时间.页面就会出现卡顿
 						   		
 						   		
-					组件的封装
-							1 写js,在js里创建组件
-								scroll.js
-								export default class AdScroll extends react.Component(
-									……………………
-									……………………
-								)
-								文件放在根目录下
-						
-							2 在com.ios.js里调用它	
-								import AdScroll from './scroll'
-								
-							3 直接当组件用
-								<View>
-									<AdScroll />
-								</View>
-
-					
-					容器嵌套时的的属性影响
-							最外层的container,设置自身的flex(延展,充满界面)
-							还要设置
-								
 								
 							
 #css布局基本知识#				
@@ -450,24 +428,3 @@
               			}
               			宽度的算法是:减去边框和margin的宽度,然后需要排几个格子,就除以几
 
-              		
-              	常见的左上角有一块文字,而正文环绕此文字时,设计样式为:
-              			1 左上角文字设为float,要设置right和bottom的margin
-              			2 正文不需要设置margin也不需要设置padding
-              	
-              			
-              	网页的标题为特殊字体时
-              			因为字体特殊,很可能大多数用户的环境上没有字体,所以一般用图片来替代
-              			              		<h1><span>The title</span></h1>
-              		
-              		h1{
-              			background-image:url("img/")
-              		}
-              		h1 span{
-              			display:none;
-              		}
-              		
-              		这样即可显示图片而隐藏文字
-              		
-              		
-              			

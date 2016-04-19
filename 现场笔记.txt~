@@ -51,6 +51,38 @@
 		uiViewClassName: 'MyCustomView',
 	});
 
+              		关于网页的文字样式,例如环绕式
+              		正文文字因为要贴边,所以一般不弄margin和padding,要弄都是float来弄margin和padding
+              		
+              		引用背景图时,用url("03.jpg")
+              		
+              		将body的背景色设为背景图片的边缘色,可以让背景图片和谐地融入背景中
+              		
+              		标题常需要较特殊的字体,用图片 替代文字
+              		<h1><span>The title</span></h1>
+              		
+              		h1{
+              			background-image:url("img/")
+              		}
+              		h1 span{
+              			display:none;
+              		}
+              		
+              		这样即可显示图片而隐藏文字
+              		
+              		九宫格制法
+              			stpe1:
+              				为body设置属性 textAlign:center
+              				
+              			step2:
+              				为包含格子的容器设置属性margin:0 auto;
+              				
+              			step3:
+              				设置格子属性
+              				width:calc((100% - 6px) / 3)  
+              				float: left;
+              				height:120  
+              				减去边框和margin的宽度,然后需要排几个格子,就除以几
               				
               				
               		#react native语法#
@@ -111,10 +143,6 @@
 						要设置诸如title, item, 用 property = {valueXX}即可.要注意语法较繁琐
 						特别是内联函数
 							
-					引用图片	
+					引用图片的格式	
 						<Image source={require('./image.png')} />
-						图片展示时,按原始尺寸大小展示,不受容器的height约束
-						引用时需要裁切出合适的图片.
-						
-						
 						
