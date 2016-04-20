@@ -52,4 +52,52 @@
 	});
 						
 						
-						
+	²¼¾Ö×ÜÔ­Ôò
+		×îÍâÃæµÄflex:1
+		ÀïÃæµÄ²»ĞèÒªflex:1,Ö»ÒªÖ¸¶¨flex·½Ïò¼´¿É
+		justifyContent: ÈÃ¿Ø¼şÔÚ´¹Ö±·½ÏòÉÏÒÆ¶¯,ÔË¶¯ÖÕµãµÄÍ¶Ó°ÔÚ´¹Ö±ÖáµÄÖĞµã
+		alignItem: ÈÃ¿Ø¼şÔÚË®Æ½·½ÏòÉÏÒÆ¶¯,ÔË¶¯ÖÕµãµÄÍ¶Ó°ÔÚË®Æ½ÖáµÄÖĞµã
+		
+	flexºÍËù°üº¬µÄ¿Ø¼şµÄ¹ØÏµ:
+		Ä¬ÈÏÇé¿öÏÂ,containerµÄÄÚ²¿ÊÇcolumnÅÅÁĞ,´ËÊ±Ë®Æ½·½ÏòÉÏflex
+		
+		¸Ä³Érowºó,Ë®Æ½ÅÅÁĞ,ÊúÖ±ÊÇflex
+	
+	npm Ê¹ÓÃÊ±,Òªµ½node_moduleÎÄ¼ş¼ĞÏÂ,È»ºónpm install XXXXX --save,ÔÙÔÚ³ÌĞòÀïµ÷ÓÃ
+	npm install express
+	È»ºóexpress°ü¾ÍÔÚnode_modulesÄ¿Â¼ÏÂ
+	
+	µ÷ÓÃÊ±
+	import express from 'express';
+	
+	letÊÇ¶¨Òå±äÁ¿µÄ·½Ê½
+	let name = 'firstComponent';
+	
+	ÔÚJSÀï,nav±»×ö³ÉÒ»¸öÈİÆ÷,¿ØÖÆÒ³ÃæµÄÑ¹Õ»ºÍµ¯³ö.µ¼º½ÌõµÄÑùÊ½ĞèÒª×ÔĞĞ´´½¨
+		¶ÔnavigatorÀ´
+			Ğ´¶¨ÒåµÄµØ·½,navigator¿Ø¼şÔÚ
+				initialRoute·½·¨Àï,´æÁËµ±Ç°»î¶¯Ò³ÃæµÄRouteĞÅÏ¢,°üÀ¨nameºÍcomponent
+				
+				ÔÚrenderScene»Øµ÷Àï,
+					renderScene={(route,navigatr)=>{¡­¡­¡­¡­¡­¡­}}ÀïµÄroute¾Í°üº¬ÕâÁ½¸öÖµ,¶ønavigator¾ÍÊÇµ¼º½À¸¶ÔÏó
+				ÒªäÖÈ¾Ò³ÃæÊ±,ÓÃrouteÀïµÄ²ÎÊı,²¢½«navigatorÒ²´«¸øĞÂäÖÈ¾µÄÒ³Ãæ	
+				
+					let Component = route.component;
+					<Component {...route.params} navigator={navigator} />
+		
+					
+			ÔÚµ÷ÓÃÊ±,´ÓpropsÀï»ñÈ¡navigator,ÓÃ´ËnavÀ´push
+				const {navigator} = this.props;
+				if(navigator){
+					navigator.push(
+						name:'secondComponent',
+						component:SecondComponent,
+					)
+				}
+				
+			ĞèÒªµã»÷¶¯×÷Ê±,ÓÃtouch×é¼ş°üº¬Ğè±»µ÷ÓÃµÄ
+				<TouchableOpacity>
+				
+				</TouchableOpacity>
+				
+				
