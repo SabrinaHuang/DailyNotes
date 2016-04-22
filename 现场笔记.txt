@@ -141,11 +141,58 @@
 							
 					
 					LBS(location based service):
-						
-							
+					
+					
+					textAlign Ö»ÄÜ¶ÔÎÄ±¾¿òÓÃ,½«ÆäÎÄ±¾¾ÓÖĞ
+					alignItem¶ÔViewÓÃ,ÉèÖÃÄÚ²¿itemµÄÅÅÁĞ
+					bottomWidth,bottomColorÖ»ÄÜ¶ÔViewÓÃ
+					
+					ÒªÄÚ²¿item¾ÓÖĞ,ÔÚcontainerÓÃjustify,alignµÄ¶ÔÆë
+					ÒªÎÄ×Ö¾ÓÖĞ,ÔÚTextÀïÓÃtextAlign
+					Èç¹û¶à¸ö¶ÔÏóË®Æ½ÅÅÁĞ,ĞèÒªÖĞ¼äµÄ¶ÔÏóstretch,ÔòÉèÖĞ¼ä¶ÔÏóµÄflexÎª1
+				
+					
+					undefined is not an object ÍùÍùËµÃ÷¶ÔÏóÃ»ÓĞ¶¨Òå,ĞèÒª¶¨ÒåÒ»ÏÂ
+					±ÈÈç
+						<TouchableOpacity onPress = {this._MessageCenter.bind(this)} > 
+						ÊÔÍ¼¸ø¶ÔÏó°ó¶¨Ò»¸ö·½·¨,µ«Êµ¼ÊÉÏ²¢Î´¶¨Òå´Ë·½·¨,ËùÒÔ´íÎóÌáÊ¾ undefined object¡­¡­¡­¡­¡­¡­
+				
+					¹ØÓÚNavigator,»¹ÊÇÓĞĞ©ÒÉÄÑ
+						ÒÑÖªĞÅÏ¢´óÖÂÈçÏÂ
+							1 ÔÚ¶¨ÒånavigatorÊ±,¾ÍµÃÖ¸¶¨ÆäÊôĞÔºÍ»Øµ÷,Ò»°ãĞÎÊ½Îª
+							       <Navigator
+							       			// ÊÇnav¶ÔÓ¦µÄµÚÒ»¸ö½çÃæ
+									        initialRoute={{ name: defaultName, component: defaultComponent }}
+									        // Ìø×ªÑùÊ½
+									        configureScene={(route) => {
+									        return Navigator.SceneConfigs.FloatFromRight;
+									        }}
+          
+									        // pushÊ±µÄ»Øµ÷
+									        renderScene={(route, navigator) => {
+									        let Component = route.component;
+									        return <Component {...route.params} navigator={navigator} />
+									        }
+									 } /> 
+        
+							2 Ò³ÃæÒªimport×Ô¼ºµÄ¶ş¼¶component,ÕâÑù²ÅÄÜÔÚpushÊ±ÕÒµ½				 
+				
+							ÖØÒª¸ÅÄî:
+								Scene:³¡¾° Ò»¸öÈâÑÛÄÜ¿´µ½,Õ¹Ê¾µÄ»­Ãæ
+								route:Â·ÓÉ Ã¿¸öscene¶ÔÓ¦µÄË÷Òı,ÓÃÓÚ±êÖ¾,¶¨Î»Ò³Ãæ.ÊÇnavµÄÁé»ê
+								
+								
 		#°æ±¾¹ÜÀí#
 				ÖĞ¼äÎÄ¼ş,×îÖÕÉú³ÉÎÄ¼ş¶¼ÒªÌí¼Óµ½ignoreÁĞ±í
 				Èı·½¿â×îºÃÒÔ½Å±¾µÄ·½Ê½Ìí¼Ó,ÔÚ±¾µØÖ´ĞĞ
 				
 			ÔÚES6Àï onPress={this.method1} ÒªĞ´³É  onPress={this.method1.bind(this)}µÄĞÎÊ½ 	
-				
+
+			
+		#¹¤¾ß#
+			Homebrew ÊÇÓÃÀ´ÔÚ Mac OS X °²×° Linux ¹¤¾ß°ü  brew install packageName¼´¿É
+			Èç	brew install python3
+		
+			
+			mac ×Ô´øµÄpreview»­Í¼¹¤¾ß,ËäÈ»²»Ì«»áÓÃ,µ«ÓĞ¸öÓÃ·¨ÊÇÒªÕÆÎÕµÄ
+				¾ÍÊÇÑ¡ÖĞ ¹¤¾ßÏä-> ÈıÀâ¾µ È»ºóµ÷ÕûÕûÌåµÄÉ«µ÷
