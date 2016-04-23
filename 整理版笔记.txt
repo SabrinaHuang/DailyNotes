@@ -29,13 +29,65 @@
 
 #react-native开发基础#
 			概念：
-				NodeJS：是基于JS runtime的javascript开发平台
-				npm（node package manager）：管理代码的工具，用于分发和管理NodeJS包
-
+				NodeJS：是基于JS runtime的javascript开发平台。ReactNative的开发基于JS语言
+				npm（node package manager）：可以抓取各种三方组件，比如github上的组件
+					工程做版本管理时，不用提交node_module(这里是所有的插件，组件包)，提交工程根目录里的package.json 然后在工程根目录里npm install即可
+				
+					如果要添加三方组件,如名为react-native-nav的组件,要到node_module目录下
+						npm install react-native-nav --save
+					调用时 
+						import react-native-nav from 'react-native-nav';
+						
+						
+					参数会影响安装行为
+						例如 sudo npm install npm -g 这-g 表示全局安装
+				
+						-g 是全局安装
+							1 包在 /usr/local里
+							2 在工程里不能通过require调用
+					
+						不加 -g是本地安装
+							1 包在node_modules目录下
+							2 在工程里通过 require('XXXpackage')来调用
+					
 			语法
-				this.setState 改变属性后,会触发
-			
+				this.setState 用于改变属性,属性更改后，会触发render(){}; 重新渲染界面
+				
+				let name = 'firstComponent'用于定义变量				
+				
+				LBS (location based service)一类应用的统称，比如大众点评的‘我附近的’就是这样的功能。
+				
 			技巧
+				RN在需要引用和表示路径时
+					.表示上一级路径
+					..表示上二级路径
+				
+				真机调试时，如果出现了webSocket Connection fail ,很可能是之前编译时打开了serve窗口,没有关掉.关掉即可.
+				
+				图片显示相关
+					dp表示像素密度，比如某手机宽1.5inch，而分辨率为240 * 320
+					则dp = 240 / 1.5 = 160; dp和dip是一个意思
+					
+					pt:point 表示一像素点对应几个pt，是apple自己搞的概念。在一般屏上，pt = 1
+					在Retina屏上，pt = 2
+					
+					在RN里，表示尺寸时，单位是pixel
+					
+					PixelRatio.get()能获取pt值
+					对android  PixelRatio.get() == 1
+					对iphone   PixelRatio.get() == 2
+					所以用	1/PixelRatio.get()能获取点数					
+				
+					另外，也可用于决定普通或高清设备上的分辨率
+						var image = getImage({
+							width:PixelRatio.getPixelSizeForLayoutSize(300),
+							height:PixelRatio.getPixelSizeForLayoutSize(200),
+							});
+			
+
+					版本管理时，需要添加到ignore列表的是中间文件和最终的exe
+						需要本地生成的是第三方库，用npm来安装
+			
 				JS调原生
 					封装原生模块供react使用								
 								第一步:
@@ -122,7 +174,27 @@
 						   	push新页时可能卡顿的原因
 						   		js需要绘制所有组件,所以必然会占用时间,图片生成所需时间大于FPS对应的最大时间.页面就会出现卡顿
 					
-						   		
+					
+					布局：
+							布局无非横排和竖排两种
+							横排
+								1 最外面的flex为1  flexDirection 为'row'  justifyContent为'center' 让item居中排列，较美观
+								
+								2 内部容器如果占用宽度均分，不用做任何修饰  如果需要内容居中
+								在外层容器里添加alignItems:'center'属性
+								
+								3 如果有某个容器需要撑开，比如导航栏里左中右，中间的撑开，
+								那设定其flex:1
+								
+
+					点击事件的实现			
+						用TouchableOpacity组件嵌套需要点击事件的组件
+						_pressText(){}
+						<TouchableOpacity onPress = this._pressText.bind(this) >
+							<Text>点我跳转</Text>
+						</TouchableOpacity>						
+						
+					
 				   list的实现
 							1 将数据封装到界面中
 							  Arr.js

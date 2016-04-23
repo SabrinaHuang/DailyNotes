@@ -1,6 +1,6 @@
 
 			
-		/*  待验证 */	
+		/* ??待验证 */	
 	// 	react 本身融入 JS的API，比如XMLHttpRequest,navigator.geolocation等
 	var React = require('react-native');
 	var { Text } = React;
@@ -50,28 +50,7 @@
 		validAttributes: { myCustomProperty: true },
 		uiViewClassName: 'MyCustomView',
 	});
-						
-						
-	布局总原则
-		最外面的flex:1
-		里面的不需要flex:1,只要指定flex方向即可
-		justifyContent: 让控件在垂直方向上移动,运动终点的投影在垂直轴的中点
-		alignItem: 让控件在水平方向上移动,运动终点的投影在水平轴的中点
-		
-	flex和所包含的控件的关系:
-		默认情况下,container的内部是column排列,此时水平方向上flex
-		
-		改成row后,水平排列,竖直是flex
-	
-	npm 使用时,要到node_module文件夹下,然后npm install XXXXX --save,再在程序里调用
-	npm install express
-	然后express包就在node_modules目录下
-	
-	调用时
-	import express from 'express';
-	
-	let是定义变量的方式
-	let name = 'firstComponent';
+
 	
 	在JS里,nav被做成一个容器,控制页面的压栈和弹出.导航条的样式需要自行创建
 		对navigator来
@@ -94,58 +73,5 @@
 						component:SecondComponent,
 					)
 				}
-				
-			需要点击动作时,用touch组件包含需被调用的
-				<TouchableOpacity>
-					<Text>点我跳转</Text>
-				</TouchableOpacity>
-				
-		#脚本知识#
-				以npm为例
-					-XX 是参数,修饰安装时的行为
-					例如 sudo npm install npm -g 这-g 表示全局安装
-				
-				全局安装的特点是:
-					1 包在 /usr/local里
-					2 在工程里不能通过require调用
-					
-				不加 -g就是本地安装,安装时
-					1 包在node_modules目录下
-					2 在工程里通过 require('XXXpackage')来调用
-					
-		
-		#react native#
-					在表示路径时 ..表示上二级路径
-					.表示上一级路径
-										
-					如果出现了webSocket Connection fail ,很可能是之前编译时打开了serve窗口,没有关掉.关掉即可.
-					
-					图片大小也可以用style={{height:180,width:320}}来设置,并且要直接放在<Image />里,不要放在Styles里
-					
-					尺寸
-						inch:长度  1英尺 = 2.54cm
-						px:屏幕上的像素点数,如常见的320 *684
-						dp:每英尺包含的点数,如 屏幕 320*480 尺寸 2英尺*3英尺,则dp 为160
-					
-					PixelRatio方法
-						在分辨率不同的设备上,用PixelRatio好
-						比如获取最细线宽
-							borderWidth:1/PixelRatio.get()
-						
-						比如根据设备来决定图片的分辨率
-							var image = getImage({
-								width:PixelRatio.getPixelSizeForLayoutSize(300),
-								height:PixelRatio.getPixelSizeForLayoutSize(200),
-							});
-							可在不同设备上展示300 * 200的图片 
-							
-					
-					LBS(location based service):
-						
-							
-		#版本管理#
-				中间文件,最终生成文件都要添加到ignore列表
-				三方库最好以脚本的方式添加,在本地执行
-				
-			在ES6里 onPress={this.method1} 要写成  onPress={this.method1.bind(this)}的形式 	
+
 				
