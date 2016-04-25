@@ -195,48 +195,4 @@
 		
 			
 			mac ×Ô´øµÄpreview»­Í¼¹¤¾ß,ËäÈ»²»Ì«»áÓÃ,µ«ÓĞ¸öÓÃ·¨ÊÇÒªÕÆÎÕµÄ
-				¾ÍÊÇÑ¡ÖĞ ¹¤¾ßÏä-> ÈıÀâ¾µ È»ºóµ÷½ÚÕûÌåµÄÉ«µ÷
-				
-		
-			Èç¹ûÒ»¸östateÀïÓĞ¶à¸öÖµ,³õÊ¼»¯Ê±ÓÃ','·Ö¸ô
-			ÀıÈç
-				route = {{ name:'Name', component:FirstPage }};
-			
-			Òª×÷Îªprops´«¸øÆäËûÒ³ÃæÊ±,ÓÃ{...route.params}À´´«µİ
-			
-			ÔÚ¶¨ÒåÀï,²ÎÊıÒªĞ´³Éµ±Ç°Ò³ÃæµÄ²ÎÊı
-			ÀıÈç
-			
-			äÖÈ¾Ê±,½«navigatorÒ²×÷Îªprops´«ÁË¹ıÈ¥
-			renderScene = { (route,navigator)=>
-				let Component = route.component;
-				<Component  {...route.params} navigator={navigator} />
-			}
-			
-			
-			
-			Â·ÓÉ:Ò»¸öÂ·ÓÉÓÃÓÚÃèÊönavigatorÀïµÄÒ»¸ö¶ÔÏó
-			
-			navigator:ÊÇÒ»¸ö¶ÔÏó,¹©¸÷ÊÓÍ¼µ÷ÓÃ,±»×÷Îªprops´«¸ønavigatoräÖÈ¾µÄÈÎÒâ×é¼ş
-			
-			<Navigator
-			    // ¶¨Òå³õÊ¼»¯routeÊ±µÄ²ÎÊı
-				initRoute(){{
-					name:'init',
-					component:First,
-				}}	
-			
-				// µ÷ÓÃrouteÀïµÄ²ÎÊı 
-				renderScene{(route,navigator)=>{
-					var component = route.component; // ÕâÀï»ñÈ¡µÄ¾ÍÊÇÔÚinitRouteÀï¶¨ÒåµÄ¼ücomponent¶ÔÓ¦µÄÖµ
-					<component {...route.params} navigator = {navigator}  />  // ¿ÉÒÔÔÚinitRouteÀïÌí¼Óparams:{}ÒÔ´«µİ²ÎÊı,navigator¾ÍÊÇNavigator¶ÔÏó,Ã¿¸öÂ·ÓÉ¶¼¿ÉÒÔµ÷ÓÃ´ËNav
-				}
-			/>
-			
-			¶Ô±»µ÷½çÃæComponent
-
-			const {navigator} = this.props;// ¿ÉÓÃ´Ë»ñÈ¡ÉÏÎÄÌá¼°µÄcomponentºÍroute.params
-			
-			
-
-			
+				¾ÍÊÇÑ¡ÖĞ ¹¤¾ßÏä-> ÈıÀâ¾µ È»ºóµ÷ÕûÕûÌåµÄÉ«µ÷
