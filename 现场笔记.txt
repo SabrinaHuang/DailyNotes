@@ -1,6 +1,6 @@
 
 			
-		/*  待验证 */	
+		/* ??待验证 */	
 	// 	react 本身融入 JS的API，比如XMLHttpRequest,navigator.geolocation等
 	var React = require('react-native');
 	var { Text } = React;
@@ -50,28 +50,7 @@
 		validAttributes: { myCustomProperty: true },
 		uiViewClassName: 'MyCustomView',
 	});
-						
-						
-	布局总原则
-		最外面的flex:1
-		里面的不需要flex:1,只要指定flex方向即可
-		justifyContent: 让控件在垂直方向上移动,运动终点的投影在垂直轴的中点
-		alignItem: 让控件在水平方向上移动,运动终点的投影在水平轴的中点
-		
-	flex和所包含的控件的关系:
-		默认情况下,container的内部是column排列,此时水平方向上flex
-		
-		改成row后,水平排列,竖直是flex
-	
-	npm 使用时,要到node_module文件夹下,然后npm install XXXXX --save,再在程序里调用
-	npm install express
-	然后express包就在node_modules目录下
-	
-	调用时
-	import express from 'express';
-	
-	let是定义变量的方式
-	let name = 'firstComponent';
+
 	
 	在JS里,nav被做成一个容器,控制页面的压栈和弹出.导航条的样式需要自行创建
 		对navigator来
@@ -94,6 +73,7 @@
 						component:SecondComponent,
 					)
 				}
+<<<<<<< HEAD
 				
 			需要点击动作时,用touch组件包含需被调用的
 				<TouchableOpacity>
@@ -240,3 +220,7 @@
 			
 
 			
+=======
+
+				
+>>>>>>> origin/master
