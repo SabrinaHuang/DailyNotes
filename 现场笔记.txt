@@ -217,10 +217,51 @@
 
 			const {navigator} = this.props;// 可用此获取上文提及的component和route.params
 			
-			
 
+			// 如果只是为了展示view
 			
-=======
+			step1:
+			它类似viewControl
+			需要建RCTxxxManager.m
+			在.m里
+			
+			#import "RCTViewManager.h"
 
+			@interface RCTviewManager : RCTViewManager
+			@end
+
+			@implementation RCTviewManager
+
+			RCT_EXPORT_MODULE();
+
+			-(UIView *)view
+			{
+			  // 获取需要加载的view
+			  return [[[NSBundle mainBundle]loadNibNamed:@"demoView" owner:self options:nil]firstObject];
+			}
+
+			@end
+			
+			step2:
+			需要建导出的js 例如demoView.js
+			var { requireNativeComponent } = require('react-native');
+			
+			// 定义输出,名称是之前的.m去掉词尾的manage
+			modle.exports = requireNativeComponent( 'RCTview',null );
+			
+			
+			step3:
+				在js里调用此控件
+				import  RCTview from './demoView'
 				
->>>>>>> origin/master
+				<RCTview />
+			
+				
+			#从原生到RN的模块映射技术#
+				需要的东西
+					1 知道是哪个类提供的哪个方法,具体地,JS调native,要模块名,方法名,参数名.也就是提供映射表
+				
+				具体实现
+					1  导出注册的模块,生成数据类ModuleData,其中包含instance和索引ID
+					
+				

@@ -91,7 +91,7 @@
 				JS调原生
 					封装原生模块供react使用								
 								第一步:
-									让原生代码成为RCTBridgeModule的协议,在.h文件里
+									让原生代码遵循RCTBridgeModule的协议,在.h文件里
 									@interface CalendarManager : NSObject <RCTBridgeModule>
 									@end	
 								
