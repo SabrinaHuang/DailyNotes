@@ -264,4 +264,76 @@
 				具体实现
 					1  导出注册的模块,生成数据类ModuleData,其中包含instance和索引ID
 					
+			
+			#感想#
+				去理解那些最基本的字句
 				
+				动画控件
+				LayoutAnimation  布局用的动画
+				
+				Animated	交互用的动画
+
+				动画有三种
+					spring,decay,timing
+					
+				能用的组件有三种
+					View,Text,Image
+					
+					
+				Animated.sequence([
+					// 一个滑动,越滑越慢的任务
+					Animated.decay(
+					position,
+					{
+						velocity:{},
+						deceleration:0.997,
+					}),
+					
+					// 一些并发的任务
+					Animated.parallel([
+						// 一个弹簧任务
+						Animated.spring(
+							position,
+							{}
+						),
+						// 一个匀速运动
+						Animated.timing(
+							
+						),
+					]),										
+				]).start();
+			
+				
+				parallel 是线程控制单元
+				
+				spring,timing,decay是动画样式
+				
+				用动画驱动 Animated.Value
+				
+				Animated.Value 可以和各种属性绑定
+				
+					this.state = {
+						FadeAnim: new Animated.Value(0);
+					}
+				
+					componentDidMount(){
+						Animated.timing{
+							this.state.FadeAnim,
+							{toValue:8},
+						}					
+					}					
+				
+				例如,绑定opacity
+				style = {{opacity:this.state.FadeAnim}}
+				
+				或者用插值函数,将值映射到另一个范围 
+				transform:[{
+					translateY:this.state.fadeAnim.interpolate({
+						inputRange:[0,1],	
+						outputRange:[250,]
+					}),
+				}],
+				
+				Animated的类方法
+					sequence 依次执行一个队列里的animate
+					parallel 并发一系列动画
