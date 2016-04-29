@@ -1,0 +1,458 @@
+
+Skip to content
+This repository
+
+    Pull requests
+    Issues
+    Gist
+
+    @SabrinaHuang
+
+1
+0
+
+    0
+
+SabrinaHuang/DailyNotes
+Code
+Issues 0
+Pull requests 0
+Wiki
+Pulse
+Graphs
+Settings
+DailyNotes/现场笔记.txt
+c384c6b 16 hours ago
+@SabrinaHuang SabrinaHuang 6
+348 lines (250 sloc) 8.5 KB
+
+			
+		/* ??待验证 */	
+	// 	react 本身融入 JS的API，比如XMLHttpRequest,navigator.geolocation等
+	var React = require('react-native');
+	var { Text } = React;
+		*指定了三个对象
+	var GeoInfo = React.createClass({
+		getInitialState: function() {
+		return { position: 'unknown' };
+	},	
+	
+	componentDidMount: function() {
+		navigator.geolocation.getCurrentPosition(
+			(position) => this.setState({position}),
+			(error) => console.error(error)
+		);
+	},
+	
+	render: function() {
+	   return (
+		  <Text>
+			Position: {JSON.stringify(this.state.position)}
+		  </Text>
+		);
+	   },
+	});
+	
+	
+	
+	// react可以重用原生UI，方法是在RCTViewManager的子类里实现-(UIView *)view。需要调用时用RCT_EXPORT_VIEW_PROPERTY暴露。
+	/* 研究重点 */
+	//  OC代码
+	#import "RCTViewManager.h"
+	@interface MyCustomViewManager : RCTViewManager
+	@end
+	// 调用此view
+	@implementation MyCustomViewManager
+		- (UIView *)view
+		{
+			return [[MyCustomView alloc] init];
+		}
+		// 向JS暴露属性
+		RCT_EXPORT_VIEW_PROPERTY(myCustomProperty);
+	@end	
+	
+	// JS代码
+	// 生成一个模型
+	module.exports = createReactIOSNativeComponentClass({
+		validAttributes: { myCustomProperty: true },
+		uiViewClassName: 'MyCustomView',
+	});
+
+	
+	在JS里,nav被做成一个容器,控制页面的压栈和弹出.导航条的样式需要自行创建
+		对navigator来
+			写定义的地方,navigator控件在
+				initialRoute方法里,存了当前活动页面的Route信息,包括name和component
+				
+				在renderScene回调里,
+					renderScene={(route,navigatr)=>{………………}}里的route就包含这两个值,而navigator就是导航栏对象
+				要渲染页面时,用route里的参数,并将navigator也传给新渲染的页面	
+				
+					let Component = route.component;
+					<Component {...route.params} navigator={navigator} />
+		
+					
+			在调用时,从props里获取navigator,用此nav来push
+				const {navigator} = this.props;
+				if(navigator){
+					navigator.push(
+						name:'secondComponent',
+						component:SecondComponent,
+					)
+				}
+<<<<<<< HEAD
+				
+			需要点击动作时,用touch组件包含需被调用的
+				<TouchableOpacity>
+					<Text>点我跳转</Text>
+				</TouchableOpacity>
+				
+		#脚本知识#
+				以npm为例
+					-XX 是参数,修饰安装时的行为
+					例如 sudo npm install npm -g 这-g 表示全局安装
+				
+				全局安装的特点是:
+					1 包在 /usr/local里
+					2 在工程里不能通过require调用
+					
+				不加 -g就是本地安装,安装时
+					1 包在node_modules目录下
+					2 在工程里通过 require('XXXpackage')来调用
+					
+		
+		#react native#
+					在表示路径时 ..表示上二级路径
+					.表示上一级路径
+										
+					如果出现了webSocket Connection fail ,很可能是之前编译时打开了serve窗口,没有关掉.关掉即可.
+					
+					图片大小也可以用style={{height:180,width:320}}来设置,并且要直接放在<Image />里,不要放在Styles里
+					
+					尺寸
+						inch:长度  1英尺 = 2.54cm
+						px:屏幕上的像素点数,如常见的320 *684
+						dp:每英尺包含的点数,如 屏幕 320*480 尺寸 2英尺*3英尺,则dp 为160
+					
+					PixelRatio方法
+						在分辨率不同的设备上,用PixelRatio好
+						比如获取最细线宽
+							borderWidth:1/PixelRatio.get()
+						
+						比如根据设备来决定图片的分辨率
+							var image = getImage({
+								width:PixelRatio.getPixelSizeForLayoutSize(300),
+								height:PixelRatio.getPixelSizeForLayoutSize(200),
+							});
+							可在不同设备上展示300 * 200的图片 
+							
+					
+					LBS(location based service):
+					
+					
+					textAlign 只能对文本框用,将其文本居中
+					alignItem对View用,设置内部item的排列
+					bottomWidth,bottomColor只能对View用
+					
+					要内部item居中,在container用justify,align的对齐
+					要文字居中,在Text里用textAlign
+					如果多个对象水平排列,需要中间的对象stretch,则设中间对象的flex为1
+				
+					
+					undefined is not an object 往往说明对象没有定义,需要定义一下
+					比如
+						<TouchableOpacity onPress = {this._MessageCenter.bind(this)} > 
+						试图给对象绑定一个方法,但实际上并未定义此方法,所以错误提示 undefined object………………
+				
+					关于Navigator,还是有些疑难
+						已知信息大致如下
+							1 在定义navigator时,就得指定其属性和回调,一般形式为
+							       <Navigator
+							       			// 是nav对应的第一个界面
+									        initialRoute={{ name: defaultName, component: defaultComponent }}
+									        // 跳转样式
+									        configureScene={(route) => {
+									        return Navigator.SceneConfigs.FloatFromRight;
+									        }}
+          
+									        // push时的回调
+									        renderScene={(route, navigator) => {
+									        let Component = route.component;
+									        return <Component {...route.params} navigator={navigator} />
+									        }
+									 } /> 
+        
+							2 页面要import自己的二级component,这样才能在push时找到				 
+				
+							重要概念:
+								Scene:场景 一个肉眼能看到,展示的画面
+								route:路由 每个scene对应的索引,用于标志,定位页面.是nav的灵魂
+								
+								
+		#版本管理#
+				中间文件,最终生成文件都要添加到ignore列表
+				三方库最好以脚本的方式添加,在本地执行
+				
+			在ES6里 onPress={this.method1} 要写成  onPress={this.method1.bind(this)}的形式 	
+
+			
+		#工具#
+			Homebrew 是用来在 Mac OS X 安装 Linux 工具包  brew install packageName即可
+			如	brew install python3
+		
+			
+			mac 自带的preview画图工具,虽然不太会用,但有个用法是要掌握的
+				就是选中 工具箱-> 三棱镜 然后调节整体的色调
+				
+		
+			如果一个state里有多个值,初始化时用','分隔
+			例如
+				route = {{ name:'Name', component:FirstPage }};
+			
+			要作为props传给其他页面时,用{...route.params}来传递
+			
+			在定义里,参数要写成当前页面的参数
+			例如
+			
+			渲染时,将navigator也作为props传了过去
+			renderScene = { (route,navigator)=>
+				let Component = route.component;
+				<Component  {...route.params} navigator={navigator} />
+			}
+			
+			
+			
+			路由:一个路由用于描述navigator里的一个对象
+			
+			navigator:是一个对象,供各视图调用,被作为props传给navigator渲染的任意组件
+			
+			<Navigator
+			    // 定义初始化route时的参数
+				initRoute(){{
+					name:'init',
+					component:First,
+				}}	
+			
+				// 调用route里的参数 
+				renderScene{(route,navigator)=>{
+					var component = route.component; // 这里获取的就是在initRoute里定义的键component对应的值
+					<component {...route.params} navigator = {navigator}  />  // 可以在initRoute里添加params:{}以传递参数,navigator就是Navigator对象,每个路由都可以调用此Nav
+				}
+			/>
+			
+			对被调界面Component
+
+			const {navigator} = this.props;// 可用此获取上文提及的component和route.params
+			
+
+			// 如果只是为了展示view
+			
+			step1:
+			它类似viewControl
+			需要建RCTxxxManager.m
+			在.m里
+			
+			#import "RCTViewManager.h"
+
+			@interface RCTviewManager : RCTViewManager
+			@end
+
+			@implementation RCTviewManager
+
+			RCT_EXPORT_MODULE();
+
+			-(UIView *)view
+			{
+			  // 获取需要加载的view
+			  return [[[NSBundle mainBundle]loadNibNamed:@"demoView" owner:self options:nil]firstObject];
+			}
+
+			@end
+			
+			step2:
+			需要建导出的js 例如demoView.js
+			var { requireNativeComponent } = require('react-native');
+			
+			// 定义输出,名称是之前的.m去掉词尾的manage
+			modle.exports = requireNativeComponent( 'RCTview',null );
+			
+			
+			step3:
+				在js里调用此控件
+				import  RCTview from './demoView'
+				
+				<RCTview />
+			
+				
+			#从原生到RN的模块映射技术#
+				需要的东西
+					1 知道是哪个类提供的哪个方法,具体地,JS调native,要模块名,方法名,参数名.也就是提供映射表
+				
+				具体实现
+					1  导出注册的模块,生成数据类ModuleData,其中包含instance和索引ID
+					
+			
+			#感想#
+				去理解那些最基本的字句
+				
+				动画控件
+				LayoutAnimation  布局用的动画
+				
+				Animated	交互用的动画
+
+				动画有三种
+					spring,decay,timing
+					
+				能用的组件有三种
+					View,Text,Image
+					
+					
+				Animated.sequence([
+					// 一个滑动,越滑越慢的任务
+					Animated.decay(
+					position,
+					{
+						velocity:{},
+						deceleration:0.997,
+					}),
+					
+					// 一些并发的任务
+					Animated.parallel([
+						// 一个弹簧任务
+						Animated.spring(
+							position,
+							{}
+						),
+						// 一个匀速运动
+						Animated.timing(
+							
+						),
+					]),										
+				]).start();
+			
+				
+				parallel 是线程控制单元
+				
+				spring,timing,decay是动画样式
+				
+				用动画驱动 Animated.Value
+				
+				Animated.Value 可以和各种属性绑定
+				
+					this.state = {
+						FadeAnim: new Animated.Value(0);
+					}
+				
+					componentDidMount(){
+						Animated.timing{
+							this.state.FadeAnim,
+							{toValue:8},
+						}					
+					}					
+				
+				例如,绑定opacity
+				style = {{opacity:this.state.FadeAnim}}
+				
+				或者用插值函数,将值映射到另一个范围 
+				transform:[{
+					translateY:this.state.fadeAnim.interpolate({
+						inputRange:[0,1],	
+						outputRange:[250,]
+					}),
+				}],
+				
+				Animated的类方法
+					sequence 依次执行一个队列里的animate
+					parallel 并发一系列动画
+					
+				名词:
+					技术栈:一般来说是指将N种技术互相组合在一起(N>1)，作为一个有机的整体来实现某种目的。也可以指掌握这些技术以及配合使用的经验。
+					
+				
+				post请求:
+					网络请求时,要带参数 url+params
+				
+				
+				编码和解码
+					字符集：宿主机能表现的抽象字符的合集
+					编码规则：字符集和二进制的映射
+
+					出现乱码的原因
+					1. 编码时用的编码规则和解码时用的编码规则不同
+					2. 宿主机上没有字符集
+
+
+					UTF-8字符集：支持地球上所有的抽象字符。优点是功能强大，缺点是体积庞大
+					GBK字符集：支持简体和繁体中文，优点是体积小，速度快，缺点是拓展性差，只有中文字符
+
+				网络请求
+					URL + 命令
+					例如
+						https://cn.bing.com/Search?q=%E9%B2%8D%E5%86%85%E6%96%AF%E6%B8%A9%E5%BE%B7%E7%B1%B3%E5%B0%94&mkt=zh-cn&FORM=BNLH
+
+						https://cn.bing.com/Search 就是资源描述符，定位一个库
+						后面的
+						q=%E9%B2%8D%E5%86%85%E6%96%AF%E6%B8%A9%E5%BE%B7%E7%B1%B3%E5%B0%94
+						&mkt=zh-cn
+						&FORM=BNLH
+						是数据库操作命令，用于访问数据
+
+
+				cocoapods用法
+					要编写Podfile文件
+
+					platform:ios,  '7.0'
+					target "targetName" do   // 指定依赖项
+
+					pod 'JSONKit',    '~> 1.4'
+
+					end
+
+					Podfile放在工程根目录下
+					在根目录下，命令行
+					pod install
+
+
+
+				json					
+
+					是一套规则，一种数据格式
+					数据的表示形式：键值对
+					数据的分隔方式：逗号	
+					方括号：数据的有序集合
+					花括号：可用于表示键值对中的值
+
+					值可以是单个字符串"a" ，键值对 "a":"b" ，键值对的集合{ "a":"b" , "a1":"b1" },集合的排列
+					[
+						{"a":"a1" , "b":"b1" },
+						{"a":"a2" , "b":"b2" },
+						{"a":"a3" , "b":"b3" },
+						{"a":"a4" , "b":"b4" },						
+					]
+
+					键只能是字符串 "theKey"
+
+
+					在JS里的调用
+
+				
+
+
+
+				state:
+					可理解为一张成员变量表
+					this.state.someText 表示名为someText的成员变量
+
+				在JS里，字符串以 '' 包裹  拼接时可直接用+号
+
+				Promise对象代表着一个还未完成，但预期将来会完成的操作。是代理。
+				调用的顺序
+					Promise  -> then() // 确定状态 fulfill或reject 返回值是promise 所以可以链式调用
+					Promise -> .then .catch()	
+
+
+
+
+
+
+
