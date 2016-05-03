@@ -435,9 +435,26 @@ c384c6b 16 hours ago
 
 					在JS里的调用
 
-				
+				JSON.parse
+					用于将string 变为json对象
 
+					如 '{"a":"a1", "b":"b1"}'
 
+					parse之后就是 
+						{
+							a:"a1",
+							b:"b1",
+						}
+
+				JSON.stringfy
+						将json对象转为string
+						如
+							var {
+							a:"a1",
+							b:"b1",
+							}
+						转完后是
+						'{"a":"a1","b":"b1"}'	
 
 				state:
 					可理解为一张成员变量表
@@ -451,8 +468,33 @@ c384c6b 16 hours ago
 					Promise -> .then .catch()	
 
 
+				网络的基本知识：
+				session	
+				Request
+				Response
+				表单
+				ispostback	
+
+				交互流程：
+					浏览器请求资源 -> 服务器返回网页的html格式 ->  
+					浏览器收集用户填写的表单，POST给服务端 -> 服务端获取请求，返回相应页面
+
+				有个flag叫 IsPostBack	  
+					第一次加载页面时为 false
+					之后按F5刷新时，值为true
+
+				可用于避免重复的请求和页面加载
+
+				
+				原生和JS通信时，JS调用原生，那参数就是JS给原生的，那回调里的参数就是原生给JS的
+
+				import React,{
+					AppRegistry,
 
 
+				}
 
+				只要不细心揣摩，就可能出错吧，比如fetch返回是字符串，parse后得到json对象，打印时需要获取元素，需要用obj.data访问
 
+				JSON.parse可以将字符串完全转成json对象，想想真幸福呢
 
