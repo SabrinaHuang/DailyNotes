@@ -21,6 +21,25 @@
 				.NET平台，（.NET platform）。是一套工具，包括了CLR和framework类库，在任意操作系统上为.NET程序提供统一接口
 
 
+			npm:
+				用于管理Node.js工具包  
+				使用方法是：
+					sudo npm install
+					
+					可选参数 -g
+					
+				用-g 表示全局安装
+				全局安装的特点是:
+					1 包在 /usr/local里
+					2 在工程里不能通过require调用
+					
+				不加 -g就是本地安装,安装时
+					1 包在node_modules目录下
+					2 在工程里通过 require('XXXpackage')来调用	
+			
+			homebrew:
+				用于安装linux程序，如brew install python3，可以安装python
+				
 			runtime:是程序运行时，除了bare-metal之外的调用
 				特点：
 					1、在程序运行时，介入的频率不是太高
@@ -600,6 +619,45 @@
               		
               		这样即可显示图片而隐藏文字
               		
+			Navigator:
+					概念：
+						路由，nav里的每一个obj
+						Scene:场景 一个肉眼能看到,展示的画面
+						route:路由 每个scene对应的索引,用于标志,定位页面.是nav的灵魂							
+						
+              		重要方法：	
+						initRoute:设置nav对应的第一个路由
+						initRoute = {{ name: defaultName, component: defaultComponent }}
 
-              		
-              			
+						renderScene={(route, navigator) => {
+									        let Component = route.component;
+									        return <Component {...route.params} navigator={navigator} />
+									        }
+						
+						这是一个回调方法，能获取被调方的参数，在这里，就是后入栈的Scene获取前一个Scene的参数，包括navigator 和当前应该展示的scene的信息
+						
+						let Component = route.Component;
+						return <Component  {...route.params}, navigator = navigator />
+					
+					需要push时	
+						const navigator = this.props;
+						navigator.push(someComponent);
+			
+
+			动画效果Animatiion:
+					在RN中，动画能被应用于Text,View,Image
+					效果有
+						弹簧(spring)
+						递减(Decay)
+						衰减(timing)
+					三种
+					
+					动画是异步操作，可通过parallel,sequence来控制动画的发起
+				
+					动画的实现方式：将Animation单例的属性绑定到object的style上
+					例如：
+					
+					
+					
+					
+						
