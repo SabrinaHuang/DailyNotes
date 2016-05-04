@@ -20,6 +20,24 @@
 				Java平台（Java platform）。是一套工具，包括Java虚拟机和Java Core，在任意操作系统上为Java程序提供统一接口
 				.NET平台，（.NET platform）。是一套工具，包括了CLR和framework类库，在任意操作系统上为.NET程序提供统一接口
 
+			cocoapods:
+				用于管理OC三方库的工具包
+					要编写Podfile文件
+
+				----------------podfile内容--------------	
+					platform:ios,  '7.0'
+					target "targetName" do   // 指定依赖项
+
+					pod 'JSONKit',    '~> 1.4'
+
+					end
+
+				----------------podfile结尾--------------	
+				
+					Podfile放在工程根目录下
+					在根目录下，命令行
+					pod install
+
 
 			npm:
 				用于管理Node.js工具包  
@@ -83,7 +101,7 @@
 				
 				真机调试时，如果出现了webSocket Connection fail ,很可能是之前编译时打开了serve窗口,没有关掉.关掉即可.
 				
-				图片显示相关
+				#图片显示相关#
 					dp表示像素密度，比如某手机宽1.5inch，而分辨率为240 * 320
 					则dp = 240 / 1.5 = 160; dp和dip是一个意思
 					
@@ -140,6 +158,11 @@
 									CalendarManager.findEvent((Events)=> {										
 									})
 				
+								小结：就是js主调，给原生参数，用原生功能。回调，获取原生参数，给原生功能。恰好相反。回调时的参数要遵循原生的法子，否则扣不出来
+								
+								
+				
+				
 						prop和state
 								prop是传给对象的参数,例如
 								 var Hello = React.createClass({
@@ -167,6 +190,7 @@
 						6 摇晃手机,在浮现的菜单里选"Dev Settings" -> Debugging -> 在弹出的对话框里填上开发服务器的ip和端口.返回,重启app,即可正确显示js
 						7 需要调试时,摇晃手机,在浮现的菜单里点选 "Debug in Chrome",在弹出的chrome里选择 列表 -> 其他工具 -> 开发者工具,即可在弹出窗体的debuggerWorker.js里,用断点调试.
 					
+					install是大部分管理用程序都有的命令，如npm install, pod install,前者配合文件package.json使用，后者配合podfile使用，就像makefile和脚本配合一样
 						
 					RCT语法
 						常用函数
@@ -204,6 +228,8 @@
 								
 								3 如果有某个容器需要撑开，比如导航栏里左中右，中间的撑开，
 								那设定其flex:1
+								
+								4 貌似flex为row和justifyContent配合用（都是水平的），而flex为column和alignItems(都是竖的)配合着用
 								
 
 					点击事件的实现			
@@ -341,6 +367,18 @@
 							border-color:red gray orange blue 
 							上红色,右灰色,下橘色,左蓝色
 				
+						还可以将样式写成state供调用
+							state({
+							backBtnFFF:{background:'red'};
+							})
+							
+							<View style= {this.state.backBtnFFF}/>
+							
+							onPress(){
+								this.setState({backBtnFFF:{background:'red'},})
+							}
+							要注意｛｝用于指定对象，而JS里只认定对象，所以一定要用{}包裹键值对
+				
 				CSS关联到HTML的适合方法
 						如果只有一个CSS要关联到HTML,则可用链接标签
 						<head>
@@ -369,8 +407,7 @@
 							color:red;
 						}
 						嵌在h1里的ul里的li里的ul里的li元素为此属性
-						并且li里的元素也是这个属性
-						
+						并且li里的元素也是这个属性						
 						
 						
 					W3C:网页方面的标准化民间组织,主要工作是制订web规范的建议
@@ -643,7 +680,20 @@
 						const navigator = this.props;
 						navigator.push(someComponent);
 			
-
+					最重要的是navigator,用于主导push和pop。设置属性时，最重要的是renderScene，它也应该是个对象
+						renderScene = { (route,navigator)=>{
+							
+						}}
+					
+					使用时
+						navigator = this.props.navigator;
+						navigator.push(name:'cp', component:FirstComponent,params:{a:'a1',b:'b1'});
+						
+						当下一个route开始渲染时，navigator里的render就开始起效
+						navigator抠出了props（就是在当前页面里调用push时给的参数）,并帮当前页面生成了NextComponent，还把nav和当前页面给的{...props.params}给了这个新页面
+						
+						
+						
 			动画效果Animatiion:
 					在RN中，动画能被应用于Text,View,Image
 					效果有
@@ -653,11 +703,115 @@
 					三种
 					
 					动画是异步操作，可通过parallel,sequence来控制动画的发起
+					如
+						Animated.sequence([
+						// 一个滑动,越滑越慢的任务
+						Animated.decay(
+						position,
+						{
+						velocity:{},
+						deceleration:0.997,
+						}),
+					
+						// 一些并发的任务
+						Animated.parallel([
+						// 一个弹簧任务
+						Animated.spring(
+							position,
+							{}
+						),
+						// 一个匀速运动
+						Animated.timing(
+							
+						),
+						]),										
+					]).start();
+				
+					在一个越滑越慢的动画之后，开始一个弹簧任务和一个匀速任务
 				
 					动画的实现方式：将Animation单例的属性绑定到object的style上
 					例如：
+						1 在state里，创建一个Animated类型的变量
+							this.state = {
+								FadeAnim: new Animated.Value(0);
+							}
+							
+						2 在生命周期的某个节点，触发此变量的改变
+							componentDidMount(){
+								Animated.timing{
+								this.state.FadeAnim,
+								{toValue:8},
+							}					
+						}	
 					
+						3 将此值和view,text的属性绑定起来
+							<View style={{opacity:this.state.FadeAnim}} />
+							这样就能看到动画效果
+				
+				
+				#编码和解码#		
+						字符集：抽象符号的合集
+						编码规则：字符集和十六进制数的对应法则
+						
+						文本显示为乱码，是解码出了问题
+						1、编码规则和解码规则不一致
+						2、宿主机上没有对应的字符集
+						
+						在中国，一般的编码模式是GBK，包含简体和繁体中文
+						而编辑器默认的编码规则是UTF-8 ，包含了地球上所有的抽象字符。常常需要将GBK转为UTF-8
+						
+						
+				#网络编程基础知识#
+						网络和数据库有类似处，URL用于定位资源（标志数据库），请求用于访问数据（操作数据）
+								例如
+						https://cn.bing.com/Search?q=%E9%B2%8D%E5%86%85%E6%96%AF%E6%B8%A9%E5%BE%B7%E7%B1%B3%E5%B0%94&mkt=zh-cn&FORM=BNLH
+
+						https://cn.bing.com/Search 就是资源描述符，定位一个库
+						后面的
+						q=%E9%B2%8D%E5%86%85%E6%96%AF%E6%B8%A9%E5%BE%B7%E7%B1%B3%E5%B0%94
+						&mkt=zh-cn
+						&FORM=BNLH
+						是数据库操作命令，用于访问数据
+
+					网络传输时常用的格式是JSON 键值对的集合。
+						其中的'值'可以是 string，也可以是对象{"a":"a1"} 、也可以是对象的集合
+						{
+							{
+								"key":"value","key2":"value2",
+							}
+						}
+						
+						JSON.stringify 可将json对象转为请求用的string
+						JSON.parse 可将string转为json对象
+
+						json和NSDictionary有联系,dictionary类型可转为json字符串
+						
 					
-					
-					
+					网络的基本概念有	
+						session	
+						Request
+						Response
+						表单
+						ispostback(用页面于表征是否刷新)	
+						
+						比如在
+							pageIsLoad里
+							{	
+								// 第一次加载
+								if(!ispostback)
+								{
+									// 做初始化操作
+								}
+							}
+							
+							可防止F5刷新时重新加载页面，节约资源
+							
+							
+					网络请求的流程
+						浏览器请求资源 -> 服务器返回网页的html格式 ->  
+					浏览器收集用户填写的表单，POST给服务端 -> 服务端获取请求，返回相应页面	
+						
+						加载初始页面 ->  填写表单 -> 提交表单并改变页面
+						
+						
 						

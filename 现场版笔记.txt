@@ -72,52 +72,15 @@
 						component:SecondComponent,
 					)
 				}
-					图片大小也可以用style={{height:180,width:320}}来设置,并且要直接放在<Image />里,不要放在Styles里
-					
-					尺寸
-						inch:长度  1英尺 = 2.54cm
-						px:屏幕上的像素点数,如常见的320 *684
-						dp:每英尺包含的点数,如 屏幕 320*480 尺寸 2英尺*3英尺,则dp 为160
-					
-					PixelRatio方法
-						在分辨率不同的设备上,用PixelRatio好
-						比如获取最细线宽
-							borderWidth:1/PixelRatio.get()
-						
-						比如根据设备来决定图片的分辨率
-							var image = getImage({
-								width:PixelRatio.getPixelSizeForLayoutSize(300),
-								height:PixelRatio.getPixelSizeForLayoutSize(200),
-							});
-							可在不同设备上展示300 * 200的图片 
-							
-					
-					LBS(location based service):
-					
-					
-					textAlign 只能对文本框用,将其文本居中
-					alignItem对View用,设置内部item的排列
-					bottomWidth,bottomColor只能对View用
-					
-					要内部item居中,在container用justify,align的对齐
-					要文字居中,在Text里用textAlign
-					如果多个对象水平排列,需要中间的对象stretch,则设中间对象的flex为1
-				
-					
-					undefined is not an object 往往说明对象没有定义,需要定义一下
-					比如
-						<TouchableOpacity onPress = {this._MessageCenter.bind(this)} > 
-						试图给对象绑定一个方法,但实际上并未定义此方法,所以错误提示 undefined object………………
-				
 
-								
-								
-		#版本管理#
-				中间文件,最终生成文件都要添加到ignore列表
-				三方库最好以脚本的方式添加,在本地执行
+				item is props 
+				then 
+					render时，扣取这个props作为route.
+					props不过是个中介罢了。
 				
-			在ES6里 onPress={this.method1} 要写成  onPress={this.method1.bind(this)}的形式 	
-			
+				
+			将原生View导出的方法
+				
 			对被调界面Component
 			
 			step2:
@@ -133,175 +96,7 @@
 				import  RCTview from './demoView'
 				
 				<RCTview />
-			
-				
-			#感想#
-				去理解那些最基本的字句
-				
-				动画控件
-				LayoutAnimation  布局用的动画
-				
-				Animated	交互用的动画
 
-				动画有三种
-					spring,decay,timing
-					
-				能用的组件有三种
-					View,Text,Image
-					
-					
-				Animated.sequence([
-					// 一个滑动,越滑越慢的任务
-					Animated.decay(
-					position,
-					{
-						velocity:{},
-						deceleration:0.997,
-					}),
-					
-					// 一些并发的任务
-					Animated.parallel([
-						// 一个弹簧任务
-						Animated.spring(
-							position,
-							{}
-						),
-						// 一个匀速运动
-						Animated.timing(
-							
-						),
-					]),										
-				]).start();
-			
-				
-				parallel 是线程控制单元
-				
-				spring,timing,decay是动画样式
-				
-				用动画驱动 Animated.Value
-				
-				Animated.Value 可以和各种属性绑定
-				
-					this.state = {
-						FadeAnim: new Animated.Value(0);
-					}
-				
-					componentDidMount(){
-						Animated.timing{
-							this.state.FadeAnim,
-							{toValue:8},
-						}					
-					}					
-				
-				例如,绑定opacity
-				style = {{opacity:this.state.FadeAnim}}
-				
-				或者用插值函数,将值映射到另一个范围 
-				transform:[{
-					translateY:this.state.fadeAnim.interpolate({
-						inputRange:[0,1],	
-						outputRange:[250,]
-					}),
-				}],
-				
-				Animated的类方法
-					sequence 依次执行一个队列里的animate
-					parallel 并发一系列动画
-					
-				名词:
-					技术栈:一般来说是指将N种技术互相组合在一起(N>1)，作为一个有机的整体来实现某种目的。也可以指掌握这些技术以及配合使用的经验。
-					
-				
-				post请求:
-					网络请求时,要带参数 url+params
-				
-				
-				编码和解码
-					字符集：宿主机能表现的抽象字符的合集
-					编码规则：字符集和二进制的映射
-
-					出现乱码的原因
-					1. 编码时用的编码规则和解码时用的编码规则不同
-					2. 宿主机上没有字符集
-
-
-					UTF-8字符集：支持地球上所有的抽象字符。优点是功能强大，缺点是体积庞大
-					GBK字符集：支持简体和繁体中文，优点是体积小，速度快，缺点是拓展性差，只有中文字符
-
-				网络请求
-					URL + 命令
-					例如
-						https://cn.bing.com/Search?q=%E9%B2%8D%E5%86%85%E6%96%AF%E6%B8%A9%E5%BE%B7%E7%B1%B3%E5%B0%94&mkt=zh-cn&FORM=BNLH
-
-						https://cn.bing.com/Search 就是资源描述符，定位一个库
-						后面的
-						q=%E9%B2%8D%E5%86%85%E6%96%AF%E6%B8%A9%E5%BE%B7%E7%B1%B3%E5%B0%94
-						&mkt=zh-cn
-						&FORM=BNLH
-						是数据库操作命令，用于访问数据
-
-
-				cocoapods用法
-					要编写Podfile文件
-
-					platform:ios,  '7.0'
-					target "targetName" do   // 指定依赖项
-
-					pod 'JSONKit',    '~> 1.4'
-
-					end
-
-					Podfile放在工程根目录下
-					在根目录下，命令行
-					pod install
-
-
-
-				json					
-
-					是一套规则，一种数据格式
-					数据的表示形式：键值对
-					数据的分隔方式：逗号	
-					方括号：数据的有序集合
-					花括号：可用于表示键值对中的值
-
-					值可以是单个字符串"a" ，键值对 "a":"b" ，键值对的集合{ "a":"b" , "a1":"b1" },集合的排列
-					[
-						{"a":"a1" , "b":"b1" },
-						{"a":"a2" , "b":"b2" },
-						{"a":"a3" , "b":"b3" },
-						{"a":"a4" , "b":"b4" },						
-					]
-
-					键只能是字符串 "theKey"
-
-
-					在JS里的调用
-
-				JSON.parse
-					用于将string 变为json对象
-
-					如 '{"a":"a1", "b":"b1"}'
-
-					parse之后就是 
-						{
-							a:"a1",
-							b:"b1",
-						}
-
-				JSON.stringfy
-						将json对象转为string
-						如
-							var {
-							a:"a1",
-							b:"b1",
-							}
-						转完后是
-						'{"a":"a1","b":"b1"}'	
-
-				state:
-					可理解为一张成员变量表
-					this.state.someText 表示名为someText的成员变量
 
 				在JS里，字符串以 '' 包裹  拼接时可直接用+号
 
@@ -311,61 +106,6 @@
 					Promise -> .then .catch()	
 
 
-				网络的基本知识：
-				session	
-				Request
-				Response
-				表单
-				ispostback	
-
-				交互流程：
-					浏览器请求资源 -> 服务器返回网页的html格式 ->  
-					浏览器收集用户填写的表单，POST给服务端 -> 服务端获取请求，返回相应页面
-
-				有个flag叫 IsPostBack	  
-					第一次加载页面时为 false
-					之后按F5刷新时，值为true
-
-				可用于避免重复的请求和页面加载
-
-				
-				原生和JS通信时，JS调用原生，那参数就是JS给原生的，那回调里的参数就是原生给JS的
-
-				import React,{
-					AppRegistry,
-
-
-				}
-
-				只要不细心揣摩，就可能出错吧，比如fetch返回是字符串，parse后得到json对象，打印时需要获取元素，需要用obj.data访问
-
-				JSON.parse可以将字符串完全转成json对象，想想真幸福呢
-
-
-			五险一金
-				金是住房公积金：可以用来买房子，还贷款，装修
-				五险是 
-				养老：单位20%，个人8%。一般要交满15年，到退休的时候才能终生享受养老金
-				医疗：单位每月给你交9%，个人承担的大概是2%。2%用于刷卡买药  大病住院可报销66%
-				失业：单位 1.5%，个人0.5%，要交满一年才能享受
-				工伤
-				生育	：单位缴纳，女员工报销生育保险的时候必须给4个月的平均工资
-
-
-			align 管垂直方向移动   justify是水平方向移动……
-
-			textInput:如果没有设置flex,默认宽度是紧缩的
-
-			要设置样式改变
-				1、 在state里设置对象
-						textFFF:{backgroundColor:FFF},
-
-				2、在控件里添加样式
-						style={[styles.XXX, this.state.textFFF]}
-
-				3、在需要改变的地方setState({})
-
-				所有的样式都是对象，都要以{}包裹，表征其为对象。否则JS不认为其为对象
 				
 				
 
