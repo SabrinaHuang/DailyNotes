@@ -15,7 +15,81 @@
 		  	4、	
 
 	#通用知识#
-			平台：一般是一套工具包。可在任意操作系统上为特定语言编写的程序提供统一的接口
+			委托在OC下的实现
+				1、需要协议文件，主调方（一般是框架类），被调方（实现协议的类）
+				
+				2、-------------------协议文件-------------------
+					XXXdelegate.h
+					需要协议作用域
+					@protocol
+						@required
+						-(void) sleep;
+						-(void) work;
+						-(void) eat;						
+					@end
+			
+				3、					-------------------在调用协议的类里-------------------
+					Frame.h 
+					#include XXXdelegate.h
+					@interface  XXX:NSObject
+
+					// 自己的变量
+					{
+						var1;
+						var2;
+					}
+
+					// 对类的引用
+					@property  id <XXXDelegate> delegate
+					//自己的方法
+					-method1;
+					-method2;
+					@end
+
+					Frame.m
+					-method1
+					{
+						[self.delegate sleep];
+
+					}	
+					-------------------在调用协议的类里-------------------
+					
+					
+				4、					-------------------在实现协议的类里-------------------
+					.h
+					@interface XXXobj:NSObject<XXXDelegate>
+					@end
+
+					.m
+					-init
+					{
+						Frame *frame = [Frame new];
+						frame.delegate = self;	// 让主调方可调用此协议类
+						frame.start;	
+					}
+
+					-(void) sleep;
+					-(void) work;
+					-(void) eat;	
+					-------------------实现协议的类-------------------
+
+
+				例如 关联到textField的viewController,就是被textField驱使来做协议类的类
+				
+				遵循了<TextFieldDelegate>协议，
+						viewController<TextFieldDelegate>
+				
+				并实现了协议里的方法
+						-textDidEndEditing()
+						{
+							…………………………
+						}
+					
+				还要让textField认其为协议类，让textField将事件发给它
+					textField.delegate = self;
+			
+
+		平台：一般是一套工具包。可在任意操作系统上为特定语言编写的程序提供统一的接口
 			例如
 				Java平台（Java platform）。是一套工具，包括Java虚拟机和Java Core，在任意操作系统上为Java程序提供统一接口
 				.NET平台，（.NET platform）。是一套工具，包括了CLR和framework类库，在任意操作系统上为.NET程序提供统一接口
@@ -103,6 +177,63 @@
 					..表示上二级路径
 				
 				真机调试时，如果出现了webSocket Connection fail ,很可能是之前编译时打开了serve窗口,没有关掉.关掉即可.
+				
+				#JS调用原生页面#
+					1、原生的view要继承RCTViewManager
+						.m
+						@interface RCTcustomViewManager:RCTViewManager
+						@end
+					
+					2、	实现-(UIView *)View 方法
+						.m
+						-(UIView *)View{
+							……………………
+							……………………
+							return view;
+						}
+						
+					3、实现一个接口文件（其实这里我就不太懂了）
+						
+						--------------------导出原生的文件--------------------
+						CustomView.js
+						import React,{
+    								DeviceEventEmitter,
+    								requireNativeComponent,
+    								PropTypes
+    					} from 'react-native'
+
+						// 如果需要监视原生组件的事件，可用EventEmitter
+						
+						var customView = createClass(
+						
+						
+						componentDidMount(){
+							EventEmitter.addListerner('ZBarCodeRead',this._onRead);
+
+							// 第一个参数ZBarCodeRead是另一个组件里的方法，这个是在原生里，用bridge.ModuleXX 方法生成的
+							// 第二个参数_onRead是本组件的方法，第二个参数指定的方法监听第一个方法
+						}
+						
+						// 负责监听的方法
+						_onRead(){
+							// 可以通过props将JS方法传给本组件，从而执行具体的业务操作
+						}
+						
+						)						
+
+    					// 如此即可导出组件，标签名为RCTXXX
+						module.exports = requireNativeComponent('RCTXXX',null);
+
+					--------------------导出原生的文件--------------------
+						
+						var { requireNativeComponent } = require('react-native');
+			
+						// 定义输出,名称是之前的.m去掉词尾的manage
+						modle.exports = requireNativeComponent( 'RCTcustomView',null );
+			
+					4、在JS中调用此接口文件
+						import RCTcustomView from './AppComponent/CustomView'
+						
 				
 				#图片显示相关#
 					dp表示像素密度，比如某手机宽1.5inch，而分辨率为240 * 320
@@ -196,6 +327,9 @@
 					install是大部分管理用程序都有的命令，如npm install, pod install,前者配合文件package.json使用，后者配合podfile使用，就像makefile和脚本配合一样
 						
 					RCT语法
+						require:
+							用于加载模块，require( 'XXXX' ),这里的XXXX是文件或者路径，总之是资源（和网络编程的概念类似）
+					
 						常用函数
 							render:实现样式,渲染样式,用JS调用样式
 							
