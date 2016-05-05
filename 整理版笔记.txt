@@ -26,7 +26,7 @@
 
 				----------------podfile内容--------------	
 					platform:ios,  '7.0'
-					target "targetName" do   // 指定依赖项
+					target "targetName" do   // 指定依赖项,target表示工程项目，如工程名为loginDemo,则targetName为loginDemo
 
 					pod 'JSONKit',    '~> 1.4'
 
@@ -37,6 +37,9 @@
 					Podfile放在工程根目录下
 					在根目录下，命令行
 					pod install
+
+				有时会报symbol(s) not found for architecture arm64，是因为搜寻的目录的起始目录太深，
+				在Build	Settings -> other linker Flags里添加 $(inherited)即可
 
 
 			npm:

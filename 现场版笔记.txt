@@ -106,6 +106,128 @@
 					Promise -> .then .catch()	
 
 
+			#委托模式#
+				基本思想是通用框架调用业务实体
+
+				实现
+					-------------------协议-------------------
+					XXXdelegate.h
+					需要协议作用域
+					@protocol
+						@required
+						-(void) sleep;
+						-(void) work;
+						-(void) eat;						
+					@end
+
+
+
+					-------------------在实现协议的类里-------------------
+					.h
+					@interface XXXobj:NSObject<XXXDelegate>
+					@end
+
+					.m
+					-init
+					{
+						Frame *frame = [Frame new];
+						frame.delegate = self;
+						frame.start;	
+					}
+
+					-(void) sleep;
+					-(void) work;
+					-(void) eat;	
+					-------------------在实现协议的类里-------------------
+
+
+					-------------------在调用协议的类里-------------------
+					Frame.h 
+					#include XXXdelegate.h
+					@interface  XXX:NSObject
+
+					// 自己的变量
+					{
+						var1;
+						var2;
+					}
+
+					// 对类的引用
+					@property <XXXDelegate> delegate
+					//自己的方法
+					-method1;
+					-method2;
+					@end
+
+					Frame.m
+					-method1
+					{
+						[self.delegate sleep];
+
+					}	
+					-------------------在调用协议的类里-------------------
+
+					例如，实现了textFieldDelegate的 viewController。textField控件会调用
+					其中实现的委托
+
+					viewControl 关联到 textField 
+					@IBOutlet someTextField
+
+					someTextField.delegate = self;
+
+
 				
-				
+
+				JS调原生UI
+					--------------------原生UI--------------------
+						.m
+						@interface RCTxxxManager:RCTViewManager
+						@end
+
+						@implement RCTxxxManager
+							-(UIView *)view
+							{
+								……………………
+								return view;
+							}
+
+						@end
+					--------------------原生UI--------------------
+
+					--------------------导出原生的文件--------------------
+						.js
+						import React,{
+    								DeviceEventEmitter,
+    								requireNativeComponent,
+    								PropTypes
+    					} from 'react-native'
+
+
+    					// 如此即可导出组件，标签名为RCTXXX
+						module.exports = requireNativeComponent('RCTXXX',null);
+
+					--------------------导出原生的文件--------------------
+
+
+				#require语法#
+						require('XXX'); 用于加载模块到js文件，其中XXX可被视为文件或目录
+
+					import React,{
+						AppRegistry,
+						Text,
+					}from 'react-native';	
+
+					React是容器，是集合，而AppRegistry，Text是集合里的元素
+
+
+				EventEmitter可在当前组件里设置监听事件
+				EventEmitter.addListerner('ZBarCodeRead',this._onRead);
+
+				第一个参数ZBarCodeRead是另一个组件里的方法
+				第二个参数_onRead是本组件的方法，第二个参数指定的方法监听第一个方法
+
+
+
+
+
 
