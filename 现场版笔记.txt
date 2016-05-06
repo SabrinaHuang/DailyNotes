@@ -1,6 +1,144 @@
 
+	PropTypes  可用于检查参数属性
+	使用范围和环境类似assert
+
+	propTypes:{
+		style:View.PropTypes.style, // 提供对外部变量的检查
+		elementStyle:View.PropTypes.style,
+	},
+	∂
 
 
+	实现粒度适中的组件
+
+	例如二级菜单
+	<View>
+		<View 第一行/>
+		<View 第二行>
+			<View 第一列>
+				一级菜单
+			</View>
+			<View 第二列>
+				对应一级菜单的二级菜单
+			</View>
+		</View>
+	</View>
+
+
+	var data = {
+		'index1':{
+			'index1_1':['item1'],
+			'index1_2':['item1','item2','item3','item4','item5',],
+			'index1_3':['item1','item2','item3','item4','item5',],
+		}
+		index2:{
+			'index2_1':['item1'],
+			'index2_2':['item1','item2','item3','item4','item5',],
+			'index2_3':['item1','item2','item3','item4','item5',],
+
+		}
+	}
+
+	item可以是字符串，字典，键值对，
+
+	data
+	nSelected
+	tabSelected
+
+	for(var item in data){
+		var ChildData = data[item];
+		for(var c in  ChildData)
+		{
+			var type = 
+		}
+	}
+
+
+export default class List extends component({
+	// 这些就是样式参数吧
+	propTypes:{
+		style:View.propTypes.style,
+		elementStyle:View.propTypes.style,
+	},
+
+	render(){
+		<View style = {this.props.style}>
+			<View style = {this.props.elementStyle}>
+		</View>
+	}
+});
+
+
+<List style={styles.list}  elementStyle={styles.listElement}>
+
+var List = React.createClass({
+  	propTypes: {
+    style: View.propTypes.style,
+    elementStyle: View.propTypes.style,
+  	},
+  render: function() {
+    return (
+      <View style={this.props.style}>
+        {elements.map((element) =>
+          <View style={[styles.element, this.props.elementStyle]} />
+        )}
+      </View>
+    );
+  }
+});
+
+	
+
+// ... 在别的文件中引用List组件 ...
+<List style={styles.list} elementStyle={styles.listElement} />
+
+
+
+
+	item VS element
+		前者类似对象，有多个特性以及接口，后者类似属性，只有键值对
+
+	--主调--
+	<Componet setPhoneNum = this._setPhoneNum)>
+
+	_setPhoneNum(val){
+
+	}
+
+
+	---被调---
+
+		onChangeText = this.prop._setPhoneNum.bind(this)
+
+
+	主调方 调用方法时，会用事件唤起它，并将参数传给它
+	这就是主调方调用封装组件时，将方法传给被调方，就可通过此方法获取组件的值的原因
+
+	再比如昨天的一个列表类，可将一个 void(*pf)(Item &) 方法传给对象的Visit方法
+
+	class list(
+
+		public:
+			void Visit(  void(*pf)(Item &) );
+	)
+
+	list::Visit( void(*pf)(Item &))
+	{
+		pf( item[i] );
+
+	}
+
+	能访问pf的组件和功能就可以访问这些item
+
+	
+	OC项目：如果添加三方组件，要将组件也加入编译项，否则函数不会入库
+	如今天用JSONKit时，没加入compile Source，就提示JSONString找不到
+
+	另外JS调用原生时，应当将相应的.m .h放到ios文件夹的根目录下，否则可能找不到。
+	就是require('react-native').nativeComponent.HttpManager
+	HttpManager应该放在根目录下
+	
+	
 
 
 

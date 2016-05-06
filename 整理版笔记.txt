@@ -916,13 +916,13 @@
 							{
 								"key":"value","key2":"value2",
 							}
-						}
+						}						
 						
 						JSON.stringify 可将json对象转为请求用的string
 						JSON.parse 可将string转为json对象
 
 						json和NSDictionary有联系,dictionary类型可转为json字符串
-						
+						值有三种形式 {},[],"", 第一种可以拓展出子集，第二第三种只能做值，没有拓展能力
 					
 					网络的基本概念有	
 						session	
@@ -950,5 +950,10 @@
 						
 						加载初始页面 ->  填写表单 -> 提交表单并改变页面
 						
-						
+			#封装组件#
+					组件的渲染通过props实现
+					如一个自己封装的MenuList
+					// data是用于渲染的数据  click是事件
+					<MenuList data = {data} click = {this.onPress} />
+
 						
