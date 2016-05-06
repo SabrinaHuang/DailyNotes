@@ -15,6 +15,13 @@
 		  	4、	
 
 	#通用知识#
+			在xcode工程里
+				添加三方的.h,.m时，要将.m添加到编译项里，否则编译时无法生成函数名列表，索引不到
+				
+				在RN中，JS调原生时，有个小注意点，就是要将被调的组件放到ios文件夹的根目录下，否则可能找不到。
+				例如require('react-native').nativeComponent.HttpManager
+				HttpManager应该放在根目录下
+	
 			委托在OC下的实现
 				1、需要协议文件，主调方（一般是框架类），被调方（实现协议的类）
 				
@@ -951,9 +958,76 @@
 						加载初始页面 ->  填写表单 -> 提交表单并改变页面
 						
 			#封装组件#
+					首先要实现一个粒度适中的组件，如二级菜单
+					component MenuList
+						<View>
+							<View 第一行/>
+							<View 第二行>
+								<View 第一列>
+										一级菜单
+								</View>
+								<View 第二列>
+										二级菜单
+								</View>
+							</View>
+						</View>
+			
+			
+					然后要给这组件数据模型，用以渲染页面
+					例如二级菜单
+					var data = {
+						'index1':{
+							'index1_1':['item1'],							'index1_2':['item1','item2','item3','item4','item5',],							'index1_3':['item1','item2','item3','item4','item5',],
+					}
+						index2:{
+							'index2_1':['item1'],							'index2_2':['item1','item2','item3','item4','item5',],			'index2_3':['item1','item2','item3','item4','item5',],
+	
+						}
+					}
+					在js里，所有的对象都是键值对或者键值对的有序/无序集合
+					而值则是 字符，[],{}中的一个，如果是{},可以进一步嵌套键值对，否则无法嵌套
+			
+			
 					组件的渲染通过props实现
 					如一个自己封装的MenuList
 					// data是用于渲染的数据  click是事件
 					<MenuList data = {data} click = {this.onPress} />
-
+					
+					对封装好的组件来说，导入props时，可以做参数检查
+					
+					---------component To be exported---------
+					export default class List extends component({
+					// style和elementStyle是参数名,这两条语句用于检查这两个参数的类型
+					propTypes:{
+						style:View.propTypes.style,
+						elementStyle:View.propTypes.style,
+					},
+					
+					// 在这里用这两个类型渲染页面
+					render(){
+						<View style = {this.props.style}>
+							<View style = {this.props.elementStyle}>
+						</View>
+						}
+					});
+					---------component To be exported end---------
+					
+					---------import component---------
+					<MenuList style={styles.list}  elementStyle={styles.listElement}>
+					
+					
+					也可以将方法传给封装好的控件，一般是业务相关的方法
+					---------主调方---------
+						<Componet setPhoneNum = this._setPhoneNum)>
+						_setPhoneNum(val){
+							//TODO 触发的方法
+						}
+					
+					---------被调方---------
+						<View onPress = {this.props.setPhoneNum.bind(this)}/>
+					需要注意，这里传过去的方法的声明格式要和调用方的保持一致，特别是参数。这里的方法供onChangeText事件调用，要求响应能接收一个文本参数，所以方法的格式应该是
+					_XXXmethod(val){
+						……………………
+					}
+					
 						
