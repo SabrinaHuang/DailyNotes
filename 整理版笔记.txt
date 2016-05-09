@@ -15,6 +15,8 @@
 		  	4、	
 
 	#通用知识#
+			在JS里，所有的东西都要写成对象的形式，连标志符（true、false）也要加上成为对象的{},真的神奇~
+	
 			在xcode工程里
 				添加三方的.h,.m时，要将.m添加到编译项里，否则编译时无法生成函数名列表，索引不到
 				
@@ -448,7 +450,34 @@
 								<View>
 									<AdScroll />
 								</View>
+			
+							4 主调需要获取回调的参数时
+								主调里
+									XXXmethod(val){
+											this.setState( 'A':val );
+									}
+									
+								调用时,要将this传给调用方，这样在调用方的
+								onPress = {this.props.outMethod.bind(this.props.target)}时，才能绑定到主调方，设置主调方的state
+								
+								具体例子：在主调方								
+								<Component onSubmit={this._setValue} target={this} />
+								
+								在被调方
+								<XXComponent onPress={this.props.onSubmit.bind(this.props.target)}>
 
+								关于bind(param0,param1,param2)  第一个this，会将引用方法的对象由隐藏的this换为param0
+								而param1,param2则会被作为参数传给方法。当然，方法的形式也要写得对
+								bind(param0,param1,param2) ，对应的原型就是
+								method(val1, val2);
+								
+							5  回调时没有传参数的系统方法，也可以获取到数据。诀窍是
+								method自带隐藏的this参数，在事件 -> 方法模型里，消息触发方法时，都会把发出消息的对象的引用传过去。
+								例如 <Button  onPress ={method} /> 会将这个Button传给onPress方法。
+								所以，onPress的形式就是 onPress()TheButton =>{}.而在JS里，这些都是JSON对象，都可以访问内容的。可以通过
+								JSON.stringify( TheButton )查看TheButton里的值。然后通过item取值
+								
+								onPress = { (obj)=>{ console.log( obj.data.telephone ) } } 这样就算没有提供回调，也能抽取出数据
 					
 					容器嵌套时的的属性影响
 							最外层的container,设置自身的flex(延展,充满界面)
@@ -699,7 +728,13 @@
 					
 					height
 						应尽量少用的属性,因为在不同浏览器里的表现不一样,一般用min-height, min-width, max-width等来表示尺寸
-					
+						
+						在JS里，用名为Dimension的API获取屏幕尺寸
+						var Dimensions = require('Dimensions')
+
+						window.width =  Dimensions.get('window').width
+						window.height =  Dimensions.get('window').height
+						
 					margin,padding,border
 						指定块状元素尺寸的重要属性
 						
@@ -717,7 +752,7 @@
 								相对于标准流时的位置漂移
 								
 						absolute:
-								以最近的非标准流父元素为原点坐标
+								以最近的非标准流父元素为原点坐标
 								倘若没有非标准流元素,则保持做标准流时的位置
 						
 								例如
