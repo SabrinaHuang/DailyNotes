@@ -1,0 +1,33 @@
+
+	js中的bind原则似乎并不适用于RN， bind后的类指针并非this，还是原来的
+
+	不是 bind(this) 的确会将方法里的this替换掉
+
+	比如主调组件调用封装组件
+
+	封装组件里：
+	XXXmethod(val){
+
+		this.setState( 'A':val );
+	}
+
+	在被调里用
+
+	XXXmethod.bind(this)  那么
+	在被调里，会 setState( 'A':val )
+
+	需要将主调的this传给被调，这样就是在主调里
+	setState( 'A':val )
+
+
+	获取手机尺寸的方法
+
+	var Dimensions = require('Dimensions')
+
+		window.width =  Dimensions.get('window').width
+		window.height =  Dimensions.get('window').height
+
+
+   所有的东西，包括内置变量，都要写成{}，当做对象来处理，真是奇妙呢
+
+   在布局时，flex没法让item相对页面居中，只能一行行来╮(╯▽╰)╭，所以得搭大盒子，在大盒子里塞小盒子
