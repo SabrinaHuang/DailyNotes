@@ -66,3 +66,26 @@
 
 			为何JSONstring时字典类型为 MDictonary?
 
+
+	# ES5,ES6语法的差别
+		在require里，ES5可以require('XXXpackage')来调用库，但ES6不行，得import Dimension, 然后 Dimension.get('window').width来调用
+
+
+	#iOS里的 API
+		访问通讯录
+			AddressBook	只提供功能，UI要自己搭，叫做低级API
+			AddressBookUI则提供了UI
+
+	#通用知识  序列图
+		生命线，一个特定实例的生命周期
+
+		矩形窄条 -> 活动期（是函数体）
+
+		消息 -> 用箭头表示	
+				同步消息：等待接收方响应消息后，再继续动作
+
+				异步消息：不用等回调
+
+
+
+
