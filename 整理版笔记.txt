@@ -15,6 +15,46 @@
 		  	4、	
 
 	#通用知识#
+			window系统下，右下角的小喇叭表示的是声卡驱动程序。驱动上可以挂载硬件外设，驱动是系统的音频线和外设间的桥梁。音频一般有音响和耳机，应该在控制面板 - 硬件里设置默认设备为耳机。如果设默认设备为音响，耳机插入时会无响应。
+			
+			另外不应卸载设备，这样外设就会无法放声。
+			
+	
+			序列图
+				用于表示程序中各实例之间的信息交互
+				基本元素包括
+				生命线： 一个特定实例的生命周期
+				竖直的矩形窄条： 实例对象里的方法体，这里叫活动期
+				消息：箭矢。分为
+					同步消息：消息发出方需要等接收方返回消息后，才继续执行
+					异步消息：消息主调方不是回调后再执行活动期，而是立马直接执行活动期
+					
+	
+			vim的基本用法
+				刚打开时，按i 进入编辑状态
+				切换到命令行，用 ':'
+				保存并退出  wq
+				如果是readonly 用wq!即可强行保存
+			
+			mac下SVN的更新
+				1、下载最新版本 http://www.wandisco.com/subversion/download#osx并安装
+				2、在命令行里
+					$ cd
+					$ vi .bash_profile
+				
+				在打开的.bash_profile中添加一行
+				export PATH=/opt/subversion/bin:$PATH
+				凭此设置IDE和SVN的关联
+				
+				3、保存文档,命令行
+					$ source .bash_profile
+				即可更新SVN本身及SVN环境
+			
+			SVN命令行的用处
+				可以执行在版本管理应用程序里难以找到的操作
+				比如服务器ip地址更改时的重定位
+				
+				用 svn relocate NewURL即可
 			在JS里，所有的东西都要写成对象的形式，连标志符（true、false）也要加上成为对象的{},真的神奇~
 	
 			在xcode工程里
@@ -172,7 +212,13 @@
 						不加 -g是本地安装
 							1 包在node_modules目录下
 							2 在工程里通过 require('XXXpackage')来调用
-					
+				
+			原生和JS通信
+				原生需要通过RCTRootView桥接到JS,BundleURL是被调用的JS资源
+				
+				 [NSURL URLWithString:@"http://10.18.51.33:8081/index.ios.bundle?platform=ios&dev=true"];
+				其中10.18.51.33:8081是开发服务器的地址， index.ios.bundle指定了所加载的起始js页
+			
 			语法
 				this.setState 用于改变属性,属性更改后，会触发render(){}; 重新渲染界面
 				
@@ -182,10 +228,11 @@
 				
 			技巧
 				RN在需要引用和表示路径时
-					.表示上一级路径
-					..表示上二级路径
+					./表示当前路径
+					../表示上一级路径
 				
 				真机调试时，如果出现了webSocket Connection fail ,很可能是之前编译时打开了serve窗口,没有关掉.关掉即可.
+				
 				
 				#JS调用原生页面#
 					1、原生的view要继承RCTViewManager
@@ -267,6 +314,12 @@
 
 					版本管理时，需要添加到ignore列表的是中间文件和最终的exe
 						需要本地生成的是第三方库，用npm来安装
+			
+			
+				定时器
+					setTimeOut 延时后执行
+					var TimeOut = setTimeout( method, 4000);
+					表示4000毫秒后执行method里的代码块
 			
 				JS调原生
 					封装原生模块供react使用								
