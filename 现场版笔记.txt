@@ -1,269 +1,71 @@
-*win7下消除麦克风噪声的方法
+	git fork
+	1、在git网站上找到需要的项目RepositoryA，fork，该库就会出现在自己的库里
+	2、用desktop版的git， Clone先前的项目到本地，叫RepositoryB
+	3、更改本地的RepositoryB，commit，更改的是自己库里的数据
+	4、pull request,请求会发给RepositoryA，相应的管理员可申请合并操作。
 
-	录音-> 属性 -> 取消监听 勾选抑制噪声，回声消除，不要选增强
+-------------------------------------------
 
-	在语言软件里不要用麦克风增强，勾选回声消除和噪音抑制
+	Action: 普通obj
 
-*JS四板斧
-	document.write(<p>我方</p>)
+	纯函数：不依赖环境状态，也不改变环境状态的函数
 
-	document.getElementById("Demo").innerHTML= "";
 
-	<script> 
-	function myfunction(){
+----------Action----------------
+	store.dispatch({
+		type: 'functionID',
+		key1:value1,
+		key12:value12,
+		key13:value13,
+		key14:value14,
+		key15:value15,
 
+	});
 
-	} </script>	
 
-	var x=2;
-	var name="";
+----------Reducers----------------
+	// 参数值是为了给state默认值
+	function  visibilityFilter( state = 'SHOW_ALL', action ){
+	switch( action.type ){
+		case 'functionID1':
+			return action.filter;
 
-	声明变量时，用var就好
+		default:
+			return state;
 
+	}}
 
-	<script>
-		var i;
 
-	</script>
+	// 返回的是整个state， ...state表示展开对象，暴露其中所有的值
+	
+	function todos(state=[],action){
+	// 返回一个数组，数组里添加一个对象
+	switch(action.type){
+		case 'ADD_TODO':
+			return [
+			...state,{
+			text:action.text,
+			completed:false
+			}];
 
-	JS威力的来源
-		浏览器加载html页面时，会创建页面的对象
-		对象是树状结构
-		这种结构让js能够访问页面里的所有元素，从而可以动态改变html的元素，属性，样式
-		js寻找文档元素的方法
-			id/name/class（class就是元素的标签）
+		case 'COMPLETE_TODO':	
+			return [
+				...state.slice(0,action.index),
+				Object.assign({}， state[action.index],{completed:true}),
+				...state.slice(0,action.index + 1),
+			];
 
-		var x = document.getElementById("main");	
-		var y = x.getElementByTagName("p");
-		document.write(y[0].innerHTML)
+		default:
+			return state;	
+	}}
 
-		不同的元素，获取值的方式不一样呢，记得<form></form>里的input标签，获取值时用
-		function validate_form(thisform){
-			with(thisform){
-				with(email){ // email是一个表单元素
-					var x = value;
-				}
-			}
-		}
-		对input类型，其值用value表示
+	// 需要导入映射表Reducers和映射表对应的驱动store
+	import { combineReducers, createStore  } from 'redux';	
 
+	let reducer = combineReducers({visibilityFilter, todos });
+	let store = createStore();
 
-	样例：
-		现在的样例还比较简单，没有状态的切换
-
-
-
-	生成数组的方式
-		1、 new Array()
-			Array[0]=
-			Array[1]=
-			Array[2]=						
-
-		2、 new Array("A","B","C");
-
-		3、["A","B","C"]
-
-
-
-	*JS里创建对象的方法
-		1、直接定义 var person={ name:"Bill", lastname:"Gates",id:10001 };
-		2、new 对象
-			person = new Object();
-			person.name = "Bill";
-			person.age = 87";
-			person.eyecolor = "blue";
-
-		3、用函数构造(这叫对象构造器)
-			function person(firstname,lastname,age,eyecolor)
-			{
-			this.firstname=firstname;
-			this.lastname=lastname;
-			this.age=age;
-			this.eyecolor=eyecolor;
-			}
-
-			myFather = person("Bill","Gates",56,"blue");
-
-			document.write(myFather.firstname + " is " + myFather.age + " years old.");
-			3.1 可以为自定义的类定义方法
-				function NewObj( name,age ){
-
-					this.changeName=changeName;( 这里关联到方法，但不像在元素里关联事件时那样，需要添加括号 )
-					// 类似内联函数
-					function changeName(name){
-						this.lasetName = name;
-					}
-				}
-
-
-
-	访问方法是
-		var name = 	person.name;
-
-	遍历属性的方法是
-		for( x in object ){
-			document.write(object.x);
-		}
-
-	undefined VS Null
-	undefined 是没值， Null是对象空
-
-	*声明时的细节
-		var name; // 为undefined类型的对象 就是object吧
-		var name = new String; // 是string对象
-		var name = "Bill Gates"; // 是string类型的对象，值为Bill Gates的对象 可通过var name = 2333;等后续操作改变类型
-
-		name = "Bill Gates";// 自动声明变量为全局
-
-		自定义对象的方法是
-			person = new Object();
-			person.firstname="Bill";
-			person.lastname="Gates";	
-
-
-	分配事件时，可以通过DOM寻找（就是找元素的三种方法）		
-	------------------------------
-	document.getElementById("").onclick= function(){displayDate()};
-
-	<script>
-		function displayDate(){
-			document.getElementById("Demo").innerHTML = Date();
-		}
-	</script>
-	------------------------------
-
-
-	DOM支持用户动态创建节点
-	var para = document.createElement("p");
-	var node = document.createNode("新段落也");
-	param.appendChild(node);
-
-	-------------
-
-
-	节点的术语范畴是tree,tree由NODE组成
-	element是xml(标志性语言)的概念，是数据的结构
-	信息完整的节点才能被称为元素
-
-	元素是node的子类
-
-
-	小驼峰法
-		面向对象里的常见命名规则就是小驼峰，比如 someMethod()
-
-
-	JS独特的比较逻辑
-		=== 表示类型和值都相同
-
-	var x = 5;
-	x === "5" 是false, x === 5 是true
-
-	break  label 用于跳出代码块
-	cars=["BMW","Volvo","Saab","Ford"];
-	list:
-	{
-		document.write(cars[0] + "<br>");
-		document.write(cars[1] + "<br>");
-		document.write(cars[2] + "<br>");
-		break list;
-		document.write(cars[3] + "<br>");
-		document.write(cars[4] + "<br>");
-		document.write(cars[5] + "<br>");
-	}
-
-	这list就是label
-
-	*HTML知识
-		<form></form> 是容器，可以包括各种表单元素
-		最常见的 
-			名字域，一般长这样：
-
-			名：
-			<input type="text" name="firstname">
-			就是普通的输入框
-
-			密码域的长相
-			密码：
-			<input type="password" name="password">
-			要注意到type比较不一样
-
-
-		*表单
-			<form action="html_form_action.asp" method = "get" >	
-
-			action对应的是submit时接收数据的页面
-
-		
-		*asp页面
-			也是一种脚本语言
-			动态服务器页面。用于创建动态网页和web应用	
-
-			<html>
-				<head>
-					<title></title>
-				</head>
-
-				<body>
-
-				</body>
-			</html>
-
-	--------------------------		
-	DOM的终极样式为BOM，BOM下有window对象
-	document就在window对象下。
-
-	最普通的用法，获取窗体尺寸
-	var w=window.innerWidth
-	|| document.documentElement.clientWidth
-	|| document.body.clientWidth;
-
-
-	var h=window.innerHeight
-	|| document.documentElement.clientHeight
-	|| document.body.clientHeight;	
-
-	稍高级的用法，获取可视区尺寸
-	screen.availWidth
-	screen.availHeight
-
-	web相关的属性
-	location.hostname  
-	----------------------------
-
-	在JS里，navigator 包含浏览器信息，但不应用于检测
-
-	用计时器控制各事件的执行顺序
-
-	N秒后执行预定代码
-
-	function timMsg(){
-
-		var t = setTimeout("alert('5秒过去了')",N*1000)
-	}
-
-	无限的延时
-	function timedCount(){
-		
-
-	}
-
-	--------------------------		
-
-	*校验规则
-		在网页开发中，校验提交的数据很重要
-		比如邮箱验证
-			1、输入的数据必须包含 @ 符号和点号(.)
-			2、@ 不可以是邮件地址的首字符
-			3、@ 之后需有至少一个点号
-
-			apos = value.indexOf("@");
-			dotpos = value.lastIndexOf(".");
-			if( apos < 1 || dotpos - apos < 2 ){
-				alert(  )
-				return false;
-			}else{
-				return true;
-			}
+------------------------------------------------------------------------	
 
 
 

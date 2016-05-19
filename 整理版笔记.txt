@@ -20,11 +20,26 @@
 			
 			另外不应卸载设备，这样外设就会无法放声。
 
+
+		*win7消除麦克风噪音
+				系统里：录音-> 属性 -> 取消监听 取消增强,勾选抑制噪声，回声消除
+
+				语言软件里（如YY,QQ）取消麦克风增强，勾选回声消除和噪音抑制
+
+
 		*前端开发
-			DOM思想：前端开发的基础，将网页视为DOM文件，网页里的节点都是item
-			比如 document.write(<p>this is a title</p>) 会在dom中插入一个节点
-			比如 document.getElementById("nodeID")可找到页面中的节点
-			
+			DOM思想：前端开发的基本。浏览器加载html页面时，会创建页面的对象
+			对象是树状结构这种结构让js能够访问页面里的所有元素，从而可以动态改变html的元素，属性，样式
+			document就是页面对象，它的父对象是window,window是BOM思想下的产物
+
+			基于DOM动态改变网页的方法：
+				通过id/name/class（class就是元素的标签）寻找文档元素，从而改变它们的值
+
+			例子：
+			document.write(<p>this is a title</p>) 会在dom中插入一个节点
+			document.getElementById("nodeID")可找到页面中的节点
+
+
 			常用语法 isNaN(str1) 用于判断str1是否纯数字
 			
 			JS是解释性语言，浏览器每加载一句，就执行一句，没有编译的过程
@@ -41,14 +56,167 @@
 			
 			<button onPress = "myfunction" ></button>
 	
+
+
+
 		基础语法：
 			1、声明 
 				var param1 = "a param";// 是全局变量
 				
 			2、直接标志
 				param1 = "a param"; // 是DOM的属性
+
+
+			3、生成复合对象的方法	
+			 	3.1、 new Array()
+				Array[0]=
+				Array[1]=
+				Array[2]=		
+				生成，然后赋值				
+
+				3.2、 new Array("A","B","C");
+					用构造函数
+
+				3.3、var cars = ["A","B","C"]		
+					直接传递对象
+
+			4、生成自定义对象的方法
+				4.1、直接定义 var person={ name:"Bill", lastname:"Gates",id:10001 };
+				4.2、new 对象
+					person = new Object();
+					person.name = "Bill";
+					person.age = 87";
+					person.eyecolor = "blue";
+
+				4.3、用函数构造(叫对象构造器)
+					function person(firstname,lastname,age,eyecolor)
+					{
+						this.firstname=firstname;
+						this.lastname=lastname;
+						this.age=age;
+						this.eyecolor=eyecolor;
+					}
+
+				myFather = person("Bill","Gates",56,"blue");
+				document.write(myFather.firstname + " is " + myFather.age + " years old.");
+
+					4.3.0 遍历对象的方法：
+						一般为键值对
+						{name:'Bill',age:87,skinColor:white};
+						获取值时，遍历成员，从而获取值
+							for( x in objectA ){
+								document.write(object.x);
+							}
+
 	
-	
+					4.3.1 可以为自定义的类定义方法
+						function NewObj( name,age ){
+								this.changeName=changeName;// 关联到方法，但不像在元素里关联事件时那样，需要添加括号
+								// 类似内联函数
+								function changeName(name){
+									this.lasetName = name;
+								}
+						}					
+
+					4.3.2 特别的对象：undefined 和 Null	
+						undefined表示没有值， Null表示空对象
+
+					4.3.3 声明时用var，对象为全局对象
+						用let, 对象为自动对象
+
+
+
+
+			如果是element（是功能完备的node）,访问值时用innerHTML
+			如果是inputbox,访问时用value
+			function validate_form(thisform){
+				with(thisform){
+					with(email){ // email是一个表单元素
+						var x = value;
+					}
+				}
+			}			
+
+
+		5、还可以	动态创建元素
+			param = document.getElementById("Demo");
+			var para = document.createElement("p");			
+			var node = document.createNode("新段落也");			
+
+			param.appendChild(node);			
+
+		6、框架角度：
+			node和element的关系可以类比父对象和子对象的关系，功能完备的node可以被称作element
+
+
+		7、break在JS里的用法
+			用 break labelName跳出代码块
+			cars=["BMW","Volvo","Saab","Ford"];
+			list:			
+			{
+				document.write(cars[0] + "<br>");
+				document.write(cars[1] + "<br>");
+				document.write(cars[2] + "<br>");
+				break list;
+				document.write(cars[3] + "<br>");
+				document.write(cars[4] + "<br>");
+				document.write(cars[5] + "<br>");
+			}			
+
+
+		8、表单	
+			<form></form> 
+				可包含
+				<input type="text" name="firstname">
+				普通的输入框
+
+				密码输入框：
+				<input type="password" name="password">	
+
+				重要属性包括
+					action="html_form_action.asp"  表示submit时将数据提交到	html_form_action.asp页面
+
+		9、window 
+			浏览器 包含 window 包含 document
+				重要属性
+					window.innerWidth、window.innerHeight、screen.availWidth、
+					screen.availHeight					
+					用于获取尺寸
+
+
+		10、定时器
+				setTimeOut
+
+				N秒后执行操作
+				function timMsg(){
+					var t = setTimeout("alert('N秒过去了')",N*1000)
+				}
+
+				定时循环地执行操作
+				var t =	function timedCount(){
+					alert('一个无限循环任务');
+					setTimeout( t, 500 );
+				}
+
+		11、校验，在表单提交中很重要的功能块
+
+				例如：邮箱验证
+				1、输入的数据必须包含 @ 符号和点号(.)
+				2、@ 不可以是邮件地址的首字符
+				3、@ 之后需有至少一个点号
+
+				apos = value.indexOf("@");
+				dotpos = value.lastIndexOf(".");
+				if( apos < 1 || dotpos - apos < 2 ){
+					alert(  )
+					return false;
+				}else{
+				return true;
+				}
+		
+				
+				
+
 		*序列图
 				用于表示程序中各实例之间的信息交互
 				基本元素包括
@@ -1146,10 +1314,6 @@
 					_XXXmethod(val){
 						……………………
 					}
-					
-			前端开发
-
-
 
 
 			数据库的结构
