@@ -36,6 +36,103 @@
 	}}
 
 
+
+jQuery库，用CSS的selector访问元素
+		<form id="myform">		
+		myform包含了提交的页面处理，
+
+		<script>
+		$("myform").submit(function(){
+			执行逻辑
+		}
+		// 表示body在load时调用了myFunction方法
+		$(document).ready(myFunction)		
+		</script>
+
+
+
+		访问节点并执行操作
+			$("p.neat").addClass("").show("slow");
+
+		1、遍历“neat”类中所有的<p>元素
+		2、向元素增加“ohmy”类，
+		3、以动画效果缓缓显示每一个段落	
+
+		这种语法叫链接，在一个对象上执行多个任务
+
+		基本语法：
+			 $() ，获取DOM对象，返回jQuery对象，可调用jQuery的方法
+
+Prototype库
+		提供常见任务的API
+		调用库的方法：
+			<script src="http://ajax.googleapis.com/ajax/libs/prototype/1.7.1.0/prototype.js>
+
+
+		使用举例	
+		// 设置id为h01的元素的文本
+		function myFunction()
+		{	
+			$("h01").insert("Hello Prototype!");
+		}
+
+		Event.observe(window,"load",myFunction);
+		为window的load窗体注册了myFunction响应方法
+
+
+JS里的map元素
+		预备知识：<meta ………………> 用于指定DOM的各种配置，比如charset=UTF-8
+
+		首先生成一个image元素，绑定到某map的id
+		<img src="////" usemap="#planetmap"   />
+		// 对应到img的map
+		<map name=XXXX  id="planetmap">
+			<area onMouseOver="writeContextAToSomeElement" />
+			<area onMouseOver="writeContextBToSomeElement" />
+			<area onMouseOver="writeContextCToSomeElement" />
+		</map>
+
+		这样area的鼠标事件就关联到image上
+
+		document.getElementById('txt').value=c
+		c = c + 1
+		t = document.setTimeOut("timedCount",1000)
+
+
+		function stopCnt(){		
+			clearTimeOut(t)
+		}
+
+
+
+HTML DOM 和 DHTML知识
+		HTML VS xml
+		xml在语法上比HTML更严格
+
+
+		元素 <a href=""/>
+
+		DOM是文档的结构模型
+
+
+		有针对任意文档的DOM
+
+		有针对XML文档的DOM
+			定义了xml元素对应的对象和属性，定义了访问的方法
+
+		还有HTML DOM
+			定义了HTML元素对应的对象和属性，定义了访问的方法
+
+		应该是一种抽象模型。
+
+
+CDN是云存储系统，用于存放框架，供各网页使用
+		比如google为jQuery框架提供了CDN服务
+
+		开发时，用
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">
+		</script>
+
 	// 返回的是整个state， ...state表示展开对象，暴露其中所有的值
 	
 	function todos(state=[],action){
@@ -67,13 +164,117 @@
 
 ------------------------------------------------------------------------	
 
+	无限循环的方法
+	var t
+
+	function setTimeCount(){
+
+		t = setTimeout("setTimeCount()",1000)
+	}
 
 
+	停下循环的方法
+	<script>
+		var t
+		var c=0
+
+		function timedCount(){
+
+			t = setTimeout("timedCount()",1000)
+		}
+
+		function stopCount(){
+			clearTimeout(t)
+		}
+	</script>
 
 
+	cookie
+		计算机和网页交互时存在本地的信息
+		比如
+		常用属性
+			名字
+			密码
+			日期
 
 
+	在JS里，字符串和对象可以自由转换。键值对可以作为对象里的成员来看待。
 
+
+----------------剑网三PVP知识----------------
+
+知识点：
+	1、键位的安排。
+		1.1、技能分类
+		1.2、手的安放位置和按键手法
+		1.3、键位区域对应的技能特点
+		1.4、技能循环的安排
+		1.5、监视对方技能
+
+----------------剑网三PVP知识End----------------
+
+*cookie的设置
+
+	设置expire day
+
+	setCookie( key,value,expireDay ){
+		exdata = nowDate + expiredays
+
+		cookie= name + "=" + escape(value) + (null == expiredays)?"":";expires="+exdata.toGMTString())
+	}
+
+
+	getCookie(name){
+		// 获取键的pos
+		c_start = cookie.indexOf( name+"=" )	
+		if( -1 != c_start ){
+		c_end = cookie.indexOf(";",c_start)
+
+		// 获取
+		if(c_end == -1) c_end = document.cookie.length
+		// 获取value值
+		return unescape(document.cookie.substring(c_start,c_end))
+		}
+
+		return ""
+	}	
+
+
+	checkCookie()
+	{
+		// 查看本地记录（cookie）
+		userName = getCookie('userName')
+		
+		if( null == userName ){
+			// 获取提示框里的内容
+			userName = prompt('enter Name');
+			if( userName != null )
+			{
+				setCookie( 'userName'),userName,365)
+			}
+		}
+		else{
+			alert( 'welcome ' +  userName )
+		}
+	}
+
+	补课之本地化：
+		将数据保存在本地，又分简单数据（内置类型）的持久化和自定义类（比如JSON对象）的持久化
+
+
+	cookie 可以看做本地化的一种实现，访问时先get,get有自己的语法规则和技巧
+	document.Cookie.indexOf( userName + "=" );
+
+
+	<body onLoad="checkCookie()">
+	</body>
+
+------------------------------------------
+	框架一般是库，提供了处理JS中常见问题的方法，包括动画，DOM,Ajax
+
+
+	问题 -> 算法
+		
 
 
 
