@@ -15,7 +15,13 @@
 		  	4、	
 
 	#通用知识#
-			
+		*gitHub的fork功能
+			1、在git网站上找到需要的项目RepositoryA，fork，该库就会出现在自己的库里
+			2、用desktop版的git， Clone先前的项目到本地，叫RepositoryB
+			3、更改本地的RepositoryB，commit，更改的是自己库里的数据
+			4、pull request,请求会发给RepositoryA，相应的管理员可申请合并操作。			
+
+
 		*电脑维修	window系统下，右下角的小喇叭表示的是声卡驱动程序。驱动上可以挂载硬件外设，驱动是系统的音频线和外设间的桥梁。音频一般有音响和耳机，应该在控制面板 - 硬件里设置默认设备为耳机。如果设默认设备为音响，耳机插入时会无响应。
 			
 			另外不应卸载设备，这样外设就会无法放声。
@@ -214,8 +220,113 @@
 				return true;
 				}
 		
+		12、各种常用的库
+				提供了解决JS中常见问题的方法，包括动画，DOM,Ajax等问题
 				
-				
+				#jQuery库
+					用CSS的selector访问元素，最重要的是$()方法，获取DOM对象，返回jQuery对象，可调用jQuery方法
+					$("p.neat").addClass("ohmy").show("slow");
+						1、遍历“neat”类中所有的<p>元素
+						2、向元素增加“ohmy”类，
+						3、以动画效果缓缓显示每一个段落	
+						这种语法叫链接，可在一个对象上执行多个任务
+
+
+				<form id="myform">		
+				myform包含了提交的页面处理，
+
+				<script>
+					$("myform").submit(function(){
+					// 执行逻辑
+					}
+					// ready = load 表示load时调用方法为myFunction
+					$(document).ready(myFunction)		
+				</script>				
+
+
+				#Prototype库
+					调用方法
+					<script src="http://ajax.googleapis.com/ajax/libs/prototype/1.7.1.0/prototype.js>
+					function myFunction()
+					{	
+						$("h01").insert("Hello Prototype!");
+					}
+
+					Event.observe(window,"load",myFunction);
+					// window的load事件注册了myFunction方法
+					// myFunction设置了id为h01的元素的文本
+
+			13、map元素
+					预备知识
+						<meta ………………> 用于指定DOM的各种配置，比如charset=UTF-8			
+
+						首先生成一个image元素，绑定到某map的id
+						<img src="////" usemap="#planetmap"   />
+						
+						<map name=XXXX  id="planetmap">// map对应到上文的img
+							<area  pos=(20,50) onMouseOver="writeContextAToSomeElement" />
+							<area  pos=(20,50) onMouseOver="writeContextBToSomeElement" />
+							<area  pos=(20,50) onMouseOver="writeContextCToSomeElement" />
+						</map>
+
+						这样area的鼠标事件就关联到image上	
+
+			14、	计时器
+				var c = 0;
+				var t;
+				function timedCount(){
+					document.getElementById('txt').value=c
+					c = c + 1
+					t = document.setTimeOut("timedCount",1000)					
+				}		
+
+				function stopCnt(){		
+					clearTimeOut(t)
+				}
+
+			15、cookie元素	
+				计算机和网页交互时存在本地的信息
+					常用属性有
+						名字
+						密码
+						日期
+					类似网络编程中的本地化操作，这种数据保存在本地的操作又分简单数据（内置类型）的持久化和自定义类（比如JSON对象）的持久化
+					也分set，get方法
+
+				setCookie( key,value,expireDay ){
+					exdata = nowDate + expiredays
+					cookie= name + "=" + escape(value) + (null == expiredays)?"":";expires="+exdata.toGMTString())
+				}					
+
+				// 由key获取value的方法
+				getCookie(name){				
+					c_start = cookie.indexOf( name+"=" )	// 获取键的pos
+					if( -1 != c_start ){
+					c_end = cookie.indexOf(";",c_start)
+					
+					if(c_end == -1) c_end = document.cookie.length // name为string的最后一个元素，end为字符串长度					
+					return unescape(document.cookie.substring(c_start,c_end))// 获取value值
+					}
+					return ""
+				}	
+
+				checkCookie()				
+				{				
+				userName = getCookie('userName')// 查看本地记录（cookie）
+		
+				if( null == userName ){				
+						userName = prompt('enter Name');// 获取提示框里的内容
+						if( userName != null )
+						{
+						setCookie( 'userName'),userName,365)
+						}
+					}
+					else{
+						alert( 'welcome ' +  userName )
+					}
+				}
+
+
 
 		*序列图
 				用于表示程序中各实例之间的信息交互

@@ -1,10 +1,3 @@
-	git fork
-	1、在git网站上找到需要的项目RepositoryA，fork，该库就会出现在自己的库里
-	2、用desktop版的git， Clone先前的项目到本地，叫RepositoryB
-	3、更改本地的RepositoryB，commit，更改的是自己库里的数据
-	4、pull request,请求会发给RepositoryA，相应的管理员可申请合并操作。
-
--------------------------------------------
 
 	Action: 普通obj
 
@@ -37,93 +30,6 @@
 
 
 
-jQuery库，用CSS的selector访问元素
-		<form id="myform">		
-		myform包含了提交的页面处理，
-
-		<script>
-		$("myform").submit(function(){
-			执行逻辑
-		}
-		// 表示body在load时调用了myFunction方法
-		$(document).ready(myFunction)		
-		</script>
-
-
-
-		访问节点并执行操作
-			$("p.neat").addClass("").show("slow");
-
-		1、遍历“neat”类中所有的<p>元素
-		2、向元素增加“ohmy”类，
-		3、以动画效果缓缓显示每一个段落	
-
-		这种语法叫链接，在一个对象上执行多个任务
-
-		基本语法：
-			 $() ，获取DOM对象，返回jQuery对象，可调用jQuery的方法
-
-Prototype库
-		提供常见任务的API
-		调用库的方法：
-			<script src="http://ajax.googleapis.com/ajax/libs/prototype/1.7.1.0/prototype.js>
-
-
-		使用举例	
-		// 设置id为h01的元素的文本
-		function myFunction()
-		{	
-			$("h01").insert("Hello Prototype!");
-		}
-
-		Event.observe(window,"load",myFunction);
-		为window的load窗体注册了myFunction响应方法
-
-
-JS里的map元素
-		预备知识：<meta ………………> 用于指定DOM的各种配置，比如charset=UTF-8
-
-		首先生成一个image元素，绑定到某map的id
-		<img src="////" usemap="#planetmap"   />
-		// 对应到img的map
-		<map name=XXXX  id="planetmap">
-			<area onMouseOver="writeContextAToSomeElement" />
-			<area onMouseOver="writeContextBToSomeElement" />
-			<area onMouseOver="writeContextCToSomeElement" />
-		</map>
-
-		这样area的鼠标事件就关联到image上
-
-		document.getElementById('txt').value=c
-		c = c + 1
-		t = document.setTimeOut("timedCount",1000)
-
-
-		function stopCnt(){		
-			clearTimeOut(t)
-		}
-
-
-
-HTML DOM 和 DHTML知识
-		HTML VS xml
-		xml在语法上比HTML更严格
-
-
-		元素 <a href=""/>
-
-		DOM是文档的结构模型
-
-
-		有针对任意文档的DOM
-
-		有针对XML文档的DOM
-			定义了xml元素对应的对象和属性，定义了访问的方法
-
-		还有HTML DOM
-			定义了HTML元素对应的对象和属性，定义了访问的方法
-
-		应该是一种抽象模型。
 
 
 CDN是云存储系统，用于存放框架，供各网页使用
@@ -162,118 +68,75 @@ CDN是云存储系统，用于存放框架，供各网页使用
 	let reducer = combineReducers({visibilityFilter, todos });
 	let store = createStore();
 
-------------------------------------------------------------------------	
 
-	无限循环的方法
-	var t
-
-	function setTimeCount(){
-
-		t = setTimeout("setTimeCount()",1000)
-	}
-
-
-	停下循环的方法
-	<script>
-		var t
-		var c=0
-
-		function timedCount(){
-
-			t = setTimeout("timedCount()",1000)
-		}
-
-		function stopCount(){
-			clearTimeout(t)
-		}
-	</script>
-
-
-	cookie
-		计算机和网页交互时存在本地的信息
-		比如
-		常用属性
-			名字
-			密码
-			日期
-
-
-	在JS里，字符串和对象可以自由转换。键值对可以作为对象里的成员来看待。
-
-
-----------------剑网三PVP知识----------------
-
-知识点：
-	1、键位的安排。
-		1.1、技能分类
-		1.2、手的安放位置和按键手法
-		1.3、键位区域对应的技能特点
-		1.4、技能循环的安排
-		1.5、监视对方技能
-
-----------------剑网三PVP知识End----------------
-
-*cookie的设置
-
-	设置expire day
-
-	setCookie( key,value,expireDay ){
-		exdata = nowDate + expiredays
-
-		cookie= name + "=" + escape(value) + (null == expiredays)?"":";expires="+exdata.toGMTString())
-	}
-
-
-	getCookie(name){
-		// 获取键的pos
-		c_start = cookie.indexOf( name+"=" )	
-		if( -1 != c_start ){
-		c_end = cookie.indexOf(";",c_start)
-
-		// 获取
-		if(c_end == -1) c_end = document.cookie.length
-		// 获取value值
-		return unescape(document.cookie.substring(c_start,c_end))
-		}
-
-		return ""
-	}	
-
-
-	checkCookie()
-	{
-		// 查看本地记录（cookie）
-		userName = getCookie('userName')
-		
-		if( null == userName ){
-			// 获取提示框里的内容
-			userName = prompt('enter Name');
-			if( userName != null )
-			{
-				setCookie( 'userName'),userName,365)
-			}
-		}
-		else{
-			alert( 'welcome ' +  userName )
+	function counter( state = 0, action ){
+		switch(action.type){
+			case 'INCREMENT':
+				return state + 1;
+			case 'DECREMENT':
+				return state - 1;
+			default:
+				return state;
 		}
 	}
 
-	补课之本地化：
-		将数据保存在本地，又分简单数据（内置类型）的持久化和自定义类（比如JSON对象）的持久化
 
 
-	cookie 可以看做本地化的一种实现，访问时先get,get有自己的语法规则和技巧
-	document.Cookie.indexOf( userName + "=" );
+	-------------action-------------
+	
 
 
-	<body onLoad="checkCookie()">
-	</body>
-
-------------------------------------------
-	框架一般是库，提供了处理JS中常见问题的方法，包括动画，DOM,Ajax
 
 
-	问题 -> 算法
+	// 定义方法，描述改变state的方法
+	-------------reducers-------------
+
+	import {creatStore} from 'redux';
+
+	function counter( state = 0, action ){
+		switch(action.type){
+			case 'INCREMENT':
+				return state +1;
+
+		}
+	}
+
+
+	-------------store-------------
+	let store = createStore(counter);
+
+	store.dispatch({type:'INCREMENT'});
+
+
+------------------
+	import {createStore} from 'redux';
+
+	function counter( state=0, action ){
+
+	}
+
+
+-------------------
+	const变量只能被赋值一次
+
+	let声明的变量是块级的，在函数里定义,类似自动变量
+
+	var声明的变量是全局或者函数级的，是全局，可重复声明，后声明时的赋值会覆盖先前的赋值。
+
+
+	#计算机学科基础思维
+		首先要贯通知识，也就是计算机学科思维
+		比如用+、-来替代人类的 * / 运算
+		求平方值，用 (n-1)平方 + 一阶差分 + 二阶差分
+		求二次方程的解，(-n,m)一一取值，表达式结果为0，对应的取值即为解
+
+	人类适合重复少，步骤复杂的任务，计算机适合重复多，步骤简单的任务
+
+	先要学思维方式，然后要学具体的知识点和技能，通过反复练习掌握知识点和技能，成为一种能力。最后要结合具体的业务，将能力转化为生产力。
+
+
+
+
 		
 
 
