@@ -698,7 +698,24 @@
 	 							 state是组件本身的属性,当state改变时,会reload界面.
 	 							 比如从网络上下载数据并填充到表格里时,会有个state叫dataSource,网络请求改变了state.页面会刷新显示,将数据展现出来.
 	 							 具体可见http://sentsin.com/web/1120.html里关于展示25部电影的段楼
-					
+				
+
+	 					常见错误提示和解决
+	 							Applicaction 项目名 has not been registered.This is either due to a require() error during initialization or failure to call AppRegistry.registerCommponent.
+
+	 							可能原因
+	 							1、根目录./index.ios.js中
+    								AppRegistry.registerComponent('项目名',() => ...);
+
+    								与./ios/项目名/appDelegate.m中的RCTRootView*rootView = [[RCTRootViewalloc]initWithBundleURL:jsCodeLocation moduleName:@"项目名" launchOptions:launchOptions];
+
+    								中的项目名不一致
+    								解决方法是项目名改成一致
+
+	 							
+	 							2、可能在同时运行一个以上的程序	
+	 								解决方法，关掉命令行窗体
+
 				技术
 					Android真机调试的步骤
 						1 开启手机的调试模式

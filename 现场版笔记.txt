@@ -1,45 +1,45 @@
+	小结redux用法
 
-	Action: 普通obj
+----------------Action----------------
+action 一个对象，用于标志行为
+	const increaseAction = { type:'increase' }
 
-	纯函数：不依赖环境状态，也不改变环境状态的函数
-
-
-----------Action----------------
-	store.dispatch({
-		type: 'functionID',
-		key1:value1,
-		key12:value12,
-		key13:value13,
-		key14:value14,
-		key15:value15,
-
-	});
+----------------Reducers----------------
+	#import {increaseAction} from './Action';
 
 
-----------Reducers----------------
-	// 参数值是为了给state默认值
-	function  visibilityFilter( state = 'SHOW_ALL', action ){
-	switch( action.type ){
-		case 'functionID1':
-			return action.filter;
+	function filter( state= {count:0} , action){
+		const _count = state.count;
 
-		default:
-			return state;
-
-	}}
-
+		switch( action.type ){
+			case 'increase':
+				return {count:_count + 1}
+			default:
+				return state;
+		}
+	}
 
 
+----------------Store----------------
+	const store = createStore(filter)
 
 
-CDN是云存储系统，用于存放框架，供各网页使用
-		比如google为jQuery框架提供了CDN服务
+ 在实际调用时，store.dispatch(increaseAction)
 
-		开发时，用
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">
-		</script>
 
-	// 返回的是整个state， ...state表示展开对象，暴露其中所有的值
+----------------RN部分----------------
+	
+	class Counter extends Component(
+		render(){
+			const {value,} = this.props;
+			<div>
+				<p>{}</p>
+			</div>
+		}
+	)
+
+	Counter.propTypes = 
+
 	
 	function todos(state=[],action){
 	// 返回一个数组，数组里添加一个对象
@@ -82,46 +82,163 @@ CDN是云存储系统，用于存放框架，供各网页使用
 
 
 
-	-------------action-------------
+	Props通常用于指定组件的属性
 	
+	const defaultProps = {
+		size:'normal',
+		type:'btn'
+	};
+
+	class MapPart extends Component(
+		<div>
+			<button defaultProps=defaultProps >点击就送</button>
+		</div>
+	)
+
+	*web前端开发中，ES5,ES6,ES7都是一套语法规则
+
+	*props作为组件的属性，应当只被赋值一次，不该重复修改
+	正确样例
+		var component = <Component foo={x} bar={y}  />;
+
+	错误样例	
+		var component = <Component />;
+		component.props.foo = x;
+		component.props.bar = y;
 
 
+	... 对props来说表示展开语法，将里面的键值对全都展开
+	var props={foo:'default'};
+	<Component  {...props} foo:'default_1' />
 
 
-	// 定义方法，描述改变state的方法
-	-------------reducers-------------
+	props还有解构赋值的属性，
+	{a,b,rest} = this.props时，a,b会获取props里名为a,b的对象的值，而rest会获取余下的值。
 
-	import {creatStore} from 'redux';
 
-	function counter( state = 0, action ){
-		switch(action.type){
-			case 'INCREMENT':
-				return state +1;
+	当组件不需要state时，可用如下方式取代render 自定义组件
+	const Button = (props)=>{
+		const {children, onClick} = props
 
+		return(
+			<TouchableOpacity onPress={onClick} >
+				<Text>{children}</Text>
+			</TouchableOpacity>
+		)
+	}
+	export default Button
+
+
+	*Action的一种新写法，很独特的感觉,据说优点是可以自定义参数，还可以防止写错
+
+	---------------------counterActions---------------------
+		export const increment = (id) => {
+			return{
+				type:INCREMENT,
+				payload:{
+					id
+				}
+			}
+		}		
+
+		导出到RN时的格式
+			// 导入这些action动作们
+			import * as counterActions from '../actions/'
+
+			class counterApp extends Component{
+				const {state, actions} = this.props
+				return(
+					<Counter
+						counter={state.count},
+						{...actions}/>
+				)
+			}
+
+			export default connect( (state)=>{
+				return ( {state:state.counter} )
+			},
+			(dispatch) => ({
+				actions:bindActionCreators(counterActions ,dispatch )
+			})
+			)( counterApp );
+
+			这connect方法的作用是关联store到组件的props
+
+
+	*引用对象/变量的方法  action的其他写法
+		// 这语法很像DCL语言
+		import * as types from  './actionTypes';
+
+		export function increment(){
+			return{
+				type:types.INCREMENT
+			}
 		}
-	}
 
 
-	-------------store-------------
-	let store = createStore(counter);
+	connect可将store关联到组件的props
+	试着分析说明
 
-	store.dispatch({type:'INCREMENT'});
+	在 counterAction.js里
+		export function increment() {
+  		return {
+    		type: types.INCREMENT
+  		};
+		}
 
-
-------------------
-	import {createStore} from 'redux';
-
-	function counter( state=0, action ){
-
-	}
-
-
-
-
-
-		
+		export function decrement() {
+		  return {
+ 		   type: types.DECREMENT
+  		};
+		}
 
 
+	在counter.js里
+		export default class Counter extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    const { counter, increment, decrement } = this.props;
+
+    return (
+      <View >
+        <Text>{counter}</Text>
+        <TouchableOpacity onPress={increment} style={styles.button}>
+          <Text>up</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={decrement} style={styles.button}>
+          <Text>down</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
+	在counterApp.js里
+	将reducer扣出来
+	import * as counterActions from '../actions/counterActions';
+
+	class CounterApp extends Component(
+		render(){
+			const {state,action} = this.props;
+			return (
+				// 这将传给counter
+				<Counter state = {state.count} {...actions} />
+			)
+		}
+	)
 
 
+	然后要将reduce绑定到counter上
+	export default connect(state =>{
+		console.log(state.counter)
+  		return ({
+      		state: state.counter
+    	});} ,
+  		(dispatch) => ({
+    			actions: bindActionCreators(counterActions, dispatch)
+  		})
+	)(CounterApp);
 
+	这分层分得可细了
