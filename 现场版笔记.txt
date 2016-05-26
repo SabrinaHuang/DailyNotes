@@ -230,7 +230,7 @@ action 一个对象，用于标志行为
 	)
 
 
-	然后要将reduce绑定到counter上
+	然后要将action绑定到counter上
 	export default connect(state =>{
 		console.log(state.counter)
   		return ({
@@ -241,4 +241,104 @@ action 一个对象，用于标志行为
   		})
 	)(CounterApp);
 
-	这分层分得可细了
+	这分层分得老细了
+
+	有counter,counterApp
+
+
+	actions - counterAction.js // state -> action 的映射
+	component - counter.js  // html模板	
+	containers - counterApp.js 
+		关键是在counter里，定义
+		<Text>{counter}</Text>
+		<TouchableOpacity onPress={increment} />
+
+		然后定义counterAction
+		import  * as types from 'actions'
+
+		export function increase(){
+			return{
+				types:types.INCREMENT;
+			}
+		}
+
+
+	const initialState={
+		count:0,
+	}
+
+	reducer.js
+		export default function counter( state=initialState, action={} )	
+
+
+	在app.js里 
+	<Provider store={store}>
+
+	</Provider> 
+
+	*jsx是将HTML模板直接嵌入JS的一种语法
+
+	AppRegistry.registerComponent('Counter', () => App); 这句的作用是将名为Counter的Component注册到名为App的组件上
+
+
+	*完全摒弃class写法的组件生成(在不涉及state的情况下)
+		const Button= (props)=>{
+			const {children, onClick} = props,
+			return(
+				<Touch onPress={onClick}>
+					<Text>{children}</Text>
+				</Touch>
+			)
+		}
+
+		ES7中Button.PropTypes={
+			children:,isRequired,
+			onClick:,isRequired,
+		}
+
+
+		ES7中函数的写法为：
+			export const increment = (id) => {
+				return {
+					type:INCREMENT,
+					payload:{
+						id
+					}
+				}
+			}	
+
+
+		reduce的样式为
+			export default handleActions({
+				[]
+
+			})	
+
+
+		*store和reducer的关系
+			store是系体，将state和action传给reducer
+
+			store会获取state和action(都是对象)
+
+			let prevState = {
+				visibleTodoFilter: 'SHOW_ALL',
+				todos:[{
+					text: 'Read the docs',
+					complete:false,
+				}]
+			}
+
+			let action = {
+				type: '',
+				text: '',
+			}
+
+			通过reducer和action更新state
+			let nextState = todoApp(prevState, action )
+
+			
+			
+
+
+
+
