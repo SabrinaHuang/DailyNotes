@@ -57,7 +57,9 @@
 			常用语法 isNaN(str1) 用于判断str1是否纯数字
 			
 			JS是解释性语言，浏览器每加载一句，就执行一句，没有编译的过程
-			
+				jsx摒弃了JS的分离，直接将HTML嵌入JS
+
+
 			<script></script>就是脚本片段，可放在<head></head>或<body></body>里。可直接写代码片段，也可定义方法
 			<script> alert("a good day") </script>
 			
@@ -69,7 +71,7 @@
 			</script>
 			
 			<button onPress = "myfunction" ></button>
-	
+			
 
 
 
@@ -528,14 +530,17 @@
 						不加 -g是本地安装
 							1 包在node_modules目录下
 							2 在工程里通过 require('XXXpackage')来调用
-				
+
 			原生和JS通信
 				原生需要通过RCTRootView桥接到JS,BundleURL是被调用的JS资源
 				
 				 [NSURL URLWithString:@"http://10.18.51.33:8081/index.ios.bundle?platform=ios&dev=true"];
 				其中10.18.51.33:8081是开发服务器的地址， index.ios.bundle指定了所加载的起始js页
 			
-			语法
+			RN语法
+				AppRegistry.registerComponent('Counter', () => App); 这句的作用是将名为Counter的Component注册到名为App的组件上
+
+
 				this.setState 用于改变属性,属性更改后，会触发render(){}; 重新渲染界面
 				
 				let name = 'firstComponent'用于定义变量				
@@ -548,7 +553,171 @@
 					let声明的变量是块级的，在函数里定义,类似自动变量
 
 					var声明的变量是全局或者函数级的，是全局，可重复声明，后声明时的赋值会覆盖先前的赋值。
+
+
+				Props的用法	
+					#赋值用法#
+					应当只在初始化时赋值一次，不应反复赋值
+
+					正确样例
+					const defaultProps = {
+							size:'normal',
+							type:'btn'
+					};
+
+					class MapPart extends Component(
+						<div>
+							<button defaultProps=defaultProps >点击就送</button>
+						</div>
+					)
+
+					或者
+					var component = <Component foo={x} bar={y}  />;
+
+					错误样例
+					var component = <Component />;
+					component.props.foo = x;
+					component.props.bar = y;					
+			
+					#解构赋值#	
+					const {a,b,rest} = this.props
+					a,b会获取props里名为a,b的对象的值，而rest会获取余下的值。
+
+					特别是在组件没有state时
+						const Button = (props)=>{
+							const {children, onClick} = props
+
+								return(
+										<TouchableOpacity onPress={onClick} >
+											<Text>{children}</Text>
+										</TouchableOpacity>
+								)
+						}
+	
+	export default Button
+
+			Redux框架		
+				原理是通过单一的数据传递，从action -> state -> 页面展示 
 				
+				最重要的是reduce和store的关系。store能获取state和action，然后传给reducer
+				在此机制里能实现异步操作
+					使用的是middleware框架
+					它可以在action发起，到达reducer之前，提供一个拓展点来放置功能
+
+					用法是
+					1、在 App.js里
+						const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
+						const store = createStoreWithMiddleware(reducer);
+
+					2、在 action里，设置一个action为function而非object	
+						export const incrementWithDelay = (id) => {
+  								return (dispatch, getState) => {
+  										// 可以做一些同步的事情
+
+  										// 可以在异步里dispatch action，触发主线程里的reducer
+    									setTimeout(() => {
+          									dispatch({
+          									  type: INCREMENT,
+         									   payload: {
+        									      id
+        									    }
+      									    })
+      									  }, 1000)
+     								 }
+    							}	
+
+    				这样就能触发异步操作。比如将网络请求添加到action里，			
+
+
+				action文件
+				function increase(){
+					return {type:'increase'}
+				}
+
+				function decrease(){
+					return {type:'decrease'}
+				}
+
+
+				reduce文件
+				const initState = {
+					count:0
+				}
+
+				// store里的state就是reduce里的state参数
+				function counter(state=initState, action={}){
+					switch(action.type){
+					case 'increase':
+						return {
+							...state,
+							count:state.count + 1,
+						}
+
+					case 'decrease':
+						return {
+							...state,
+							count:state.count - 1,
+						}
+					default:return state;
+					}
+				}
+
+
+				App.js
+				import reduce
+				import action
+				const store =  createStore(counter)
+
+				// 订阅，跟随消息
+				store.subscribe(()=>
+					// 打印state
+					console.log(store.getState())
+				);
+
+				可以用
+					store.dispatch(increase)
+					store.dispatch(decrease)
+				验证state和action的确传给了reduce
+
+
+				#需要关联到RN时#
+					1、RN的Component里
+					class CountApp extends Component(
+						render(){
+							const { count, increase,decrease } = this.props;
+							<View>	
+								<div>{count}</div>
+								<Touch onPress=increase ></Touch>
+								<Touch onPress=decrease ></Touch>
+							</View>
+						}
+					)
+
+					2、RN的Component里,用connect方法，将state和dispatch关联到组件
+
+						import * as actionTypes from 'action'
+						export const App = connect(
+							state => {
+								return {
+									state:state.count,
+								}
+							}
+							(dispatch) => {
+								return {
+									() => combine(actionTypes, dispatch),
+								}
+							}
+						)(CountApp)
+
+					3、作为组件来调用	
+						export default classA extends Component(
+							<Provider store={store}>
+								<App />
+							</Provider>
+						)
+						这样组件就和store所支配的reducer真正关联起来
+
+
 			技巧
 				RN在需要引用和表示路径时
 					./表示当前路径
