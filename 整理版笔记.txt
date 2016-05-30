@@ -510,13 +510,20 @@
 
 #react-native开发基础#
 			概念：
-				NodeJS：是基于JS runtime的javascript开发平台。ReactNative的开发基于JS语言
-				npm（node package manager）：可以抓取各种三方组件，比如github上的组件
+				NodeJS是基于JS的runtime的javascript开发平台。node是一种三方库。
+				ReactNative的开发基于JS语言
+				npm（node package manager）：
+					npm  install用于安装Node模块
+					可以抓取各种三方组件，比如github上的组件
 					工程做版本管理时，不用提交node_module(这里是所有的插件，组件包)，提交工程根目录里的package.json 然后在工程根目录里npm install即可
 				
-					如果要添加三方组件,如名为react-native-nav的组件,要到node_module目录下
+					如果要添加三方组件,如名为react-native-nav的组件,
+
+					1、安装时
+						到node_module目录下
 						npm install react-native-nav --save
-					调用时 
+
+					2、调用时 
 						import react-native-nav from 'react-native-nav';
 						
 						
@@ -526,10 +533,13 @@
 						-g 是全局安装
 							1 包在 /usr/local里
 							2 在工程里不能通过require调用
+							3 只有工具模块才会全局安装
 					
 						不加 -g是本地安装
 							1 包在node_modules目录下
 							2 在工程里通过 require('XXXpackage')来调用
+
+
 
 			原生和JS通信
 				原生需要通过RCTRootView桥接到JS,BundleURL是被调用的JS资源
@@ -537,6 +547,7 @@
 				 [NSURL URLWithString:@"http://10.18.51.33:8081/index.ios.bundle?platform=ios&dev=true"];
 				其中10.18.51.33:8081是开发服务器的地址， index.ios.bundle指定了所加载的起始js页
 			
+
 			RN语法
 				AppRegistry.registerComponent('Counter', () => App); 这句的作用是将名为Counter的Component注册到名为App的组件上
 
@@ -1397,6 +1408,8 @@
               		
               		这样即可显示图片而隐藏文字
               		
+
+
 			Navigator:
 					概念：
 						路由，nav里的每一个obj
