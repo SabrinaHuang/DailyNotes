@@ -1033,6 +1033,8 @@
 								调用时,要将this传给调用方，这样在调用方的
 								onPress = {this.props.outMethod.bind(this.props.target)}时，才能绑定到主调方，设置主调方的state
 								
+								比较简便的方法是：在传递参数时，直接 action= function.bind(this) 这样在调用时，方法里的this就直接指向主调方
+
 								具体例子：在主调方								
 								<Component onSubmit={this._setValue} target={this} />
 								

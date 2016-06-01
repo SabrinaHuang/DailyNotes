@@ -46,8 +46,15 @@
 	react-native和react的差别在于前者用的是JSX语法，不能用html里的组件。只能用类似的组件，比如View对应css里的div, text对应css里的span
 
 	
+	受控组件，其显示需要通过自己的state来刷新
+	比如
+		picker
 
+		通过其selectedValue驱动组件
+		而selectedValue要绑定到 this.state.someVal
+		this.state.someVal通过onValueChange的回调刷新
 
+		
 
 
 
