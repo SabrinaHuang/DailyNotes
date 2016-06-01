@@ -906,6 +906,9 @@
 						6 摇晃手机,在浮现的菜单里选"Dev Settings" -> Debugging -> 在弹出的对话框里填上开发服务器的ip和端口.返回,重启app,即可正确显示js
 						7 需要调试时,摇晃手机,在浮现的菜单里点选 "Debug in Chrome",在弹出的chrome里选择 列表 -> 其他工具 -> 开发者工具,即可在弹出窗体的debuggerWorker.js里,用断点调试.
 					
+					iOS真机调试的步骤
+						todo
+
 					install是大部分管理用程序都有的命令，如npm install, pod install,前者配合文件package.json使用，后者配合podfile使用，就像makefile和脚本配合一样
 						
 					RCT语法

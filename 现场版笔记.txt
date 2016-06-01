@@ -54,7 +54,33 @@
 		而selectedValue要绑定到 this.state.someVal
 		this.state.someVal通过onValueChange的回调刷新
 
-		
+		这些组件的value需要绑定到某个变量上，随变量而变
+
+	比如
+		textInput 有value属性，绑定到state上
+		然后 在onChangeText里，(val) => this.setState(  );
 
 
+	模型可以描述实体的定义，实体的操作，实体操作的结果，实体的管理限制。
+	比如表就是关系模型的实例
+
+
+
+	react-native的真机调试
+		在RCTWebSocketExecutor里，将setUp方法里的URL指定为开发服务器的地址
+		在appDelegate里，将App对应的localhost指定为开发服务器
+
+		重新启动项目，摇晃调试机，在弹出的菜单中选择JS Remotely Debugging
+		在chrome浏览器里，三横线菜单-> more Tools -> Developer Tools
+
+		不调试时摇晃出菜单，选 disable remote load		 
+
+
+	JS是典型的层级对象结构，以<Text> Entitya + Entityb + Entityc </Text> 为例，会将 a b c 当做对象，以对象串联的方式连接。如果在其中用 + 等符号，因为对象本身没有定义+操作，所以会将 + 当做对象来处理， 返回的结果是 "Entitya.value + Entityb.value + Entityc.value" 这样的字符串
+
+
+	JS里的大小写敏感
+		一定要注意这点。因为JS非编译性语言，没有语法检查功能和标志检查功能，写错标志也不会提示。
+
+	没有<br/>或者\n可以折行，需要分行时，用text标签	
 
