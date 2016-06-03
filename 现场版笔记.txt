@@ -84,3 +84,47 @@
 
 	没有<br/>或者\n可以折行，需要分行时，用text标签	
 
+
+
+	当组件的props（一般都是些框架性的配置）变化时，会触发
+	1、 componentWillRecProps
+			将要接收
+	2、 shouldCompUpdate()
+			接收前夕
+	3、compWillUpdate()
+			将要渲染
+	4、render()
+			渲染
+
+	
+
+	RN VS. reactNative  抽象层相同，但有差异，前者用于移动端开发，后者用于web开发
+
+	package.json里，逗号有严格的规范，dependencies 里最后一项值不应以逗号结尾。
+
+
+	js里，需要和业务无关的utils，用于配置
+		比如
+		1、尺寸配置  pixel,width,height
+
+		2、网络请求，包括封装好的post
+			post(url,data,callback)
+			和
+			host,login,getUser,updateUser,deleteUser,createUser等接口的地址
+
+		3、以首页的开发为例
+			设置
+
+		
+
+
+
+
+	引用工程时，
+	1、 到node_modules（提供node工具），调用Library里特定工程的xcodeProj，例如address_book.xcodeProj
+
+	2、 在此xcodeProj里，从build Phases里添加静态库
+
+
+
+
