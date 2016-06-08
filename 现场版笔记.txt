@@ -4,7 +4,7 @@
 	// 返回一个数组，数组里添加一个对象
 	switch(action.type){
 		case 'ADD_TODO':
-			return [
+			retrn [
 			...state,{
 			text:action.text,
 			completed:false
@@ -115,9 +115,6 @@
 		3、以首页的开发为例
 			设置
 
-		
-
-
 
 
 	引用工程时，
@@ -127,4 +124,83 @@
 
 
 
+	props可通过父控件传给子控件，比如 <CustomView  customID1 = value1 customID2 = value2  />
+
+	例如：
+		在CustomView的处理中，可通过 this.props.customID1 获取对象
+	customID1的值也可以是方法， 比如 (value) => { this.setState({state1:value} ) }  (这里value如果是单值，就写成单值。如果是对象，就要展开为{...value})
+
+
+	当父控件传给子控件的prop改变时，往往需要通过组件的生命周期方法来相应地更新子控件
+
+	例如
+	<View style={a,b,c}>
+		<CustomComponent {...this.state}/>
+	</View>
+
+	当view的state改变时
+	在CustomComponent.js里,props改变，不能触发事件
+
+	于是在生命周期事件，setState,从而触发重渲染
+		componentWillReceiveProps(){
+			this.setState({});
+
+		}
+
+
+	props,state,variable在调用时，形式不同。props，state都要加this.的前缀，以表示引用，
+	var因为是全局变量，所以直接通过名称调用即可
+		
+
+	生成列表时，
+	0、 需要数据源
+			var data = [{a,b,c},{a,b,c},{a,b,c},{a,b,c},{a,b,c}];
+	1、 实现一个数组
+			var items = [];
+	2、 将数据循环填入
+			for( var i in data )		
+			{
+				let item = (
+					<View>
+						<Text>{items[i].value}</Text>
+					</View>
+				);
+
+				items.push(item);
+			}	
+
+
+	3、将数组放入组件来渲染
+			<View>
+				{items}
+			</View>		
+
+
+
+	导入和导出
+		export class customClassA{……………………}  // 此处没有default关键词
+
+		import {customClassA} from // 需要用{}将其囊括起来，否则会导入默认的组件		
+
+
+	this.setState is not a function ,出现本问题往往由于在调用时未bind到this，导致动作没有发起对象。	
+
+	connect函数，第一个参数将state的值（此state来自reducer方法里的state）绑定到props上
+
+
+	源文件要写成 {uri;'https://weibo.com/vczero'}
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
 
