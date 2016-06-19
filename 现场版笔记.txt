@@ -192,6 +192,51 @@
 
 
 
+	网络请求可以封装
+		需要url, data和回调
+
+		url是fetch方法的必填参数，data是fetch的第二个参数，是optional的。callback必填，是fetch的回调
+
+		封装时
+			var fetchOptions = {
+				method:'POST',
+				headers:{
+
+				},
+				body: JSON.stringify(data)
+			}
+
+			fetch( url,fetchOptions )
+			.then( (response) => response.text() ) 
+			.then((responseText)=>{
+				callback(JSON.parse(responseText));
+			});
+
+			
+			-----GET方式-----
+			在url里，可以直接写上请求
+			'url?response_type=code'
+			+ '&state=1234'
+			+ '&view=wap'
+			+ ………………
+
+			这叫get方式
+
+			-----POST方式-----
+			而在post方式里，会创建表单实体，并将实体作为option传出去
+
+			List param = new ArrayList();
+			param.add(obj1);
+			param.add(obj2);
+			Entity  entity1 = EntityWithParam(Param);
+
+			// 将param传给post请求实例
+			Post.setEntity(entity1);
+			HttpResponse.execute(Post);
+
+
+
+		
 
 
 
