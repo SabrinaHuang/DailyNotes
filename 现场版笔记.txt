@@ -76,7 +76,7 @@
 		不调试时摇晃出菜单，选 disable remote load		 
 
 
-	JS是典型的层级对象结构，以<Text> Entitya + Entityb + Entityc </Text> 为例，会将 a b c 当做对象，以对象串联的方式连接。如果在其中用 + 等符号，因为对象本身没有定义+操作，所以会将 + 当做对象来处理， 返回的结果是 "Entitya.value + Entityb.value + Entityc.value" 这样的字符串
+	JS是典型的层级对象结构，以<Text> Entitya + Entityb + Entityc </Text> 为例，会将 a b c 当做对象，以对象串联的方式连接。如果在其中用 + 等符号，因为对象本身没有定义+操作，所以会将 + 当做对象来处理， 返回的结果是 %22Entitya.value + Entityb.value + Entityc.value%22 这样的字符串
 
 
 	JS里的大小写敏感
@@ -188,7 +188,7 @@
 	connect函数，第一个参数将state的值（此state来自reducer方法里的state）绑定到props上
 
 
-	源文件要写成 {uri;'https://weibo.com/vczero'}
+	源文件要写成 {uri:'https://weibo.com/vczero'}
 
 
 
@@ -236,12 +236,92 @@
 
 
 
-		
+	实现网络请求时的一般步骤
+		网络请求的数据流向
+			客户端访问服务端 -> 服务端访问mock接口 -> mock返回数据给服务端
+			-> 服务端数据给客户端
+
+
+		接口配置时，最重要的是url和action  url	
+
+
+	
+	网络请求fetch的用法
+		最简单的，直接请求某个url，返回的是html页面的报文
+
+		稍复杂一点的是get用法，具体是
+		fetch('http://server/app.do?key1=value1&key2=value2&key3=value3');
+
+		再复杂一点的是post用法，
+			post时需要option，为请求时的头文件，标志了请求时的一些全局参数
+			一般形式是:
+
+			1、 传统的form方式
+				var Opt = {
+					method:'POST',  // 必填，表示请求方式
+					header:{
+						'Content-Type': 'application/x-www-form-urlencoded',
+					}, // 必填，类似<DOCUMENT />里的meat标签
+					body: 'key1=value1&key2=value2'
+				}
+
+				fetch(url,Opt);
+
+
+			2、 新型方式(与时俱进者一般采用的方式)				
+				var Opt = {
+					method:'POST', 
+					header:{
+    					'Accept': 'application/json',
+    					'Content-Type': 'application/json',
+					}, 
+					body: JSON.stringify({
+						param1:'value1',
+						param2:'value2'
+					})
+				}
+
+				fetch(url,Opt);				
+
+
+				
+
+
+	SVN更改工程时，需要更改三处
+		以移动文件为例
+			1、在SVN库里move文件
+			2、在物理路径下查看并更改（如果在第一步里的更改没有影响物理路径，需要更改一下）
+			3、在工程里更改文件的位置
+
+
+	
+	更名文件时，应当先在svn更改名称（这更改比较贴近物理路径更改，是更本质，决定性的更改）
+	然后到工程里做相应文件的配置更改
+
+
+	产生treeConflict的原因是svn上的文件结构改变了（参考windows的目录结构图），比如改名，移动，删除
+		当update时，只要远程和本地的更改的某一个包含这种操作，就可能出现问题
+
+
+
+	在传递props时，获取时可以在方法内直接写 const{XXX,XXX} = this.props 这样在方法里调用时就不用写this. 来表示组件
+	
+	但倘若是不在同一个大括号里，那引用时就要用this.method
+
+	当需要给onPress这些赋予事件时
+		第一种是直接执行的 ()=> method(param)	
+		第二种是将方法绑定过去 method
 
 
 
 
-
+http://10.19.106.156:16120/appserver/interface.do?sign_method=yd_md5&req_time=1234567890123&data={ 
+ %22name%22:%22王小虎%22, 
+ %22mobile%22:%2215028374899%22, 
+%22session_id%22:%22d6fbafd4-44c3-4132-a8c1-fd55fe0a73d2-1452056145349%22, 
+ %22verify_num%22:%22213647%22, 
+ %22password%22:%224QrcOUm6Wau+VuBX8g+IPg%3D%3D%22 
+}&action=kdb.ui.user.register.do&appver=1.00.00&version=V2.0&sign=7B689E18C2E7F88B6493106DDF437C69
 
 
 
