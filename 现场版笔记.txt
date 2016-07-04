@@ -314,18 +314,109 @@
 
 
 
+	style也可作为参数来传递
+		在定义时
+		class List extends Component(
 
-http://10.19.106.156:16120/appserver/interface.do?sign_method=yd_md5&req_time=1234567890123&data={ 
- %22name%22:%22王小虎%22, 
- %22mobile%22:%2215028374899%22, 
-%22session_id%22:%22d6fbafd4-44c3-4132-a8c1-fd55fe0a73d2-1452056145349%22, 
- %22verify_num%22:%22213647%22, 
- %22password%22:%224QrcOUm6Wau+VuBX8g+IPg%3D%3D%22 
-}&action=kdb.ui.user.register.do&appver=1.00.00&version=V2.0&sign=7B689E18C2E7F88B6493106DDF437C69
+			render{
+				const {style,elementStyle} = this.props;
+
+				return(
+					<View style={style}>
+						{
+							elementStyle.map( 
+								(element) =>
+								<View style={styles.element} />  // 在用map方法调用时，需要添加styles前缀，而直接调用属性时，不需要此前缀
+							)
+						}
+					</View>						
+				)
+			}
+			)
+		)
+
+		在调用时
+
+		<List  style={styles.style1} elementStyle={styles.style2} />
+
+		const styles = StyleSheet.create({
+			style1:{
+
+			},
+
+			style2:{
+
+			},
+		});
 
 
+		关于const 定义的类型，其作用域就是包裹它的括号。比如
+
+		method1(){
+			// do sth
+		}
 
 
+		render(){
+			const {val1} = this.props;
+
+			<Text onPress={method1.bind(this)} ></Text>
+		}
+
+		method1是无法访问 val1属性的，因为它和定义val1的render同级，如果它被包含在render()里，那就可以
+
+
+		做应用授权的步骤
+			1、生成访问授权页面的url, authUrl
+			2、让webView组件的source = {{uri:authUrl}}
+			3、实现页面跳转的响应方法，其中应该有获取accessToken的方法
+			4、令webView的onNavChange响应为此页面跳转
+
+			5、需要注意，页面布局时，应当在state里设置code属性，在页面布局时
+				this.state={
+					code:null,
+				}
+
+				this.state.code?
+				<WebView {...props}/>
+				:
+				<Text>{this.state.code}</Text>
+
+				而在授权方法里，当请求完accessToken后，
+				this.setState({
+					code:code
+				})
+
+				这样请求成功后，就可以展示自定义的页面
+
+			关键是要细心地模仿他人的步骤，不可随意删减，更改和移动
+
+			比如我之前并不知道 this.state.code的关键用法。导致即使授权成功，也无法跳转页面
+
+			
 
 		
+	   WebView不但可以展示html,也可以直接通过网络请求获取数据，从而将结果展示在页面
+	   目前可以先用GET方式请求，以免拼接字符串时出现问题。返回的数据不要以html格式展示出来。直接显示在页面上就好。		
+
+
+	   js是一种很强大的语言，不但可以用于开发前端页面，也可以通过Node框架的支持，用于开发后端服务器
+
+
+	   在新版的语言里，引用propTypes时，需要  import {Component,PropTypes} from 'react';  而不是import from 'react-native'
+
+	   使用var时，不管是在哪个域里，都会覆盖之前的同名定义，必须用const才能确保不被覆盖，保持原有的值
+
+	   
+	   出现RCTView找不到，或者其他RCT开头的文件找不到时，最大的可能是没有用npm安装相关的Node三方库
+
+
+	   UnableToResolveError: Unable to resolve module ReactDefaultPerf 通常是因为react版本和react-native版本不匹配，这点在npm install时会给出相应提示
+
+
+	----python抓取图片的方法----   
+	http://www.2cto.com/kf/201303/194314.html
+	http://www.oschina.net/code/snippet_1242232_26489
+
+
 
